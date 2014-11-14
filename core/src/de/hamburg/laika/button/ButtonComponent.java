@@ -1,8 +1,10 @@
 package de.hamburg.laika.button;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 
 import de.kuro.lazyjam.cdiutils.annotations.Render;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
@@ -34,7 +36,7 @@ public class ButtonComponent {
 		
 		if (r.contains(x, y)) {
 			listener.onHover();
-			if (i.isTouched()) {
+			if (i.isButtonPressed(Buttons.LEFT)) {
 				listener.onClick();
 			}
 		}
