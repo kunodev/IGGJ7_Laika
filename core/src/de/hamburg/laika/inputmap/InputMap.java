@@ -11,16 +11,51 @@ import de.kuro.lazyjam.cdiutils.annotations.Service;
 public class InputMap {
 
 	public enum Action {
-		UP, DOWN
+		UP, DOWN, LEFT, RIGHT, SHOOT, 
+		SHIELD_LEFT, SHIELD_RIGHT, SHIELD_SHOOT, SHIELD_AIM_LEFT, SHIELD_AIM_RIGHT
 	}
 	
-	public Map<Action, Integer> actionToHWKey;
-	
+	public Map<Action, Integer> actionToHWKey;	
 	
 	public InputMap() {
 		actionToHWKey = new HashMap<Action,Integer>();
+		p1Controls();
+		p2Shields();
+	}
+	
+	public void p1Controls() {
 		actionToHWKey.put(Action.UP, Keys.UP);
 		actionToHWKey.put(Action.DOWN, Keys.DOWN);
+		actionToHWKey.put(Action.LEFT, Keys.LEFT);
+		actionToHWKey.put(Action.RIGHT, Keys.RIGHT);
+		actionToHWKey.put(Action.SHOOT, Keys.ENTER);
 	}
+	
+	public void p2Shields() {
+		actionToHWKey.put(Action.SHIELD_LEFT, Keys.W);
+		actionToHWKey.put(Action.SHIELD_RIGHT, Keys.S);
+		actionToHWKey.put(Action.SHIELD_AIM_LEFT, Keys.A);
+		actionToHWKey.put(Action.SHIELD_AIM_RIGHT, Keys.D);
+		actionToHWKey.put(Action.SHIELD_SHOOT, Keys.G);
+	}
+	
+	public void p2Controls() {
+		actionToHWKey.put(Action.UP, Keys.W);
+		actionToHWKey.put(Action.DOWN, Keys.S);
+		actionToHWKey.put(Action.LEFT, Keys.A);
+		actionToHWKey.put(Action.RIGHT, Keys.D);
+		actionToHWKey.put(Action.SHOOT, Keys.G);		
+	}
+	
+	public void p1Shields() {
+		actionToHWKey.put(Action.SHIELD_LEFT, Keys.UP);
+		actionToHWKey.put(Action.SHIELD_RIGHT, Keys.DOWN);
+		actionToHWKey.put(Action.SHIELD_AIM_LEFT, Keys.LEFT);
+		actionToHWKey.put(Action.SHIELD_AIM_RIGHT, Keys.RIGHT);
+		actionToHWKey.put(Action.SHIELD_SHOOT, Keys.NUM_0);
+	}
+	
+	
+	
 	
 }
