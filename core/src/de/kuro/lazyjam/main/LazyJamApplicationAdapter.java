@@ -46,6 +46,7 @@ public abstract class LazyJamApplicationAdapter extends ApplicationAdapter {
 		serviceMan.registerAsService(initCam());
 		// only needed once
 		this.loadAssets();
+		assetManager.finishLoading();
 		ReflectionUtil.init();
 		serviceMan.searchForServices();
 	}
