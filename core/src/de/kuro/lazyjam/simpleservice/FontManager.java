@@ -25,7 +25,6 @@ public class FontManager {
 
 	public FontManager() {
 		font = new BitmapFont();
-		font.scale(100f);
 	}
 	
 	public void init() {
