@@ -15,6 +15,7 @@ import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.background.BackGroundMover;
 import de.hamburg.laika.button.ButtonBuilder;
 import de.hamburg.laika.inputmap.InputMap;
+import de.hamburg.laika.player.BulletFactory;
 import de.hamburg.laika.player.ChangeControlsTask;
 import de.hamburg.laika.player.CoinsComponent;
 import de.hamburg.laika.player.InfoTextComponent;
@@ -56,8 +57,10 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("button.png", Texture.class);
 		assetManager.load("background1280720.png", Texture.class);
 		assetManager.load("raumschiff_map.png", Texture.class);
+		assetManager.load("grosse_kanone_map.png", Texture.class);
 		assetManager.load("Go Cart - Loop Mix.mp3", Music.class);
 		assetManager.load("schutzschild.png", Texture.class);
+		assetManager.load("hammer_pew.png", Texture.class);
 	}
 
 	@Override
@@ -65,6 +68,8 @@ public class Laika extends LazyJamApplicationAdapter {
 		super.create();
 		GameState gs = new LaikaGameState();
 		this.gscm.initMainGameState(gs);
+		
+		
 		gs.bgm = assetManager.get("Go Cart - Loop Mix.mp3");
 		gs.bgm.setLooping(true);
 		gs.bgm.play();
@@ -72,6 +77,9 @@ public class Laika extends LazyJamApplicationAdapter {
 		
 		initBackGround(gs);
 
+		
+		BulletFactory.HAMMER = assetManager.get("hammer_pew.png");
+		
 		GameObject laika = new GameObject(new Vector2(50.f, 50.f), TAG_PLAYER, gs);
 		laika.addComponent(new PlayerControl());
 		laika.addComponent(new HealthComponent(500));
@@ -79,6 +87,17 @@ public class Laika extends LazyJamApplicationAdapter {
 		PNGSpriteRenderComponent shipAnimation = new PNGSpriteRenderComponent();
 		shipAnimation.init("raumschiff_map+2+1", assetManager);
 		laika.addComponent(shipAnimation);
+		
+		GameObject canon = new GameObject(new Vector2(50.f, 50.f), TAG_DECO, gs);
+		PNGSpriteRenderComponent cannonAnimation = new PNGSpriteRenderComponent();
+		cannonAnimation.init("grosse_kanone_map+3+1", assetManager);
+		cannonAnimation.sprite.s.setOriginCenter();
+		cannonAnimation.sprite.s.setOrigin(cannonAnimation.sprite.s.getOriginX(), cannonAnimation.sprite.s.getOriginY() - 10);
+		canon.addComponent(cannonAnimation);
+		RelativityComponent relCanonComp = new RelativityComponent();
+		relCanonComp.parent = laika;
+		canon.addComponent(relCanonComp);
+		canon.addComponent(new SmallCannonControl());
 		
 		BackGroundGen backGroundGen = new BackGroundGen(gs);
 		laika.addComponent(backGroundGen);
@@ -93,7 +112,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		UpgradeComponent upgradeComponent = new SpeedUpgradeComponent();
 		laika.addComponent(upgradeComponent);
 		laika.addComponent(new RocketControl());
-		laika.addComponent(new SmallCannonControl());
+		
 		
 		GameObject shield = new GameObject(new Vector2(), TAG_PLAYER, gs);
 		RelativityComponent relComp = new RelativityComponent();
@@ -112,7 +131,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		GameObject jaeger = new GameObject(new Vector2(WIDTH, HEIGHT), gs);
 		jaeger.addComponent(new Laser(assetManager.get("rain.png", Texture.class), 8.0f, 2.0f, 1.5f, 1.0f, 50));
 		Texture catTexture = assetManager.get("cat.png", Texture.class);
-		jaeger.addComponent(new Jaeger(3.1f, laika.getPos()));
+		//jaeger.addComponent(new Jaeger(3.1f, laika.getPos()));
 		jaeger.addComponent(new SpriteWrapper(catTexture));
 		
 		GameObject comet = new GameObject(new Vector2(WIDTH * 0.33f, HEIGHT * 0.67f), gs);
@@ -125,7 +144,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		
 		ChangeControlsTask cct = new ChangeControlsTask(serviceMan.getService(InputMap.class));
 		controllerFuckUpThread = new LimitedTimeWorkerThread(5000, cct, Integer.MAX_VALUE);
-		controllerFuckUpThread.start();
+		//controllerFuckUpThread.start();
 		
 	}
 
