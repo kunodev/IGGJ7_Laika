@@ -132,7 +132,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		
 		laika.addComponent(upgradeComponent);
 		laika.addComponent(upgradeComponent2);
-		laika.addComponent(upgradeComponent3);
+		canon.addComponent(upgradeComponent3);
 		laika.addComponent(new RocketControl());
 		
 		
