@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.AI.AlienFactory;
 import de.hamburg.laika.button.ButtonComponent;
+import de.hamburg.laika.player.CoinsComponent;
 import de.hamburg.laika.player.PlayerControl;
 import de.hamburg.laika.player.ShieldControl;
 import de.hamburg.laika.player.SpeedUpgradeComponent;
@@ -31,7 +32,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		
 		AlienFactory alienFac = new AlienFactory();		
 		laika.addComponent(alienFac);
-		
+		laika.addComponent(new CoinsComponent());
 		
 		UpgradeComponent upgradeComponent = new SpeedUpgradeComponent();
 		laika.addComponent(upgradeComponent);
