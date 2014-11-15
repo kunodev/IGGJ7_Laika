@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
@@ -32,7 +31,7 @@ public class AlienFactory {
 		
 		for (int j = 0; j < enemyTypeAmountPairs.size(); ++j) {
 			if ( rand.nextFloat() * 100.f <= 0.5) {
-				GameObject enemy = new GameObject(new Vector2(Laika.WIDTH, MathUtils.random() * Laika.HEIGHT ),Laika.TAG_ENEMY, gs);
+				GameObject enemy = new GameObject(new Vector2(Laika.WIDTH, rand.nextFloat() * Laika.HEIGHT ),Laika.TAG_ENEMY, gs);
 				AmountEnemyTypePair amountEnemyTypePair = enemyTypeAmountPairs.get(j);
 				for(Object obj : amountEnemyTypePair.factory.createComponents()) {
 					enemy.addComponent(obj);
