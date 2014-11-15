@@ -7,13 +7,9 @@ import de.hamburg.laika.Laika;
 import de.hamburg.laika.inputmap.InputMap;
 import de.hamburg.laika.inputmap.InputMap.Action;
 import de.kuro.lazyjam.cdiutils.annotations.Collide;
-import de.kuro.lazyjam.cdiutils.annotations.Render;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
-import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
-import de.kuro.lazyjam.ecmodel.concrete.components.VelocityComponent;
 import de.kuro.lazyjam.ecmodel.concrete.tools.Collision;
-import de.kuro.lazyjam.simpleservice.FontManager;
 
 public class PlayerControl {
 	

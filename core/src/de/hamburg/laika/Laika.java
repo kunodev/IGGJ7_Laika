@@ -57,6 +57,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("background1280720.png", Texture.class);
 		assetManager.load("raumschiff_map.png", Texture.class);
 		assetManager.load("Go Cart - Loop Mix.mp3", Music.class);
+		assetManager.load("schutzschild.png", Texture.class);
 	}
 
 	@Override
@@ -94,11 +95,12 @@ public class Laika extends LazyJamApplicationAdapter {
 		laika.addComponent(new RocketControl());
 		laika.addComponent(new SmallCannonControl());
 		
-		GameObject shield = new GameObject(new Vector2(), gs);
+		GameObject shield = new GameObject(new Vector2(), TAG_PLAYER, gs);
 		RelativityComponent relComp = new RelativityComponent();
 		relComp.parent = laika;
 		shield.addComponent(new ShieldControl());
 		shield.addComponent(relComp);
+		shield.addComponent(new SpriteWrapper(assetManager.get("schutzschild.png")));
 		
 		ButtonBuilder bb = new ButtonBuilder(gs);
 		Texture buttonBG = assetManager.get("button.png", Texture.class);
