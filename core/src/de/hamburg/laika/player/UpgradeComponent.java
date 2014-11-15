@@ -1,5 +1,6 @@
 package de.hamburg.laika.player;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.button.ButtonListener;
@@ -11,7 +12,7 @@ public class UpgradeComponent implements ButtonListener {
 	
 	@Render
 	public void render(FontManager fm, Vector2 pos) {
-		fm.drawTextAbsolut(pos.x + 100, pos.y, "" + numUpdates);
+		fm.drawTextAbsolutCentered((int)pos.x + 100, (int)pos.y, "" + numUpdates, Color.WHITE);
 	}
 
 	@Override
