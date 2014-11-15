@@ -97,8 +97,8 @@ public class Laika extends LazyJamApplicationAdapter {
 		GameObject shield = new GameObject(new Vector2(), gs);
 		RelativityComponent relComp = new RelativityComponent();
 		relComp.parent = laika;
-		shield.addComponent(relComp);
 		shield.addComponent(new ShieldControl());
+		shield.addComponent(relComp);
 		
 		ButtonBuilder bb = new ButtonBuilder(gs);
 		Texture buttonBG = assetManager.get("button.png", Texture.class);

@@ -35,8 +35,7 @@ public class ShieldControl {
 	
 	@Render
 	public void render(FontManager fm, Vector2 pos) {
-		fm.drawTextAbsolutCentered((int)shieldRenderPos.x, (int)shieldRenderPos.y, "SHIELD", Color.WHITE);
-
+		fm.drawTextAbsolutCentered((int)pos.x, (int)pos.y, "SHIELD", Color.WHITE);
 	}
 
 }
