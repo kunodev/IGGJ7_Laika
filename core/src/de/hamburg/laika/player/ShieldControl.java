@@ -45,7 +45,7 @@ public class ShieldControl {
 			towerangle += 10;
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.SHIELD_SHOOT))) {
-			BulletFactory.createBullet(pos.cpy().add(tempTowerOffset.nor().scl(5.5f)), gs, tempTowerOffset, 10);
+			BulletFactory.createBullet(pos.cpy().add(tempTowerOffset.nor().scl(5.5f)), gs, tempTowerOffset, 10, true);
 		}
 	}
 	

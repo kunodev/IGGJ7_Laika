@@ -18,6 +18,7 @@ import de.kuro.lazyjam.ecmodel.concrete.GameState;
 public class ExtraSimpleCollisionComponent {
 	
 	public List<Predicate<GameObject>> filters;
+	public String tagToSearch;
 
 	public ExtraSimpleCollisionComponent() {
 		filters = new ArrayList<Predicate<GameObject>>();
@@ -25,7 +26,13 @@ public class ExtraSimpleCollisionComponent {
 	
 	@Update
 	public void collideWith(Vector2 pos, GameState gs, GameObjectContext goc, IRectangleProvider rect) {
-		Stream<GameObject> gameObjectsStream = gs.gameObjects.stream();
+		Stream<GameObject> gameObjectsStream;
+		if(tagToSearch == null) {
+			gameObjectsStream = gs.gameObjects.stream();			
+		} else {
+			gameObjectsStream = gs.taggedGameObjects.get(tagToSearch).stream();
+		}
+
 		Predicate<GameObject> finalFilter = e -> e != goc.go;
 		
 		for(Predicate<GameObject> filter : this.filters) {

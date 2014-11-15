@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.Laika;
 import de.hamburg.laika.EnemyType.IEnemyType;
+import de.hamburg.laika.EnemyType.factory.IComponentCollectionFactory;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
@@ -32,10 +33,11 @@ public class AlienFactory {
 		
 		for (int j = 0; j < enemyTypeAmountPairs.size(); ++j) {
 			if ( MathUtils.randomBoolean()) {
-				GameObject enemy = new GameObject(new Vector2(Laika.WIDTH, MathUtils.random() * Laika.HEIGHT ), gs);
+				GameObject enemy = new GameObject(new Vector2(Laika.WIDTH, MathUtils.random() * Laika.HEIGHT ),Laika.TAG_ENEMY, gs);
 				AmountEnemyTypePair amountEnemyTypePair = enemyTypeAmountPairs.get(j);
-				enemy.addComponent(amountEnemyTypePair.enemyType);
-				enemy.addComponent(new HealthComponent(MathUtils.random(90, 110)));
+				for(Object obj : amountEnemyTypePair.factory.createComponents()) {
+					enemy.addComponent(obj);
+				}
 				amountEnemyTypePair.amount--;
 				if ( amountEnemyTypePair.amount == 0 ) {
 					trash.add(amountEnemyTypePair);
@@ -49,17 +51,17 @@ public class AlienFactory {
 		
 	}
 	
-	public void registerEnemyType(Integer amount, IEnemyType enemyType) {
-		enemyTypeAmountPairs.add(new AmountEnemyTypePair(amount, enemyType));
+	public void registerEnemyType(Integer amount, IComponentCollectionFactory componentFac) {
+		enemyTypeAmountPairs.add(new AmountEnemyTypePair(amount, componentFac));
 	}
 	
 	static class AmountEnemyTypePair {
 		public int amount;
-		public IEnemyType enemyType;
+		public IComponentCollectionFactory factory;
 		
-		public AmountEnemyTypePair( int amount, IEnemyType enemyType ) {
+		public AmountEnemyTypePair( int amount, IComponentCollectionFactory factory) {
 			this.amount = amount;
-			this.enemyType = enemyType;
+			this.factory = factory;
 		}
 	}
 	

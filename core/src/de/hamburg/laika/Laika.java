@@ -8,16 +8,23 @@ import de.hamburg.laika.EnemyType.Comet;
 import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.EnemyType.Jaeger;
 import de.hamburg.laika.EnemyType.Laser;
+import de.hamburg.laika.EnemyType.factory.JaegerFactory;
 import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.button.ButtonBuilder;
 import de.hamburg.laika.button.ButtonComponent;
 import de.hamburg.laika.player.*;
 import de.kuro.lazyjam.asciiassetextension.ASCIIPicture;
+import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
+import de.kuro.lazyjam.ecmodel.IGameState;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
+import de.kuro.lazyjam.ecmodel.concrete.components.ExtraSimpleCollisionComponent;
 import de.kuro.lazyjam.main.LazyJamApplicationAdapter;
 
 public class Laika extends LazyJamApplicationAdapter {
+	public static final String TAG_PLAYER = "ship";
+	public static final String TAG_ENEMY = "enemy";
+	
 	public static float WIDTH = 1280;
 	public static float HEIGHT = 720;
 
@@ -39,7 +46,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		GameState gs = new GameState();
 		this.gscm.initMainGameState(gs);
 
-		GameObject laika = new GameObject(new Vector2(50.f, 50.f), "ship", gs);
+		GameObject laika = new GameObject(new Vector2(50.f, 50.f), TAG_PLAYER, gs);
 		laika.addComponent(new PlayerControl());
 		laika.addComponent(new HealthComponent(500));
 		laika.addComponent(new ASCIIPicture("PLAYER"));
@@ -68,11 +75,16 @@ public class Laika extends LazyJamApplicationAdapter {
 
 		GameObject jaeger = new GameObject(new Vector2(WIDTH, HEIGHT), gs);
 		jaeger.addComponent(new Laser(assetManager.get("rain.png", Texture.class), 8.0f, 2.0f, 1.5f, 1.0f, 50));
-		jaeger.addComponent(new Jaeger(assetManager.get("cat.png", Texture.class), 96.0f, laika));
-
-		GameObject comet = new GameObject(new Vector2(WIDTH * 0.33f, HEIGHT * 0.67f), gs);
-		comet.addComponent(new Comet(assetManager.get("poop.png", Texture.class), 30.0f));
+		Texture catTexture = assetManager.get("cat.png", Texture.class);
+		jaeger.addComponent(new Jaeger(3.1f, laika.getPos()));
+		jaeger.addComponent(new SpriteWrapper(catTexture));
 		
-		alienFac.registerEnemyType(50, new Jaeger(assetManager.get("cat.png", Texture.class), 96.0f, laika));
+		GameObject comet = new GameObject(new Vector2(WIDTH * 0.33f, HEIGHT * 0.67f), gs);
+		Texture cometTex = assetManager.get("poop.png", Texture.class);
+		SpriteWrapper sw = new SpriteWrapper(cometTex);
+		comet.addComponent(new Comet(7.0f));
+		comet.addComponent(sw);
+		
+		alienFac.registerEnemyType(50, new JaegerFactory(laika.getPos(), catTexture) );
 	}
 }
