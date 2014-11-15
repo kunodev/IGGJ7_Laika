@@ -89,6 +89,11 @@ public class LaikaGameState extends GameState{
 		backGroundGen.registerStardust(assetManager.get("purplestar.png", Texture.class));
 		backGroundGen.registerStardust(assetManager.get("greenstar.png", Texture.class));
 		backGroundGen.registerStardust(assetManager.get("pinkstar.png", Texture.class));
+		
+		backGroundGen.registerStardust(assetManager.get("sparkle1.png", Texture.class));
+		backGroundGen.registerStardust(assetManager.get("sparkle2.png", Texture.class));
+		backGroundGen.registerStardust(assetManager.get("sparkle3.png", Texture.class));
+		backGroundGen.registerStardust(assetManager.get("sparkle4.png", Texture.class));
 				
 		AlienFactory alienFac = new AlienFactory(this);
 		laika.addComponent(alienFac);
