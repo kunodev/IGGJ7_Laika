@@ -22,8 +22,11 @@ import de.hamburg.laika.player.PlayerControl;
 import de.hamburg.laika.player.RocketControl;
 import de.hamburg.laika.player.ShieldControl;
 import de.hamburg.laika.player.SmallCannonControl;
-import de.hamburg.laika.player.SpeedUpgradeComponent;
-import de.hamburg.laika.player.UpgradeComponent;
+import de.hamburg.laika.player.buffcomponents.MainCannonModificationComponent;
+import de.hamburg.laika.player.buffcomponents.ShieldModificationComponent;
+import de.hamburg.laika.player.buffcomponents.SideCannonModificationComponent;
+import de.hamburg.laika.player.buffcomponents.SpeedModificationComponent;
+import de.hamburg.laika.player.buffcomponents.UpgradeComponent;
 import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
@@ -68,7 +71,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		gs.bgm = assetManager.get("Go Cart - Loop Mix.mp3");
 		gs.bgm.setLooping(true);
 		gs.bgm.play();
-		gs.bgm.setVolume(0.5f);
+		gs.bgm.setVolume(0.1f);
 		
 		//initBackGround(gs);
 
@@ -87,28 +90,35 @@ public class Laika extends LazyJamApplicationAdapter {
 		
 		AlienFactory alienFac = new AlienFactory(gs);
 		laika.addComponent(alienFac);
-		laika.addComponent(new CoinsComponent());
 		laika.addComponent(new InfoTextComponent());
 
 
-		UpgradeComponent upgradeComponent = new SpeedUpgradeComponent();
+		UpgradeComponent upgradeComponent = new SpeedModificationComponent();
+		UpgradeComponent upgradeComponent2 = new MainCannonModificationComponent();
+		UpgradeComponent upgradeComponent3 = new SideCannonModificationComponent();
+		
 		laika.addComponent(upgradeComponent);
+		laika.addComponent(upgradeComponent2);
+		laika.addComponent(upgradeComponent3);
 		laika.addComponent(new RocketControl());
 		laika.addComponent(new SmallCannonControl());
 		
 		GameObject shield = new GameObject(new Vector2(), TAG_PLAYER, gs);
 		RelativityComponent relComp = new RelativityComponent();
+		UpgradeComponent upgradeComponent4 = new ShieldModificationComponent();
+		
 		relComp.parent = laika;
 		shield.addComponent(new ShieldControl());
 		shield.addComponent(relComp);
 		shield.addComponent(new SpriteWrapper(assetManager.get("schutzschild.png", Texture.class)));
+		shield.addComponent(upgradeComponent4);
 		
 		ButtonBuilder bb = new ButtonBuilder(gs);
 		Texture buttonBG = assetManager.get("button.png", Texture.class);
 		bb.createButton(upgradeComponent, "Moar Speed", buttonBG);
-		bb.createButton(null, "nothing", buttonBG);
-		bb.createButton(null, "nothing", buttonBG);
-		bb.createButton(null, "nothing", buttonBG);
+		bb.createButton(upgradeComponent2, "Moar big pew", buttonBG);
+		bb.createButton(upgradeComponent3, "Moar Small pew", buttonBG);
+		bb.createButton(upgradeComponent4, "Moar Shields", buttonBG);
 
 		GameObject jaeger = new GameObject(new Vector2(WIDTH, HEIGHT), gs);
 		jaeger.addComponent(new Laser(assetManager.get("rain.png", Texture.class), 8.0f, 2.0f, 1.5f, 1.0f, 50));
@@ -125,7 +135,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		alienFac.registerEnemyType(50, new JaegerFactory(laika.getPos(), catTexture) );
 		
 		ChangeControlsTask cct = new ChangeControlsTask(serviceMan.getService(InputMap.class));
-		controllerFuckUpThread = new LimitedTimeWorkerThread(5000, cct, Integer.MAX_VALUE);
+		controllerFuckUpThread = new LimitedTimeWorkerThread(50000, cct, Integer.MAX_VALUE);
 		controllerFuckUpThread.start();
 		
 	}

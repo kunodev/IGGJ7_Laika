@@ -1,4 +1,4 @@
-package de.hamburg.laika.player;
+package de.hamburg.laika.player.buffcomponents;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -8,6 +8,7 @@ import de.kuro.lazyjam.cdiutils.annotations.Render;
 import de.kuro.lazyjam.simpleservice.FontManager;
 
 public class UpgradeComponent implements ButtonListener {
+	
 	protected int numUpdates = 0;
 	
 	@Render
@@ -24,6 +25,11 @@ public class UpgradeComponent implements ButtonListener {
 	
 	@Override
 	public void onClick() {
+		numUpdates++;
+	}
+
+	@Override
+	public void onRightMouseClick() {
 		numUpdates++;
 	}
 }

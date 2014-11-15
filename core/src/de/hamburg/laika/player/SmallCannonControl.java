@@ -18,6 +18,7 @@ public class SmallCannonControl {
 	
 	public static final int SMALL_CANNON_TICKS = 10;
 	public int currentSmallCannonTicks;
+	public int cannonTicksReduction;
 
 	public Vector2 towerPos = new Vector2();
 	public static final Vector2 TOWER_OFFSET = new Vector2(25,0);
@@ -40,7 +41,7 @@ public class SmallCannonControl {
 			towerangle += 10;
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.SHIELD_SHOOT))) {
-			if(currentSmallCannonTicks >= SMALL_CANNON_TICKS) {
+			if(currentSmallCannonTicks >= SMALL_CANNON_TICKS - cannonTicksReduction) {
 				BulletFactory.createBullet(pos.cpy().add(tempTowerOffset.nor().scl(5.5f)), gs, tempTowerOffset, 10, true);
 				currentSmallCannonTicks = 0;
 			}
