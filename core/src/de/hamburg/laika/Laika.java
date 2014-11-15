@@ -1,6 +1,5 @@
 package de.hamburg.laika;
 
-import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
@@ -8,6 +7,7 @@ import de.hamburg.laika.AI.AlienFactory;
 import de.hamburg.laika.EnemyType.Comet;
 import de.hamburg.laika.EnemyType.Jaeger;
 import de.hamburg.laika.EnemyType.Laser;
+import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.button.ButtonComponent;
 import de.hamburg.laika.player.CoinsComponent;
 import de.hamburg.laika.player.PlayerControl;
@@ -43,6 +43,10 @@ public class Laika extends LazyJamApplicationAdapter {
 		GameObject laika = new GameObject(new Vector2(50.f, 50.f), gs);
 		laika.addComponent(new PlayerControl());
 
+		BackGroundGen backGroundGen = new BackGroundGen(gs);
+		laika.addComponent(backGroundGen);
+		//ADD STARSTUFF backGroundGen.registerEnemyType(enemyType);
+		
 		AlienFactory alienFac = new AlienFactory(gs);
 		laika.addComponent(alienFac);
 		laika.addComponent(new CoinsComponent());
