@@ -100,7 +100,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		relComp.parent = laika;
 		shield.addComponent(new ShieldControl());
 		shield.addComponent(relComp);
-		shield.addComponent(new SpriteWrapper(assetManager.get("schutzschild.png")));
+		shield.addComponent(new SpriteWrapper(assetManager.get("schutzschild.png", Texture.class)));
 		
 		ButtonBuilder bb = new ButtonBuilder(gs);
 		Texture buttonBG = assetManager.get("button.png", Texture.class);
