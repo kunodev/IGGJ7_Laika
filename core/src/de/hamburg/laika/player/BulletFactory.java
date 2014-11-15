@@ -15,6 +15,7 @@ import de.kuro.lazyjam.ecmodel.concrete.components.VelocityComponent;
 public class BulletFactory {
 	
 	public static Texture HAMMER;
+	public static Texture MATROSCHKA;
 	
 	public static void createBullet(Vector2 pos, GameState gs) {
 		createBullet(pos, gs, new Vector2(1,0), 10, true);
@@ -68,8 +69,9 @@ public class BulletFactory {
 		vcc.add(delay, target.cpy(), speed2);
 		bullet.addComponent(vcc);
 		
-		ASCIIPicture asciiPic = new ASCIIPicture("SWOSH");
-		bullet.addComponent(asciiPic);
+		SpriteWrapper sw = new SpriteWrapper(MATROSCHKA);
+		sw.s.setOriginCenter();
+		bullet.addComponent(sw);
 		ExtraSimpleCollisionComponent simpleCollision = new ExtraSimpleCollisionComponent();
 		simpleCollision.filters.add( e-> e.getComponent(HealthComponent.class) != null);
 		simpleCollision.tagToSearch = Laika.TAG_ENEMY;

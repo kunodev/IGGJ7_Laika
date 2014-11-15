@@ -14,7 +14,7 @@ import de.kuro.lazyjam.ecmodel.concrete.GameState;
 
 public class RocketControl {
 
-	public final int buttonOffset = 200;
+	public final int buttonOffset = 50;
 	public final int chargeTime = 200;
 	
 	public long timeCounter = 0;
@@ -26,7 +26,7 @@ public class RocketControl {
 		timeCounter++;
 		Vector3 tmp = cam.unproject(new Vector3(i.getX(), i.getY(), 0));
 		Vector2 target = new Vector2(tmp.x, tmp.y);
-		
+		System.out.println(target.y);
 		if (isCharged()) {
 			if (target.y >= buttonOffset && i.isButtonPressed(Buttons.LEFT)) {
 				lastShot = timeCounter;

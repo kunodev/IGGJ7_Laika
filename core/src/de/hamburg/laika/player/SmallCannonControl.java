@@ -20,7 +20,7 @@ public class SmallCannonControl {
 
 	public Vector2 towerPos = new Vector2();
 	public static final Vector2 TOWER_OFFSET = new Vector2(20,60);
-	public static final Vector2 TOWER_BULLET = new Vector2(0,20);
+	public static final Vector2 TOWER_BULLET = new Vector2(0,25);
 	
 	public float towerangle;
 	
@@ -39,14 +39,17 @@ public class SmallCannonControl {
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.SHIELD_SHOOT))) {
 			if(currentSmallCannonTicks >= SMALL_CANNON_TICKS - cannonTicksReduction) {
+				sw.play = true;
+				
 				tempBulletOffset.rotate(towerangle);
-				tempBulletOffset.sub(0, -5);
 
 				Vector2 rotation = new Vector2(0,1);
 				rotation.rotate(towerangle);
-				BulletFactory.createBulletHammer(pos.cpy(), gs, rotation, 10, true);
+				BulletFactory.createBulletHammer(pos.cpy().sub(0, 10).add(tempBulletOffset), gs, rotation, 10, true);
 				currentSmallCannonTicks = 0;
 			}
+		} else {
+			sw.reset();
 		}
 		currentSmallCannonTicks++;
 	}

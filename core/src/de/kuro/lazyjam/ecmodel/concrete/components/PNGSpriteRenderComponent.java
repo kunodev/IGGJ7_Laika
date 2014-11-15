@@ -17,11 +17,12 @@ import de.kuro.lazyjam.cdiutils.cdihelper.CDICallHelper;
 import de.kuro.lazyjam.cdiutils.context.GameObjectContext;
 
 @Component(name="PNGSprite")
-public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {	
+public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent implements IRectangleProvider{	
 	
 	public int loopTick = 30;
 	private int currentTick;
 	public SpriteWrapper sprite;
+	public boolean play = true;
 	
 	public class MyTexRegion extends TextureRegion implements IRectangleProvider {
 
@@ -62,20 +63,26 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {
 			// TODO Auto-generated constructor stub
 		}
 
+		
 		@Override
 		public Rectangle getRectangle() {
-			return getRectangle();
+			return sprite.s.getBoundingRectangle();
 		}
-		
 	}
 	
 	@Update
 	public void update() {
-		currentTick++;
+		if(play) { 
+			currentTick++;
+		}
 		if(currentTick >= loopTick) {
 			this.incrementXOffset();
 			currentTick = 0;
 		}
+	}
+	
+	public void reset() {
+		this.xOffset = 0;
 	}
 	
 	@Render
@@ -112,5 +119,10 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {
 			}
 			currY++;
 		}
-	}	
+	}
+	
+	@Override
+	public Rectangle getRectangle() {
+		return sprite.s.getBoundingRectangle();
+	}
 }

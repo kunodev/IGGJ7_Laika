@@ -42,6 +42,7 @@ import de.kuro.lazyjam.tools.WorkerThread;
 public class LaikaGameState extends GameState{
 
 	WorkerThread controllerFuckUpThread;
+	public static final float SAFE_ZONE_SIZE = 128.f;
 	
 	@Override
 	protected void update(GlobalContext globalContext) {
@@ -51,7 +52,7 @@ public class LaikaGameState extends GameState{
 			GameObject go = it.next();
 			final Vector2 pos = go.getPos();
 			//if(!this.taggedGameObjects.get(Laika.TAG_DECO).contains(go)) {
-				if(pos.x < 0 || pos.y < 0 || pos.x > cam.viewportWidth || pos.y > cam.viewportHeight){
+				if(pos.x < -SAFE_ZONE_SIZE || pos.y < -SAFE_ZONE_SIZE || pos.x > cam.viewportWidth + SAFE_ZONE_SIZE || pos.y > cam.viewportHeight + SAFE_ZONE_SIZE){
 					it.remove();
 				}
 			//}
@@ -71,6 +72,7 @@ public class LaikaGameState extends GameState{
 		GameObject canon = new GameObject(new Vector2(50.f, 50.f), Laika.TAG_DECO, this);
 		PNGSpriteRenderComponent cannonAnimation = new PNGSpriteRenderComponent();
 		cannonAnimation.init("grosse_kanone_map+3+1", assetManager);
+		cannonAnimation.loopTick = 2;
 		cannonAnimation.sprite.s.setOriginCenter();
 		cannonAnimation.sprite.s.setOrigin(cannonAnimation.sprite.s.getOriginX(), cannonAnimation.sprite.s.getOriginY() - 10);
 		canon.addComponent(cannonAnimation);
@@ -89,6 +91,11 @@ public class LaikaGameState extends GameState{
 		backGroundGen.registerStardust(assetManager.get("purplestar.png", Texture.class));
 		backGroundGen.registerStardust(assetManager.get("greenstar.png", Texture.class));
 		backGroundGen.registerStardust(assetManager.get("pinkstar.png", Texture.class));
+		
+		backGroundGen.registerStardust(assetManager.get("sparkle1.png", Texture.class));
+		backGroundGen.registerStardust(assetManager.get("sparkle2.png", Texture.class));
+		backGroundGen.registerStardust(assetManager.get("sparkle3.png", Texture.class));
+		backGroundGen.registerStardust(assetManager.get("sparkle4.png", Texture.class));
 				
 		AlienFactory alienFac = new AlienFactory(this);
 		laika.addComponent(alienFac);
@@ -121,11 +128,6 @@ public class LaikaGameState extends GameState{
 		bb.createButton(upgradeComponent2, "Moar big pew", buttonBG);
 		bb.createButton(upgradeComponent3, "Moar Small pew", buttonBG);
 		bb.createButton(upgradeComponent4, "Moar Shields", buttonBG);
-
-		GameObject jaeger = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT), this);
-		jaeger.addComponent(new Laser(assetManager.get("rain.png", Texture.class), 4.0f, 2.0f, 1.5f, 1.0f, 50));
-		Texture catTexture = assetManager.get("cat.png", Texture.class);
-		jaeger.addComponent(new SpriteWrapper(catTexture));
 		
 		GameObject comet = new GameObject(new Vector2(Laika.WIDTH * 0.33f, Laika.HEIGHT * 0.67f), this);
 		Texture cometTex = assetManager.get("poop.png", Texture.class);
@@ -133,7 +135,7 @@ public class LaikaGameState extends GameState{
 		comet.addComponent(new Comet(7.0f));
 		comet.addComponent(sw);
 
-		
+		final Texture catTexture = assetManager.get("cat.png", Texture.class);
 		alienFac.registerEnemyType(50, new JaegerFactory(laika.getPos(), catTexture) );
 
 		GameObject lazorKitten = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT * 0.8f), Laika.TAG_ENEMY, this);
