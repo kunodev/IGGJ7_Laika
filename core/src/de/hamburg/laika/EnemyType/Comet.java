@@ -5,9 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+
 import de.kuro.lazyjam.cdiutils.annotations.Render;
 
-public class Comet {
+public class Comet implements IEnemyType {
 	final Texture tex;
 	final float rotationSpeed;
 	float rotation;

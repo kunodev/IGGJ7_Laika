@@ -1,62 +1,65 @@
 package de.hamburg.laika.AI;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
+import de.hamburg.laika.Laika;
+import de.hamburg.laika.EnemyType.IEnemyType;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
+import de.kuro.lazyjam.ecmodel.concrete.GameObject;
+import de.kuro.lazyjam.ecmodel.concrete.GameState;
 
 public class AlienFactory {
 	
-	private int time = 0;
+	Random rand = new Random(1);
 	
-	private enum Phases {		
-		
-		P1(0, 50, 1),
-		P2(50, 70, 2);
-		
-		private int startTime;
-		private int endTime;
-		private int enemyType;
-		
-		private Phases(int startTime, int endTime, int enemyType) {
-			this.startTime = startTime;
-			this.endTime = endTime;
-			this.enemyType = enemyType;
-		}
-		
-		public int getStartTime() {
-			return startTime;
-		}
-		
-		public int getEndTime() {
-			return endTime;
-		}
-		
-		public int getEnemyType() {
-			return enemyType;
-		}
-	}
+	private final GameState gs;
 	
-	@Update
-	public void update(Input i, Vector2 pos) {
-		time++; // addTime
+	ArrayList<AmountEnemyTypePair> enemyTypeAmountPairs = new ArrayList<AmountEnemyTypePair>();
 		
-		for (Phases currenPhase : getPhases()) {
-			currenPhase.getEnemyType();
-			// CHECK FOR SPAWNING.
-		}
-		
+	public AlienFactory(GameState gs) {
+		this.gs = gs;
 	}
 
-	private ArrayList<Phases> getPhases() {
-		ArrayList<Phases> currentPhases = new ArrayList<Phases>();
-		for (Phases phase : Phases.values()) {
-			if ( time >= phase.getStartTime() && time <= phase.getEndTime() ) {
-				currentPhases.add(phase);
+	@Update
+	public void update(Input i, Vector2 pos) {
+		
+		Array<AmountEnemyTypePair> trash = new Array<AmountEnemyTypePair>(enemyTypeAmountPairs.size());
+		
+		for (int j = 0; j < enemyTypeAmountPairs.size(); ++j) {
+			if ( rand.nextFloat() * 100f > 0.5 ) {
+				GameObject enemy = new GameObject(new Vector2(Laika.WIDTH, rand.nextFloat() * Laika.HEIGHT ), gs);
+				AmountEnemyTypePair amountEnemyTypePair = enemyTypeAmountPairs.get(j);
+				enemy.addComponent(amountEnemyTypePair.enemyType);
+				amountEnemyTypePair.amount--;
+				if ( amountEnemyTypePair.amount == 0 ) {
+					trash.add(amountEnemyTypePair);
+				}	
 			}
 		}
-		return currentPhases;
-	}	
+
+		for (AmountEnemyTypePair amountEnemyTypePair : trash) {
+			enemyTypeAmountPairs.remove(amountEnemyTypePair);
+		}
+		
+	}
+	
+	public void registerEnemyType(Integer amount, IEnemyType enemyType) {
+		enemyTypeAmountPairs.add(new AmountEnemyTypePair(amount, enemyType));
+	}
+	
+	static class AmountEnemyTypePair {
+		public int amount;
+		public IEnemyType enemyType;
+		
+		public AmountEnemyTypePair( int amount, IEnemyType enemyType ) {
+			this.amount = amount;
+			this.enemyType = enemyType;
+		}
+	}
+	
 }
