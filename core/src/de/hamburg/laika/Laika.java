@@ -43,6 +43,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("poop.png", Texture.class);
 		assetManager.load("rain.png", Texture.class);
 		assetManager.load("button.png", Texture.class);
+		assetManager.load("background1280720.png", Texture.class);
 	}
 
 	@Override
@@ -50,12 +51,17 @@ public class Laika extends LazyJamApplicationAdapter {
 		super.create();
 		GameState gs = new GameState();
 		this.gscm.initMainGameState(gs);
+		
+		GameObject backGround = new GameObject(new Vector2(0f,10f), gs);
+		SpriteWrapper backgroundSprite = new SpriteWrapper(assetManager.get("background1280720.png"));
+		backgroundSprite.s.setSize(Laika.WIDTH, Laika.HEIGHT);
+		backGround.addComponent(backgroundSprite);
 
 		GameObject laika = new GameObject(new Vector2(50.f, 50.f), TAG_PLAYER, gs);
 		laika.addComponent(new PlayerControl());
 		laika.addComponent(new HealthComponent(500));
 		laika.addComponent(new ASCIIPicture("PLAYER"));
-
+		
 		BackGroundGen backGroundGen = new BackGroundGen(gs);
 		laika.addComponent(backGroundGen);
 		//ADD STARSTUFF backGroundGen.registerEnemyType(enemyType);
@@ -95,5 +101,6 @@ public class Laika extends LazyJamApplicationAdapter {
 		ChangeControlsTask cct = new ChangeControlsTask(serviceMan.getService(InputMap.class));
 		controllerFuckUpThread = new LimitedTimeWorkerThread(5000, cct, Integer.MAX_VALUE);
 		controllerFuckUpThread.start();
+		
 	}
 }
