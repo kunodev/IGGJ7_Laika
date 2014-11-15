@@ -3,10 +3,7 @@ package de.kuro.lazyjam.main;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
@@ -25,10 +22,21 @@ public abstract class LazyJamApplicationAdapter extends ApplicationAdapter {
 	public GameStateContextManager gscm;
 	public AssetManager assetManager;
 	public ServiceManager serviceMan;
-	
+
+	//debug
+	private FPSLogger fps = new FPSLogger();
+
+	private final float width;
+	private final float height;
+
+	public LazyJamApplicationAdapter(float width, float height) {
+		this.width = width;
+		this.height = height;
+	}
+
 	public Camera initCam() {
 		OrthographicCamera cam = new OrthographicCamera();
-		cam.setToOrtho(false, 1024, 768);
+		cam.setToOrtho(false, width, height);
 		return cam;
 	}
 	
@@ -63,6 +71,7 @@ public abstract class LazyJamApplicationAdapter extends ApplicationAdapter {
 		gscm.render();
 
 		batch.end();
+		fps.log();
 	}
 	
 	public void setMap(String map, GameStateContext gsc) {

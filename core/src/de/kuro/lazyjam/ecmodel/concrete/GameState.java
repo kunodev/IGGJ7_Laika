@@ -1,13 +1,10 @@
 package de.kuro.lazyjam.ecmodel.concrete;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -40,6 +37,13 @@ public class GameState extends AGameState {
 		GameStateContext gsc = new GameStateContext(globalContext, this);
 		for (GameObject go : gameObjects) {
 			go.onUpdate(gsc);
+		}
+		final OrthographicCamera cam = globalContext.serviceMan.getService(OrthographicCamera.class);
+		for(Iterator<GameObject> it = gameObjects.iterator(); it.hasNext();){
+			final Vector2 pos = it.next().getPos();
+			if(pos.x < 0 || pos.y < 0 || pos.x > cam.viewportWidth || pos.y > cam.viewportHeight){
+				it.remove();
+			}
 		}
 	}
 

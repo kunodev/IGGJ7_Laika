@@ -3,6 +3,7 @@ package de.hamburg.laika.player;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 
+import de.hamburg.laika.Laika;
 import de.hamburg.laika.inputmap.InputMap;
 import de.hamburg.laika.inputmap.InputMap.Action;
 import de.kuro.lazyjam.cdiutils.annotations.Render;
@@ -21,16 +22,16 @@ public class PlayerControl {
 	@Update
 	public void update(Input i, Vector2 pos, InputMap map, GameState gs) {
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.DOWN))) {
-			pos.y -= SPEED * speedModifier;
+			pos.y = Math.max(0.0f, Math.min(Laika.HEIGHT, pos.y - SPEED * speedModifier));
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.UP))) {
-			pos.y += SPEED * speedModifier;;
+			pos.y = Math.max(0.0f, Math.min(Laika.HEIGHT, pos.y + SPEED * speedModifier));
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.LEFT))) {
-			pos.x -= SPEED * speedModifier;;
+			pos.x = Math.max(0.0f, Math.min(Laika.WIDTH, pos.x - SPEED * speedModifier));
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.RIGHT))) {
-			pos.x += SPEED * speedModifier;;
+			pos.x = Math.max(0.0f, Math.min(Laika.WIDTH, pos.x + SPEED * speedModifier));
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.SHOOT))) {
 			BulletFactory.createBullet(pos, gs);

@@ -1,5 +1,6 @@
 package de.hamburg.laika.player;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 
 import de.kuro.lazyjam.cdiutils.annotations.Render;
@@ -14,7 +15,7 @@ public class Bullet extends ExtraSimpleCollisionComponent{
 	public int damage;
 	
 	@Update
-	public void foo(Vector2 pos, GameState gs, GameObject go) {
+	public void foo(Vector2 pos, GameState gs, GameObject go, OrthographicCamera camera) {
 		super.collideWith(pos, gs, go);
 	}
 	
