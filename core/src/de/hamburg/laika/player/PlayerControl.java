@@ -14,9 +14,11 @@ import de.kuro.lazyjam.ecmodel.concrete.tools.Collision;
 public class PlayerControl {
 	
 	public static final int SPEED = 3;
-	public static final int BIG_CANNON_TICKS = 20;
 	
 	public float speedModifier = 1.0f;
+
+	public static final int BIG_CANNON_TICKS = 20;
+	public int cannonTicksReduction;
 	public int currentCannonTicks;
 	
 	@Update
@@ -34,7 +36,7 @@ public class PlayerControl {
 			pos.x = Math.max(0.0f, Math.min(Laika.WIDTH, pos.x + SPEED * speedModifier));
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.SHOOT))) {
-			if(currentCannonTicks >= BIG_CANNON_TICKS) {
+			if(currentCannonTicks >= BIG_CANNON_TICKS - cannonTicksReduction) {
 				BulletFactory.createBullet(pos, gs);
 				currentCannonTicks = 0;
 			}

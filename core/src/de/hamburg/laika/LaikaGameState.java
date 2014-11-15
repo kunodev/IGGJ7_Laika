@@ -18,11 +18,11 @@ public class LaikaGameState extends GameState{
 		for(Iterator<GameObject> it = gameObjects.iterator(); it.hasNext();){
 			GameObject go = it.next();
 			final Vector2 pos = go.getPos();
-			if(!this.taggedGameObjects.get(Laika.TAG_DECO).contains(go)) {
+			//if(!this.taggedGameObjects.get(Laika.TAG_DECO).contains(go)) {
 				if(pos.x < 0 || pos.y < 0 || pos.x > cam.viewportWidth || pos.y > cam.viewportHeight){
 					it.remove();
 				}
-			}
+			//}
 		}
 	}
 }

@@ -1,12 +1,10 @@
 package de.hamburg.laika.player;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.inputmap.InputMap;
 import de.hamburg.laika.inputmap.InputMap.Action;
-import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
 import de.kuro.lazyjam.ecmodel.concrete.components.PNGSpriteRenderComponent;
@@ -16,6 +14,9 @@ public class SmallCannonControl {
 	
 	public static final int SMALL_CANNON_TICKS = 1;
 	public int currentSmallCannonTicks;
+	public int cannonTicksReduction;
+	
+	public int bonusDamage;
 
 	public Vector2 towerPos = new Vector2();
 	public static final Vector2 TOWER_OFFSET = new Vector2(20,60);
@@ -37,8 +38,7 @@ public class SmallCannonControl {
 			sw.sprite.s.setRotation(sw.sprite.s.getRotation() - 10);
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.SHIELD_SHOOT))) {
-			System.out.println("shoot");
-			if(currentSmallCannonTicks >= SMALL_CANNON_TICKS) {
+			if(currentSmallCannonTicks >= SMALL_CANNON_TICKS - cannonTicksReduction) {
 				tempBulletOffset.rotate(towerangle);
 				tempBulletOffset.sub(0, -5);
 
