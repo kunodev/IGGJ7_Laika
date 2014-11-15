@@ -11,6 +11,7 @@ import de.kuro.lazyjam.asciiassetextension.ASCIIPicture;
 import de.kuro.lazyjam.cdiutils.annotations.Render;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
+import de.kuro.lazyjam.ecmodel.concrete.components.PNGSpriteRenderComponent;
 import de.kuro.lazyjam.simpleservice.FontManager;
 
 public class SmallCannonControl {
@@ -24,8 +25,8 @@ public class SmallCannonControl {
 	public float towerangle;
 	
 	@Update
-	public void update(Input i, Vector2 pos, InputMap map, GameState gs, ASCIIPicture ship) {
-		Rectangle shipRect = ship.getRectangle();
+	public void update(Input i, Vector2 pos, InputMap map, GameState gs, PNGSpriteRenderComponent ship) {
+		Rectangle shipRect = ship.sprite.getRectangle();
 		Vector2 shipCenter = pos.cpy().add(shipRect.getWidth()/2, shipRect.getHeight()/2);
 
 		Vector2 tempTowerOffset = TOWER_OFFSET.cpy();

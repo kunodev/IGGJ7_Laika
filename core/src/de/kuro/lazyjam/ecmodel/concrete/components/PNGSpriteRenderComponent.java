@@ -21,7 +21,7 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {
 	
 	public int loopTick = 30;
 	private int currentTick;
-	private SpriteWrapper sprite;
+	public SpriteWrapper sprite;
 	
 	public class MyTexRegion extends TextureRegion implements IRectangleProvider {
 
