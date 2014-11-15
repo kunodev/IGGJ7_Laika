@@ -3,6 +3,7 @@ package de.kuro.lazyjam.simpleservice;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -69,6 +70,10 @@ public class FontManager {
 			yOffset++;
 		}
 		
+	}
+	
+	public TextBounds getBounds(String text) {
+		return font.getBounds(text);
 	}
 
 }
