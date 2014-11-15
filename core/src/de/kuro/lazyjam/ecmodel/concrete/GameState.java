@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -19,6 +20,8 @@ public class GameState extends AGameState {
 
 	public Collection<GameObject> gameObjects;
 	public Map<String, Collection<GameObject>> taggedGameObjects;
+	
+	public Music bgm;
 	
 	public GameState() {
 		taggedGameObjects = new HashMap<String, Collection<GameObject>>();
