@@ -3,6 +3,7 @@ package de.kuro.lazyjam.asciiassetextension;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -21,6 +22,10 @@ public class SpriteWrapper implements IRectangleProvider {
 	public SpriteWrapper(Sprite s) {
 		this.s = s;
 	}
+	
+	public void setRegion(TextureRegion r) {
+		s.setRegion(r);
+	}
 
 	@Override
 	public Rectangle getRectangle() {
@@ -29,7 +34,7 @@ public class SpriteWrapper implements IRectangleProvider {
 
 	@Render
 	public void draw(SpriteBatch sb, Vector2 pos) {
-		s.setPosition(pos.x, pos.y);
+		s.setPosition(pos.x - s.getWidth()/2, pos.y - s.getHeight()/2);
 		s.draw(sb);	
 	}
 

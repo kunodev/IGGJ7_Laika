@@ -21,6 +21,7 @@ import de.kuro.lazyjam.ecmodel.IGameState;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
 import de.kuro.lazyjam.ecmodel.concrete.components.ExtraSimpleCollisionComponent;
+import de.kuro.lazyjam.ecmodel.concrete.components.PNGSpriteRenderComponent;
 import de.kuro.lazyjam.main.LazyJamApplicationAdapter;
 import de.kuro.lazyjam.tools.LimitedTimeWorkerThread;
 import de.kuro.lazyjam.tools.WorkerThread;
@@ -45,6 +46,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("rain.png", Texture.class);
 		assetManager.load("button.png", Texture.class);
 		assetManager.load("background1280720.png", Texture.class);
+		assetManager.load("raumschiff_map.png", Texture.class);
 		assetManager.load("Go Cart - Loop Mix.mp3", Music.class);
 	}
 
@@ -66,7 +68,10 @@ public class Laika extends LazyJamApplicationAdapter {
 		GameObject laika = new GameObject(new Vector2(50.f, 50.f), TAG_PLAYER, gs);
 		laika.addComponent(new PlayerControl());
 		laika.addComponent(new HealthComponent(500));
-		laika.addComponent(new ASCIIPicture("PLAYER"));
+		//laika.addComponent(new ASCIIPicture("PLAYER"));
+		PNGSpriteRenderComponent shipAnimation = new PNGSpriteRenderComponent();
+		shipAnimation.init("raumschiff_map+2+1", assetManager);
+		laika.addComponent(shipAnimation);
 		
 		BackGroundGen backGroundGen = new BackGroundGen(gs);
 		laika.addComponent(backGroundGen);
