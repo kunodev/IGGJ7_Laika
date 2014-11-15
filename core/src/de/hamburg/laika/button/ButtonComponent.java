@@ -41,7 +41,7 @@ public class ButtonComponent {
 			return;
 		}
 		
-		Rectangle r = new Rectangle(pos.x, pos.y, size.x, size.y);
+		Rectangle r = new Rectangle(pos.x - size.x / 2, pos.y - size.y / 2, size.x, size.y);
 		Vector3 tmp = cam.unproject(new Vector3(i.getX(), i.getY(), 0));
 		float x = tmp.x;
 		float y = tmp.y;
