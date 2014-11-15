@@ -71,6 +71,7 @@ public class LaikaGameState extends GameState{
 		GameObject canon = new GameObject(new Vector2(50.f, 50.f), Laika.TAG_DECO, this);
 		PNGSpriteRenderComponent cannonAnimation = new PNGSpriteRenderComponent();
 		cannonAnimation.init("grosse_kanone_map+3+1", assetManager);
+		cannonAnimation.loopTick = 2;
 		cannonAnimation.sprite.s.setOriginCenter();
 		cannonAnimation.sprite.s.setOrigin(cannonAnimation.sprite.s.getOriginX(), cannonAnimation.sprite.s.getOriginY() - 10);
 		canon.addComponent(cannonAnimation);
