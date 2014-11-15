@@ -33,7 +33,7 @@ import de.kuro.lazyjam.ecmodel.concrete.GameState;
 			for (SpriteWrapper dust : stardust) {
 				if ( rand.nextFloat() * 100f < 2 ) {
 					GameObject star = new GameObject(new Vector2(Laika.WIDTH, rand.nextFloat() * Laika.HEIGHT ), gs);
-					star.addComponent(new LinearMovement(new Vector2(-rand.nextFloat() * (rand.nextInt(15) + 10), 0.f)));
+					star.addComponent(new LinearMovement(new Vector2(-rand.nextFloat() * (rand.nextInt(15) + 10.f), 0.f)));
 					star.addComponent(dust);
 				}
 			}			
