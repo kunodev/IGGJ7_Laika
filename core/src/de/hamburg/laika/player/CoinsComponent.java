@@ -9,9 +9,4 @@ public class CoinsComponent {
 	public void removeCoins(int amount) {
 		coins = Math.max(0, coins - amount);
 	}
-	
-	@Render
-	public void render(FontManager fm) {
-		fm.drawTextAbsolut(400, 30, "" + coins + " coins");
-	}
 }

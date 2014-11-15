@@ -51,11 +51,13 @@ public class Laika extends LazyJamApplicationAdapter {
 		AlienFactory alienFac = new AlienFactory(gs);
 		laika.addComponent(alienFac);
 		laika.addComponent(new CoinsComponent());
+		laika.addComponent(new InfoTextComponent());
 
 
 		UpgradeComponent upgradeComponent = new SpeedUpgradeComponent();
 		laika.addComponent(upgradeComponent);
 		laika.addComponent(new ShieldControl());
+		laika.addComponent(new RocketControl());
 		
 		ButtonBuilder bb = new ButtonBuilder(gs);
 		Texture buttonBG = assetManager.get("button.png", Texture.class);
