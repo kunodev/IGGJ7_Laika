@@ -1,8 +1,5 @@
 package de.kuro.lazyjam.asciiassetextension;
 
-import java.awt.Font;
-
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -18,7 +15,7 @@ public class ASCIIPicture implements IRectangleProvider {
 
 	public String picture;
 	public Rectangle rect;
-	public BitmapFont f;
+	public BitmapFont f = new BitmapFont();
 	
 	public static final int DEFAULT_FONTSIZE = 20;
 	
@@ -43,12 +40,7 @@ public class ASCIIPicture implements IRectangleProvider {
 	public void updateRect(Vector2 pos, FontManager fm) {
 		this.getRectangle().x = pos.x;
 		this.getRectangle().y = pos.y;
-		fm.getBounds(this.picture);
 	}
-	
-//	public void initRectangle(FontManager fm) {
-//		this.rect = fm.getBounds(this.picture).;
-//	}
  
 	@Override
 	public Rectangle getRectangle() {
@@ -70,7 +62,7 @@ public class ASCIIPicture implements IRectangleProvider {
 	
 	@Render
 	public void draw(FontManager fm, Vector2 pos, SpriteBatch b){
-		fm.drawAbsoluteWithRectangle(pos.x, pos.y, this.picture, this.rect);
+		fm.drawAbsoluteWithRectangleCentered(pos.x, pos.y, this.picture, getRectangle());
 	}
 	
 }

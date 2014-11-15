@@ -57,6 +57,11 @@ public class FontManager {
 	public void drawTextAbsolut(float x, float y, String text) {
 		this.drawTextAbsolut((int) x, (int) y, text);
 	}
+	
+	public void drawTextAbsolutCentered(int x, int y, String text, Color color) {
+		TextBounds bounds = this.getBounds(text);
+		drawTextAbsolut(x - bounds.width/2, y - font.getLineHeight()/2, text, color);
+	}
 
 	public void drawTextAbsolut(float x, float y, String text, Color color) {
 		this.drawTextAbsolut((int) x, (int) y, text, color);
@@ -67,6 +72,16 @@ public class FontManager {
 		int yOffset = 0;
 		for(String line : splitPicture) {
 			this.drawTextAbsolut(x , y + this.font.getLineHeight() *yOffset, line, Color.GREEN);
+			yOffset++;
+		}
+		
+	}
+	
+	public void drawAbsoluteWithRectangleCentered(float x, float y, String picture, Rectangle rect) {
+		String[] splitPicture = picture.split("\\n");
+		int yOffset = 0;
+		for(String line : splitPicture) {
+			this.drawTextAbsolut(x - rect.width/2, y - rect.height/2 + this.font.getLineHeight() *yOffset, line, Color.GREEN);
 			yOffset++;
 		}
 		

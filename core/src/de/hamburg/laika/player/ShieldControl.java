@@ -1,10 +1,13 @@
 package de.hamburg.laika.player;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.inputmap.InputMap;
 import de.hamburg.laika.inputmap.InputMap.Action;
+import de.kuro.lazyjam.asciiassetextension.ASCIIPicture;
 import de.kuro.lazyjam.cdiutils.annotations.Render;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
@@ -23,14 +26,17 @@ public class ShieldControl {
 	public float towerangle;
 	
 	@Update
-	public void update(Input i, Vector2 pos, InputMap map, GameState gs) {
+	public void update(Input i, Vector2 pos, InputMap map, GameState gs, ASCIIPicture ship) {
+		Rectangle shipRect = ship.getRectangle();
+		Vector2 shipCenter = pos.cpy().add(shipRect.getWidth()/2, shipRect.getHeight()/2);
+		
 		Vector2 tempOffset = SHIELD_OFFSET.cpy();
 		tempOffset.rotate(shieldangle);
-		shieldRenderPos = tempOffset.cpy().add(pos);
+		shieldRenderPos = tempOffset.cpy().add(shipCenter);
 
 		Vector2 tempTowerOffset = SHIELD_OFFSET.cpy();
 		tempTowerOffset.rotate(towerangle);
-		towerPos = tempTowerOffset.cpy().add(pos);
+		towerPos = tempTowerOffset.cpy().add(shipCenter);
 		
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.SHIELD_LEFT))) {
 			shieldangle -= 10;
@@ -51,8 +57,8 @@ public class ShieldControl {
 	
 	@Render
 	public void render(FontManager fm) {
-		fm.drawTextAbsolut(shieldRenderPos.x, shieldRenderPos.y, "SHIELD");
-		fm.drawTextAbsolut(towerPos.x, towerPos.y, "TOWER");
+		fm.drawTextAbsolutCentered((int)shieldRenderPos.x, (int)shieldRenderPos.y, "SHIELD", Color.WHITE);
+		fm.drawTextAbsolutCentered((int)towerPos.x, (int)towerPos.y, "TOWER", Color.WHITE);
 	}
 	
 }
