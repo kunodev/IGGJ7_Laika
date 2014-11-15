@@ -10,6 +10,7 @@ import de.hamburg.laika.EnemyType.Jaeger;
 import de.hamburg.laika.EnemyType.Laser;
 import de.hamburg.laika.EnemyType.factory.JaegerFactory;
 import de.hamburg.laika.background.BackGroundGen;
+import de.hamburg.laika.button.ButtonBuilder;
 import de.hamburg.laika.button.ButtonComponent;
 import de.hamburg.laika.player.*;
 import de.kuro.lazyjam.asciiassetextension.ASCIIPicture;
@@ -33,6 +34,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("cat.png", Texture.class);
 		assetManager.load("poop.png", Texture.class);
 		assetManager.load("rain.png", Texture.class);
+		assetManager.load("button.png", Texture.class);
 	}
 
 	@Override
@@ -53,13 +55,20 @@ public class Laika extends LazyJamApplicationAdapter {
 		AlienFactory alienFac = new AlienFactory(gs);
 		laika.addComponent(alienFac);
 		laika.addComponent(new CoinsComponent());
+		laika.addComponent(new InfoTextComponent());
 
 
 		UpgradeComponent upgradeComponent = new SpeedUpgradeComponent();
 		laika.addComponent(upgradeComponent);
 		laika.addComponent(new ShieldControl());
-		GameObject upgradeButton = new GameObject(new Vector2(50, 50), gs);
-		upgradeButton.addComponent(new ButtonComponent(upgradeComponent, "Moar Speed", 100, 100));
+		laika.addComponent(new RocketControl());
+		
+		ButtonBuilder bb = new ButtonBuilder(gs);
+		Texture buttonBG = assetManager.get("button.png", Texture.class);
+		bb.createButton(upgradeComponent, "Moar Speed", buttonBG);
+		bb.createButton(null, "nothing", buttonBG);
+		bb.createButton(null, "nothing", buttonBG);
+		bb.createButton(null, "nothing", buttonBG);
 
 		GameObject jaeger = new GameObject(new Vector2(WIDTH, HEIGHT), gs);
 		jaeger.addComponent(new Laser(assetManager.get("rain.png", Texture.class), 8.0f, 2.0f, 1.5f, 1.0f, 50));
