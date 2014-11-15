@@ -1,15 +1,10 @@
 package de.hamburg.laika;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.AI.AlienFactory;
 import de.hamburg.laika.button.ButtonComponent;
-import de.hamburg.laika.player.PlayerOne;
+import de.hamburg.laika.player.PlayerControl;
 import de.hamburg.laika.player.SpeedUpgradeComponent;
 import de.hamburg.laika.player.UpgradeComponent;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
