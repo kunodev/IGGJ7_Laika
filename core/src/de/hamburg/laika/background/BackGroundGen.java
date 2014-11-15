@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.Laika;
 import de.hamburg.laika.EnemyMovement.LinearMovement;
+import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
@@ -34,7 +35,7 @@ import de.kuro.lazyjam.ecmodel.concrete.GameState;
 				if ( rand.nextFloat() * 100f > 0.5 ) {
 					GameObject star = new GameObject(new Vector2(Laika.WIDTH, rand.nextFloat() * Laika.HEIGHT ), gs);
 					star.addComponent(new LinearMovement(new Vector2(-2f, 0.f)));
-					star.addComponent(dust);
+					star.addComponent(new SpriteWrapper(dust));
 				}
 			}			
 		}

@@ -58,6 +58,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("Go Cart - Loop Mix.mp3", Music.class);
 		assetManager.load("schutzschild.png", Texture.class);
 		assetManager.load("shootingstar1.png", Texture.class);
+		
 	}
 
 	@Override
@@ -83,7 +84,8 @@ public class Laika extends LazyJamApplicationAdapter {
 		BackGroundGen backGroundGen = new BackGroundGen(gs);
 		laika.addComponent(backGroundGen);
 		//ADD STARSTUFF backGroundGen.registerEnemyType(enemyType);
-		backGroundGen.registerStardust(assetManager.get("cat.png", Texture.class));
+		backGroundGen.registerStardust(assetManager.get("shootingstar1.png", Texture.class));
+	
 		
 		AlienFactory alienFac = new AlienFactory(gs);
 		laika.addComponent(alienFac);
