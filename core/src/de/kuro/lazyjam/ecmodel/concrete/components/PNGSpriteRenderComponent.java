@@ -1,12 +1,11 @@
 package de.kuro.lazyjam.ecmodel.concrete.components;
 
 import java.util.ArrayList;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 
 import de.kuro.lazyjam.asciiassetextension.IRectangleProvider;
 import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
@@ -22,6 +21,53 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {
 	
 	public int loopTick = 30;
 	private int currentTick;
+	private SpriteWrapper sprite;
+	
+	public class MyTexRegion extends TextureRegion implements IRectangleProvider {
+
+		
+		public MyTexRegion() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public MyTexRegion(Texture texture, float u, float v, float u2, float v2) {
+			super(texture, u, v, u2, v2);
+			// TODO Auto-generated constructor stub
+		}
+
+		public MyTexRegion(Texture texture, int x, int y, int width, int height) {
+			super(texture, x, y, width, height);
+			// TODO Auto-generated constructor stub
+		}
+
+		public MyTexRegion(Texture texture, int width, int height) {
+			super(texture, width, height);
+			// TODO Auto-generated constructor stub
+		}
+
+		public MyTexRegion(Texture texture) {
+			super(texture);
+			// TODO Auto-generated constructor stub
+		}
+
+		public MyTexRegion(TextureRegion region, int x, int y, int width,
+				int height) {
+			super(region, x, y, width, height);
+			// TODO Auto-generated constructor stub
+		}
+
+		public MyTexRegion(TextureRegion region) {
+			super(region);
+			// TODO Auto-generated constructor stub
+		}
+
+		@Override
+		public Rectangle getRectangle() {
+			return getRectangle();
+		}
+		
+	}
 	
 	@Update
 	public void update() {
@@ -34,7 +80,8 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {
 	
 	@Render
 	public void render(GameObjectContext goc) {
-		CDICallHelper.callOnObject(goc, Render.class, super.getCurrent());
+		sprite.setRegion((TextureRegion)getCurrent());
+		CDICallHelper.callOnObject(goc, Render.class, sprite);
 	}
 	
 	@ComponentInit
@@ -42,6 +89,7 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {
 		// Check params
 		String[] initVal = initString.split("\\+");
 		Texture preFab = assetMan.get(initVal[0] + ".png");
+		sprite = new SpriteWrapper(preFab);
 		int maxX = Integer.parseInt(initVal[1]);
 		int maxY = Integer.parseInt(initVal[2]);
 		// precalc
@@ -56,24 +104,12 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {
 		for(int i=0; i<maxY; i++) {
 			this.renderableObjects.add(new ArrayList<IRectangleProvider>());
 			for(int j=0; j<maxX; j++) { 
-				IRectangleProvider newDrawable = new SpriteWrapper(new Sprite(preFab, 
-						currX * widthOfSprite, currY * heightOfSprite,
-						widthOfSprite, heightOfSprite));
-				this.renderableObjects.get(i).add(newDrawable);
+				MyTexRegion tr = new MyTexRegion(preFab, currX * widthOfSprite, currY * heightOfSprite, widthOfSprite, heightOfSprite);
+				this.renderableObjects.get(i).add(tr);
 				
 				currX++;
 			}
 			currY++;
 		}
-	}
-	
-	public void applyToAllSprites(Consumer<SpriteWrapper> func) {
-		for(ArrayList<IRectangleProvider> list : this.renderableObjects) {
-			for(IRectangleProvider ele : list) {
-				SpriteWrapper sw = (SpriteWrapper) ele;
-				func.accept(sw);
-			}
-		}
-	}
-		
+	}	
 }

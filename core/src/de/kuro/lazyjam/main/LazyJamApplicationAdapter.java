@@ -26,6 +26,8 @@ public abstract class LazyJamApplicationAdapter extends ApplicationAdapter {
 
 	private final float width;
 	private final float height;
+	
+	private OrthographicCamera cam;
 
 	public LazyJamApplicationAdapter(float width, float height) {
 		this.width = width;
@@ -33,8 +35,10 @@ public abstract class LazyJamApplicationAdapter extends ApplicationAdapter {
 	}
 
 	public Camera initCam() {
-		OrthographicCamera cam = new OrthographicCamera();
+		cam = new OrthographicCamera();
 		cam.setToOrtho(false, width, height);
+        cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
+		cam.update();
 		return cam;
 	}
 	
@@ -66,6 +70,7 @@ public abstract class LazyJamApplicationAdapter extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		serviceMan.getService(TiledMapProvider.class).render();
 		batch.begin();
+		batch.setProjectionMatrix(cam.combined);
 		gscm.render();
 
 		batch.end();
