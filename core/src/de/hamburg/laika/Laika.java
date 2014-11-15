@@ -1,5 +1,6 @@
 package de.hamburg.laika;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
@@ -44,6 +45,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("rain.png", Texture.class);
 		assetManager.load("button.png", Texture.class);
 		assetManager.load("background1280720.png", Texture.class);
+		assetManager.load("Go Cart - Loop Mix.mp3", Music.class);
 	}
 
 	@Override
@@ -51,6 +53,10 @@ public class Laika extends LazyJamApplicationAdapter {
 		super.create();
 		GameState gs = new GameState();
 		this.gscm.initMainGameState(gs);
+		gs.bgm = assetManager.get("Go Cart - Loop Mix.mp3");
+		gs.bgm.setLooping(true);
+		gs.bgm.play();
+		gs.bgm.setVolume(0.5f);
 		
 		GameObject backGround = new GameObject(new Vector2(0f,10f), gs);
 		SpriteWrapper backgroundSprite = new SpriteWrapper(assetManager.get("background1280720.png"));
