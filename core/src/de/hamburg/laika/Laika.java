@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import de.hamburg.laika.AI.AlienFactory;
 import de.hamburg.laika.button.ButtonComponent;
 import de.hamburg.laika.player.PlayerOne;
+import de.hamburg.laika.player.SpeedUpgradeComponent;
 import de.hamburg.laika.player.UpgradeComponent;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
@@ -36,10 +37,10 @@ public class Laika extends LazyJamApplicationAdapter {
 		laika.addComponent(alienFac);
 		
 		
-		UpgradeComponent upgradeComponent = new UpgradeComponent();
+		UpgradeComponent upgradeComponent = new SpeedUpgradeComponent();
 		laika.addComponent(upgradeComponent);
 		GameObject upgradeButton = new GameObject(new Vector2(50, 50),gs);
-		upgradeButton.addComponent(new ButtonComponent(upgradeComponent, "Click me", 100, 100));
+		upgradeButton.addComponent(new ButtonComponent(upgradeComponent, "Moar Speed", 100, 100));
 	}
 }
 
