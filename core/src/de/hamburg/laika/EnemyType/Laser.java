@@ -1,6 +1,5 @@
 package de.hamburg.laika.EnemyType;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
@@ -31,7 +30,7 @@ public class Laser {
 
 	@Update
 	public void update(GameState gs, GameObject go) {
-		stateTime += Gdx.graphics.getDeltaTime();
+		stateTime += gs.getTickTimer() / 1000.0f;
 		if ((!isLaserOn && stateTime > pause) || (isLaserOn && stateTime > onTime)) {
 			isLaserOn = !isLaserOn;
 			stateTime = 0.f;
@@ -55,7 +54,7 @@ public class Laser {
 	public void collide(GameObject thisGo, GameObject otherGo, GameState gs) {
 		if (isLaserOn) {
 			final float dist = Intersector.distanceLinePoint(thisGo.getPos().x, thisGo.getPos().y, 0.0f, thisGo.getPos().y, otherGo.getPos().x, otherGo.getPos().y);
-			if (dist < 10 && otherGo.getComponent(HealthComponent.class) != null && otherGo.getComponent(HealthComponent.class).damage(damage)) {
+			if (dist < 8 && otherGo.getComponent(HealthComponent.class) != null && otherGo.getComponent(HealthComponent.class).damage(damage)) {
 				otherGo.selfDestruct(gs);
 				System.out.println("FREAKIN' LAIKA KIlLED YOU!");
 			}

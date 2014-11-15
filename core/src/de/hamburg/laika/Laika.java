@@ -3,9 +3,11 @@ package de.hamburg.laika;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.AI.AlienFactory;
+import de.hamburg.laika.EnemyMovement.LinearMovement;
 import de.hamburg.laika.EnemyType.Comet;
 import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.EnemyType.Jaeger;
@@ -24,6 +26,7 @@ import de.hamburg.laika.player.ShieldControl;
 import de.hamburg.laika.player.SmallCannonControl;
 import de.hamburg.laika.player.SpeedUpgradeComponent;
 import de.hamburg.laika.player.UpgradeComponent;
+import de.kuro.lazyjam.asciiassetextension.AnimationWrapper;
 import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
@@ -58,7 +61,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("Go Cart - Loop Mix.mp3", Music.class);
 		assetManager.load("schutzschild.png", Texture.class);
 		assetManager.load("shootingstar1.png", Texture.class);
-		
+		assetManager.load("lazorkitten_map.png", Texture.class);
 	}
 
 	@Override
@@ -113,7 +116,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		bb.createButton(null, "nothing", buttonBG);
 
 		GameObject jaeger = new GameObject(new Vector2(WIDTH, HEIGHT), gs);
-		jaeger.addComponent(new Laser(assetManager.get("rain.png", Texture.class), 8.0f, 2.0f, 1.5f, 1.0f, 50));
+		jaeger.addComponent(new Laser(assetManager.get("rain.png", Texture.class), 4.0f, 2.0f, 1.5f, 1.0f, 50));
 		Texture catTexture = assetManager.get("cat.png", Texture.class);
 		jaeger.addComponent(new Jaeger(3.1f, laika.getPos()));
 		jaeger.addComponent(new SpriteWrapper(catTexture));
@@ -125,7 +128,11 @@ public class Laika extends LazyJamApplicationAdapter {
 		comet.addComponent(sw);
 		
 		alienFac.registerEnemyType(50, new JaegerFactory(laika.getPos(), catTexture) );
-		
+
+		GameObject lazorKitten = new GameObject(new Vector2(WIDTH, HEIGHT * 0.8f), TAG_ENEMY, gs);
+		lazorKitten.addComponent(new LinearMovement(new Vector2(-2.0f, 0.0f)));
+		lazorKitten.addComponent(new AnimationWrapper(assetManager.get("lazorkitten_map.png", Texture.class),3, 1, 1.f/6.f, Animation.PlayMode.LOOP_PINGPONG));
+
 		ChangeControlsTask cct = new ChangeControlsTask(serviceMan.getService(InputMap.class));
 		controllerFuckUpThread = new LimitedTimeWorkerThread(5000, cct, Integer.MAX_VALUE);
 		controllerFuckUpThread.start();
