@@ -17,7 +17,7 @@ import de.kuro.lazyjam.cdiutils.cdihelper.CDICallHelper;
 import de.kuro.lazyjam.cdiutils.context.GameObjectContext;
 
 @Component(name="PNGSprite")
-public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {	
+public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent implements IRectangleProvider{	
 	
 	public int loopTick = 30;
 	private int currentTick;
@@ -62,11 +62,11 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {
 			// TODO Auto-generated constructor stub
 		}
 
+		
 		@Override
 		public Rectangle getRectangle() {
-			return getRectangle();
+			return sprite.s.getBoundingRectangle();
 		}
-		
 	}
 	
 	@Update
@@ -112,5 +112,10 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {
 			}
 			currY++;
 		}
-	}	
+	}
+	
+	@Override
+	public Rectangle getRectangle() {
+		return sprite.s.getBoundingRectangle();
+	}
 }

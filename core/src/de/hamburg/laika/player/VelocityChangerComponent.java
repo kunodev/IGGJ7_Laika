@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.math.Vector2;
 
+import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 import de.kuro.lazyjam.ecmodel.concrete.components.VelocityComponent;
 
@@ -32,7 +33,7 @@ public class VelocityChangerComponent {
 	}
 	
 	@Update
-	public void update(VelocityComponent vc, Vector2 pos) {
+	public void update(VelocityComponent vc, Vector2 pos, SpriteWrapper sw) {
 		timeCounter++;
 		
 		Iterator<Change> it = targets.iterator();
@@ -41,6 +42,7 @@ public class VelocityChangerComponent {
 			if (e.time <= timeCounter) {
 				it.remove();
 				vc.v = e.target.cpy().sub(pos).nor().scl(e.speed);
+				sw.s.setRotation((float)(Math.atan2(vc.v.x, vc.v.y) * 180 / -Math.PI) + 90);
 			}
 			
 		}
