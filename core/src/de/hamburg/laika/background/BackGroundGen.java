@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.Laika;
 import de.hamburg.laika.EnemyMovement.LinearMovement;
+import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
@@ -20,8 +21,7 @@ import de.kuro.lazyjam.ecmodel.concrete.GameState;
 		Random rand = new Random(1);
 		
 		private final GameState gs;
-		
-		ArrayList<Texture> stardust = new ArrayList<Texture>();
+		ArrayList<SpriteWrapper> stardust = new ArrayList<SpriteWrapper>();
 			
 		public BackGroundGen(GameState gs) {
 			this.gs = gs;
@@ -30,16 +30,16 @@ import de.kuro.lazyjam.ecmodel.concrete.GameState;
 		@Update
 		public void update() {
 			
-			for (Texture dust : stardust) {
-				if ( rand.nextFloat() * 100f > 0.5 ) {
+			for (SpriteWrapper dust : stardust) {
+				if ( rand.nextFloat() * 100f < 2 ) {
 					GameObject star = new GameObject(new Vector2(Laika.WIDTH, rand.nextFloat() * Laika.HEIGHT ), gs);
-					star.addComponent(new LinearMovement(new Vector2(-2f, 0.f)));
+					star.addComponent(new LinearMovement(new Vector2(-rand.nextFloat() * (rand.nextInt(15) + 10), 0.f)));
 					star.addComponent(dust);
 				}
 			}			
 		}
 		
 		public void registerStardust(Texture starTexture) {
-			stardust.add(starTexture);
+			stardust.add(new SpriteWrapper(starTexture));
 		}
 	}

@@ -1,6 +1,5 @@
 package de.hamburg.laika.EnemyMovement;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 import de.kuro.lazyjam.cdiutils.annotations.Update;
@@ -14,6 +13,6 @@ public class LinearMovement implements IEnemyMovement {
 
 	@Update
 	public void update(Vector2 pos){
-		pos.mulAdd(velocity, Gdx.graphics.getDeltaTime());
+		pos.add(velocity);
 	}
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import de.kuro.lazyjam.cdiutils.cdihelper.ReflectionUtil;
 import de.kuro.lazyjam.cdiutils.cdihelper.ServiceManager;
 import de.kuro.lazyjam.cdiutils.context.GameStateContext;
@@ -66,7 +67,7 @@ public abstract class LazyJamApplicationAdapter extends ApplicationAdapter {
 		int deltaInMs = (int) (Gdx.graphics.getDeltaTime() * 1000);
 		gscm.update(deltaInMs);
 		
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(3/255.f, 12/255.f, 44/255.f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		serviceMan.getService(TiledMapProvider.class).render();
 		batch.begin();

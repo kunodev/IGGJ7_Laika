@@ -8,9 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import de.hamburg.laika.AI.AlienFactory;
 import de.hamburg.laika.EnemyType.Comet;
 import de.hamburg.laika.EnemyType.HealthComponent;
-import de.hamburg.laika.EnemyType.Jaeger;
 import de.hamburg.laika.EnemyType.Laser;
-import de.hamburg.laika.EnemyType.factory.JaegerFactory;
 import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.background.BackGroundMover;
 import de.hamburg.laika.button.ButtonBuilder;
@@ -60,7 +58,13 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("raumschiff_map.png", Texture.class);
 		assetManager.load("Go Cart - Loop Mix.mp3", Music.class);
 		assetManager.load("schutzschild.png", Texture.class);
+		
 		assetManager.load("shootingstar1.png", Texture.class);
+		assetManager.load("shootingstar2.png", Texture.class);
+		assetManager.load("shootingstar3.png", Texture.class);
+		assetManager.load("purplestar.png", Texture.class);
+		assetManager.load("greenstar.png", Texture.class);
+		assetManager.load("pinkstar.png", Texture.class);
 	}
 
 	@Override
@@ -86,8 +90,14 @@ public class Laika extends LazyJamApplicationAdapter {
 		BackGroundGen backGroundGen = new BackGroundGen(gs);
 		laika.addComponent(backGroundGen);
 		//ADD STARSTUFF backGroundGen.registerEnemyType(enemyType);
-		backGroundGen.registerStardust(assetManager.get("cat.png", Texture.class));
+		backGroundGen.registerStardust(assetManager.get("shootingstar1.png", Texture.class));
+		backGroundGen.registerStardust(assetManager.get("shootingstar2.png", Texture.class));
+		backGroundGen.registerStardust(assetManager.get("shootingstar3.png", Texture.class));
 		
+		backGroundGen.registerStardust(assetManager.get("purplestar.png", Texture.class));
+		backGroundGen.registerStardust(assetManager.get("greenstar.png", Texture.class));
+		backGroundGen.registerStardust(assetManager.get("pinkstar.png", Texture.class));
+				
 		AlienFactory alienFac = new AlienFactory(gs);
 		laika.addComponent(alienFac);
 		laika.addComponent(new InfoTextComponent());
@@ -123,8 +133,8 @@ public class Laika extends LazyJamApplicationAdapter {
 		GameObject jaeger = new GameObject(new Vector2(WIDTH, HEIGHT), gs);
 		jaeger.addComponent(new Laser(assetManager.get("rain.png", Texture.class), 8.0f, 2.0f, 1.5f, 1.0f, 50));
 		Texture catTexture = assetManager.get("cat.png", Texture.class);
-		jaeger.addComponent(new Jaeger(3.1f, laika.getPos()));
-		jaeger.addComponent(new SpriteWrapper(catTexture));
+		//jaeger.addComponent(new Jaeger(3.1f, laika.getPos()));
+		//jaeger.addComponent(new SpriteWrapper(catTexture));
 		
 		GameObject comet = new GameObject(new Vector2(WIDTH * 0.33f, HEIGHT * 0.67f), gs);
 		Texture cometTex = assetManager.get("poop.png", Texture.class);
@@ -132,7 +142,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		comet.addComponent(new Comet(7.0f));
 		comet.addComponent(sw);
 		
-		alienFac.registerEnemyType(50, new JaegerFactory(laika.getPos(), catTexture) );
+		//alienFac.registerEnemyType(50, new JaegerFactory(laika.getPos(), catTexture) );
 		
 		ChangeControlsTask cct = new ChangeControlsTask(serviceMan.getService(InputMap.class));
 		controllerFuckUpThread = new LimitedTimeWorkerThread(50000, cct, Integer.MAX_VALUE);
