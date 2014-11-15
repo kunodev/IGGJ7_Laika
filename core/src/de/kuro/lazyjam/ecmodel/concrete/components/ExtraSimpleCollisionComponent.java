@@ -15,6 +15,7 @@ public abstract class ExtraSimpleCollisionComponent {
 		gs.gameObjects.stream()
 			.filter(e -> e.getComponent(ExtraSimpleCollisionComponent.class) != null)
 			.filter(e -> e.getPos().dst(pos) <= range)
+			.filter(e -> e != go)
 			.forEach(e -> e.getComponent(ExtraSimpleCollisionComponent.class).collide(e, go, gs));
 	}
 	

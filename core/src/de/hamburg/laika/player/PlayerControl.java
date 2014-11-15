@@ -31,12 +31,7 @@ public class PlayerControl {
 			pos.x += SPEED;
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.SHOOT))) {
-			GameObject bullet = new GameObject(pos.cpy(), gs);
-			Bullet comp = new Bullet();
-			bullet.addComponent(comp);
-			VelocityComponent vc = new VelocityComponent();
-			vc.v.set(10f, 0f);
-			bullet.addComponent(vc);
+			BulletFactory.createBullet(pos, gs);
 		}
 	}
 	

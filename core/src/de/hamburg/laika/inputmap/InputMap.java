@@ -33,9 +33,9 @@ public class InputMap {
 	
 	public void p2Shields() {
 		actionToHWKey.put(Action.SHIELD_LEFT, Keys.W);
-		actionToHWKey.put(Action.SHIELD_RIGHT, Keys.S);
+		actionToHWKey.put(Action.SHIELD_RIGHT, Keys.D);
 		actionToHWKey.put(Action.SHIELD_AIM_LEFT, Keys.A);
-		actionToHWKey.put(Action.SHIELD_AIM_RIGHT, Keys.D);
+		actionToHWKey.put(Action.SHIELD_AIM_RIGHT, Keys.S);
 		actionToHWKey.put(Action.SHIELD_SHOOT, Keys.G);
 	}
 	
