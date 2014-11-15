@@ -1,5 +1,6 @@
 package de.hamburg.laika;
 
+import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
@@ -7,6 +8,7 @@ import de.hamburg.laika.AI.AlienFactory;
 import de.hamburg.laika.EnemyMovement.PursueTarget;
 import de.hamburg.laika.EnemyType.Comet;
 import de.hamburg.laika.EnemyType.Jaeger;
+import de.hamburg.laika.EnemyType.Laser;
 import de.hamburg.laika.button.ButtonComponent;
 import de.hamburg.laika.player.CoinsComponent;
 import de.hamburg.laika.player.PlayerControl;
@@ -30,6 +32,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("badlogic.jpg", Texture.class);
 		assetManager.load("cat.png", Texture.class);
 		assetManager.load("poop.png", Texture.class);
+		assetManager.load("rain.png", Texture.class);
 	}
 	
 	@Override
@@ -53,6 +56,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		upgradeButton.addComponent(new ButtonComponent(upgradeComponent, "Moar Speed", 100, 100));
 
 		GameObject jaeger = new GameObject(new Vector2(WIDTH, HEIGHT), gs);
+		jaeger.addComponent(new Laser(assetManager.get("rain.png", Texture.class), 8.0f, 2.0f, 1.5f, 1.0f));
 		jaeger.addComponent(new Jaeger(assetManager.get("cat.png", Texture.class), 96.0f, laika));
 
 		GameObject comet = new GameObject(new Vector2(WIDTH * 0.33f, HEIGHT * 0.67f), gs);
