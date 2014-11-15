@@ -27,9 +27,8 @@ import de.hamburg.laika.player.UpgradeComponent;
 import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
-import de.kuro.lazyjam.ecmodel.concrete.components.ExtraSimpleCollisionComponent;
-import de.kuro.lazyjam.ecmodel.concrete.components.RelativityComponent;
 import de.kuro.lazyjam.ecmodel.concrete.components.PNGSpriteRenderComponent;
+import de.kuro.lazyjam.ecmodel.concrete.components.RelativityComponent;
 import de.kuro.lazyjam.main.LazyJamApplicationAdapter;
 import de.kuro.lazyjam.tools.LimitedTimeWorkerThread;
 import de.kuro.lazyjam.tools.WorkerThread;
@@ -58,6 +57,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("raumschiff_map.png", Texture.class);
 		assetManager.load("Go Cart - Loop Mix.mp3", Music.class);
 		assetManager.load("schutzschild.png", Texture.class);
+		assetManager.load("shootingstar1.png", Texture.class);
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		gs.bgm.play();
 		gs.bgm.setVolume(0.5f);
 		
-		initBackGround(gs);
+		//initBackGround(gs);
 
 		GameObject laika = new GameObject(new Vector2(50.f, 50.f), TAG_PLAYER, gs);
 		laika.addComponent(new PlayerControl());
@@ -83,6 +83,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		BackGroundGen backGroundGen = new BackGroundGen(gs);
 		laika.addComponent(backGroundGen);
 		//ADD STARSTUFF backGroundGen.registerEnemyType(enemyType);
+		backGroundGen.registerStardust(assetManager.get("cat.png", Texture.class));
 		
 		AlienFactory alienFac = new AlienFactory(gs);
 		laika.addComponent(alienFac);
