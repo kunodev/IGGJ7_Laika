@@ -1,6 +1,8 @@
 package de.kuro.lazyjam.ecmodel.concrete.components;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,11 +13,24 @@ import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.cdiutils.annotations.Component;
 import de.kuro.lazyjam.cdiutils.annotations.ComponentInit;
 import de.kuro.lazyjam.cdiutils.annotations.Render;
+import de.kuro.lazyjam.cdiutils.annotations.Update;
 import de.kuro.lazyjam.cdiutils.cdihelper.CDICallHelper;
 import de.kuro.lazyjam.cdiutils.context.GameObjectContext;
 
 @Component(name="PNGSprite")
 public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {	
+	
+	public int loopTick = 30;
+	private int currentTick;
+	
+	@Update
+	public void update() {
+		currentTick++;
+		if(currentTick >= loopTick) {
+			this.incrementXOffset();
+			currentTick = 0;
+		}
+	}
 	
 	@Render
 	public void render(GameObjectContext goc) {
@@ -49,6 +64,15 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {
 				currX++;
 			}
 			currY++;
+		}
+	}
+	
+	public void applyToAllSprites(Consumer<SpriteWrapper> func) {
+		for(ArrayList<IRectangleProvider> list : this.renderableObjects) {
+			for(IRectangleProvider ele : list) {
+				SpriteWrapper sw = (SpriteWrapper) ele;
+				func.accept(sw);
+			}
 		}
 	}
 		
