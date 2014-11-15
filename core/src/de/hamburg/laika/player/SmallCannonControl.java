@@ -19,6 +19,8 @@ public class SmallCannonControl {
 	public static final int SMALL_CANNON_TICKS = 10;
 	public int currentSmallCannonTicks;
 	public int cannonTicksReduction;
+	
+	public int bonusDamage;
 
 	public Vector2 towerPos = new Vector2();
 	public static final Vector2 TOWER_OFFSET = new Vector2(25,0);

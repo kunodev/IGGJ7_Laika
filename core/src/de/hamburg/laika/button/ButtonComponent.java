@@ -50,6 +50,8 @@ public class ButtonComponent {
 			listener.onHover();
 			if (i.isButtonPressed(Buttons.LEFT)) {
 				listener.onClick();
+			} else if(i.isButtonPressed(Buttons.RIGHT)) {
+				listener.onRightMouseClick();
 			}
 		}
 	}

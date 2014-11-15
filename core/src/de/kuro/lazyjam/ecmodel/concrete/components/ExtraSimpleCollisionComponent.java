@@ -1,6 +1,7 @@
 package de.kuro.lazyjam.ecmodel.concrete.components;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -30,7 +31,11 @@ public class ExtraSimpleCollisionComponent {
 		if(tagToSearch == null) {
 			gameObjectsStream = gs.gameObjects.stream();			
 		} else {
-			gameObjectsStream = gs.taggedGameObjects.get(tagToSearch).stream();
+			Collection<GameObject> goCollection = gs.taggedGameObjects.get(tagToSearch);
+			if(goCollection == null) {
+				return;
+			}
+			gameObjectsStream = goCollection.stream();
 		}
 
 		Predicate<GameObject> finalFilter = e -> e != goc.go;

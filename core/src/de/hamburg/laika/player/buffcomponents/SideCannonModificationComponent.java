@@ -1,7 +1,6 @@
 package de.hamburg.laika.player.buffcomponents;
 
 import de.hamburg.laika.player.CoinsComponent;
-import de.hamburg.laika.player.PlayerControl;
 import de.hamburg.laika.player.SmallCannonControl;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 
@@ -26,7 +25,8 @@ public class SideCannonModificationComponent extends UpgradeComponent{
 			sell = false;
 		}
 		
-		scc.cannonTicksReduction = numUpdates * ATOMIC_BUFF;
+		scc.cannonTicksReduction = numUpdates/5 * ATOMIC_BUFF;
+		scc.bonusDamage = numUpdates * ATOMIC_BUFF * 5;
 	}
 	
 	@Override
