@@ -4,10 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 
-public class Linear {
+public class LinearMovement {
 	final Vector2 velocity; // per second
 
-	public Linear(Vector2 velocity) {
+	public LinearMovement(Vector2 velocity) {
 		this.velocity = velocity;
 	}
 
