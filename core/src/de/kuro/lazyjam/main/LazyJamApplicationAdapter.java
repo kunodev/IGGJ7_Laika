@@ -3,17 +3,15 @@ package de.kuro.lazyjam.main;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Vector3;
-
 import de.kuro.lazyjam.cdiutils.cdihelper.ReflectionUtil;
 import de.kuro.lazyjam.cdiutils.cdihelper.ServiceManager;
 import de.kuro.lazyjam.cdiutils.context.GameStateContext;
 import de.kuro.lazyjam.ecmodel.GameStateContextManager;
-import de.kuro.lazyjam.settings.Constants;
-import de.kuro.lazyjam.simpleservice.FontManager;
 import de.kuro.lazyjam.tiled.TiledMapProvider;
 
 public abstract class LazyJamApplicationAdapter extends ApplicationAdapter {

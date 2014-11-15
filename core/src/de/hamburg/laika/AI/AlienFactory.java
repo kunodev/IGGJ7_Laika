@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
+import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.Laika;
 import de.hamburg.laika.EnemyType.IEnemyType;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
@@ -14,9 +16,7 @@ import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
 
 public class AlienFactory {
-	
-	Random rand = new Random(1);
-	
+
 	private final GameState gs;
 	
 	ArrayList<AmountEnemyTypePair> enemyTypeAmountPairs = new ArrayList<AmountEnemyTypePair>();
@@ -31,10 +31,11 @@ public class AlienFactory {
 		Array<AmountEnemyTypePair> trash = new Array<AmountEnemyTypePair>(enemyTypeAmountPairs.size());
 		
 		for (int j = 0; j < enemyTypeAmountPairs.size(); ++j) {
-			if ( rand.nextFloat() * 100f > 0.5 ) {
-				GameObject enemy = new GameObject(new Vector2(Laika.WIDTH, rand.nextFloat() * Laika.HEIGHT ), gs);
+			if ( MathUtils.randomBoolean()) {
+				GameObject enemy = new GameObject(new Vector2(Laika.WIDTH, MathUtils.random() * Laika.HEIGHT ), gs);
 				AmountEnemyTypePair amountEnemyTypePair = enemyTypeAmountPairs.get(j);
 				enemy.addComponent(amountEnemyTypePair.enemyType);
+				enemy.addComponent(new HealthComponent(MathUtils.random(90, 110)));
 				amountEnemyTypePair.amount--;
 				if ( amountEnemyTypePair.amount == 0 ) {
 					trash.add(amountEnemyTypePair);
