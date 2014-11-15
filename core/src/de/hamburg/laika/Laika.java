@@ -2,6 +2,7 @@ package de.hamburg.laika;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.AI.AlienFactory;
@@ -13,15 +14,18 @@ import de.hamburg.laika.EnemyType.factory.JaegerFactory;
 import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.background.BackGroundMover;
 import de.hamburg.laika.button.ButtonBuilder;
-import de.hamburg.laika.button.ButtonComponent;
 import de.hamburg.laika.inputmap.InputMap;
-import de.hamburg.laika.player.*;
-import de.kuro.lazyjam.asciiassetextension.ASCIIPicture;
+import de.hamburg.laika.player.ChangeControlsTask;
+import de.hamburg.laika.player.CoinsComponent;
+import de.hamburg.laika.player.InfoTextComponent;
+import de.hamburg.laika.player.PlayerControl;
+import de.hamburg.laika.player.RocketControl;
+import de.hamburg.laika.player.ShieldControl;
+import de.hamburg.laika.player.SpeedUpgradeComponent;
+import de.hamburg.laika.player.UpgradeComponent;
 import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
-import de.kuro.lazyjam.ecmodel.IGameState;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
-import de.kuro.lazyjam.ecmodel.concrete.components.ExtraSimpleCollisionComponent;
 import de.kuro.lazyjam.ecmodel.concrete.components.PNGSpriteRenderComponent;
 import de.kuro.lazyjam.main.LazyJamApplicationAdapter;
 import de.kuro.lazyjam.tools.LimitedTimeWorkerThread;
@@ -115,15 +119,13 @@ public class Laika extends LazyJamApplicationAdapter {
 	}
 
 	private void initBackGround(GameState gs) {		
-		GameObject backGround = new GameObject(new Vector2(0f,0f), TAG_DECO, gs);
+		GameObject backGround = new GameObject(new Vector2(WIDTH/2,HEIGHT/2), TAG_DECO, gs);
 		Texture backgroundTex = assetManager.get("background1280720.png");
+		backgroundTex.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 		SpriteWrapper backgroundSprite = new SpriteWrapper(backgroundTex);
+		System.out.println(backgroundTex.getWidth());
 		BackGroundMover movement = new BackGroundMover();
 		backGround.addComponent(backgroundSprite);
 		backGround.addComponent(movement);
-		GameObject backGround2 = new GameObject(new Vector2(Laika.WIDTH,0f),TAG_DECO, gs);
-		SpriteWrapper backgroundSprite2 = new SpriteWrapper(backgroundTex);	
-		backGround2.addComponent(backgroundSprite2);
-		backGround2.addComponent(movement);
 	}
 }
