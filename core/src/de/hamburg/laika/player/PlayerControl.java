@@ -24,13 +24,13 @@ public class PlayerControl {
 			pos.y -= SPEED * speedModifier;
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.UP))) {
-			pos.y += SPEED;
+			pos.y += SPEED * speedModifier;;
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.LEFT))) {
-			pos.x -= SPEED;
+			pos.x -= SPEED * speedModifier;;
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.RIGHT))) {
-			pos.x += SPEED;
+			pos.x += SPEED * speedModifier;;
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.SHOOT))) {
 			BulletFactory.createBullet(pos, gs);
