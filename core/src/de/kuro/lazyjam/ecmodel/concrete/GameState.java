@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import de.hamburg.laika.Laika;
 import de.kuro.lazyjam.cdiutils.cdihelper.ServiceManager;
 import de.kuro.lazyjam.cdiutils.context.GameStateContext;
 import de.kuro.lazyjam.cdiutils.context.GlobalContext;
@@ -40,13 +41,6 @@ public class GameState extends AGameState {
 		GameStateContext gsc = new GameStateContext(globalContext, this);
 		for (GameObject go : gameObjects) {
 			go.onUpdate(gsc);
-		}
-		final OrthographicCamera cam = globalContext.serviceMan.getService(OrthographicCamera.class);
-		for(Iterator<GameObject> it = gameObjects.iterator(); it.hasNext();){
-			final Vector2 pos = it.next().getPos();
-			if(pos.x < 0 || pos.y < 0 || pos.x > cam.viewportWidth || pos.y > cam.viewportHeight){
-				it.remove();
-			}
 		}
 	}
 
