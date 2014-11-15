@@ -7,7 +7,7 @@ import de.kuro.lazyjam.cdiutils.annotations.Render;
 import de.kuro.lazyjam.simpleservice.FontManager;
 
 public class UpgradeComponent implements ButtonListener {
-	private int numUpdates = 0;
+	protected int numUpdates = 0;
 	
 	@Render
 	public void render(FontManager fm, Vector2 pos) {
@@ -19,7 +19,8 @@ public class UpgradeComponent implements ButtonListener {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	
 	@Override
 	public void onClick() {
 		numUpdates++;
