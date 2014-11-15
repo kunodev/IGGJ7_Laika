@@ -22,6 +22,7 @@ import de.kuro.lazyjam.ecmodel.IGameState;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
 import de.kuro.lazyjam.ecmodel.concrete.components.ExtraSimpleCollisionComponent;
+import de.kuro.lazyjam.ecmodel.concrete.components.RelativityComponent;
 import de.kuro.lazyjam.main.LazyJamApplicationAdapter;
 import de.kuro.lazyjam.tools.LimitedTimeWorkerThread;
 import de.kuro.lazyjam.tools.WorkerThread;
@@ -79,8 +80,14 @@ public class Laika extends LazyJamApplicationAdapter {
 
 		UpgradeComponent upgradeComponent = new SpeedUpgradeComponent();
 		laika.addComponent(upgradeComponent);
-		laika.addComponent(new ShieldControl());
 		laika.addComponent(new RocketControl());
+		laika.addComponent(new SmallCannonControl());
+		
+		GameObject shield = new GameObject(new Vector2(), gs);
+		RelativityComponent relComp = new RelativityComponent();
+		relComp.parent = laika;
+		shield.addComponent(relComp);
+		shield.addComponent(new ShieldControl());
 		
 		ButtonBuilder bb = new ButtonBuilder(gs);
 		Texture buttonBG = assetManager.get("button.png", Texture.class);

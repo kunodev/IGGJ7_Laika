@@ -18,8 +18,10 @@ import de.kuro.lazyjam.simpleservice.FontManager;
 public class PlayerControl {
 	
 	public static final int SPEED = 3;
+	public static final int BIG_CANNON_TICKS = 20;
 	
 	public float speedModifier = 1.0f;
+	public int currentCannonTicks;
 	
 	@Update
 	public void update(Input i, Vector2 pos, InputMap map, GameState gs) {
@@ -36,8 +38,12 @@ public class PlayerControl {
 			pos.x = Math.max(0.0f, Math.min(Laika.WIDTH, pos.x + SPEED * speedModifier));
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.SHOOT))) {
-			BulletFactory.createBullet(pos, gs);
+			if(currentCannonTicks >= BIG_CANNON_TICKS) {
+				BulletFactory.createBullet(pos, gs);
+				currentCannonTicks = 0;
+			}
 		}
+		currentCannonTicks++;
 	}
 	
 
