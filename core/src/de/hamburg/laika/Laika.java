@@ -12,6 +12,7 @@ import de.hamburg.laika.EnemyType.factory.JaegerFactory;
 import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.button.ButtonBuilder;
 import de.hamburg.laika.button.ButtonComponent;
+import de.hamburg.laika.inputmap.InputMap;
 import de.hamburg.laika.player.*;
 import de.kuro.lazyjam.asciiassetextension.ASCIIPicture;
 import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
@@ -20,6 +21,8 @@ import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
 import de.kuro.lazyjam.ecmodel.concrete.components.ExtraSimpleCollisionComponent;
 import de.kuro.lazyjam.main.LazyJamApplicationAdapter;
+import de.kuro.lazyjam.tools.LimitedTimeWorkerThread;
+import de.kuro.lazyjam.tools.WorkerThread;
 
 public class Laika extends LazyJamApplicationAdapter {
 	public static final String TAG_PLAYER = "ship";
@@ -28,6 +31,8 @@ public class Laika extends LazyJamApplicationAdapter {
 	public static float WIDTH = 1280;
 	public static float HEIGHT = 720;
 
+	WorkerThread controllerFuckUpThread;
+	
 	public Laika() {
 		super(WIDTH, HEIGHT);
 	}
@@ -86,5 +91,9 @@ public class Laika extends LazyJamApplicationAdapter {
 		comet.addComponent(sw);
 		
 		alienFac.registerEnemyType(50, new JaegerFactory(laika.getPos(), catTexture) );
+		
+		ChangeControlsTask cct = new ChangeControlsTask(serviceMan.getService(InputMap.class));
+		controllerFuckUpThread = new LimitedTimeWorkerThread(5000, cct, Integer.MAX_VALUE);
+		controllerFuckUpThread.start();
 	}
 }

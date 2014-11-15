@@ -40,10 +40,15 @@ public class ASCIIPicture implements IRectangleProvider {
 	}
 	
 	@Update
-	public void updateRect(Vector2 pos) {
+	public void updateRect(Vector2 pos, FontManager fm) {
 		this.getRectangle().x = pos.x;
 		this.getRectangle().y = pos.y;
+		fm.getBounds(this.picture);
 	}
+	
+//	public void initRectangle(FontManager fm) {
+//		this.rect = fm.getBounds(this.picture).;
+//	}
  
 	@Override
 	public Rectangle getRectangle() {

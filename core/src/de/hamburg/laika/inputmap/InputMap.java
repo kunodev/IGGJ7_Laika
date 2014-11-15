@@ -15,12 +15,18 @@ public class InputMap {
 		SHIELD_LEFT, SHIELD_RIGHT, SHIELD_SHOOT, SHIELD_AIM_LEFT, SHIELD_AIM_RIGHT
 	}
 	
+	public enum InputState {
+		NORMAL, INVERTED
+	}
+	
 	public Map<Action, Integer> actionToHWKey;	
+	private InputState state;
 	
 	public InputMap() {
 		actionToHWKey = new HashMap<Action,Integer>();
 		p1Controls();
 		p2Shields();
+		this.state = InputState.NORMAL;
 	}
 	
 	public void p1Controls() {
@@ -49,13 +55,22 @@ public class InputMap {
 	
 	public void p1Shields() {
 		actionToHWKey.put(Action.SHIELD_LEFT, Keys.UP);
-		actionToHWKey.put(Action.SHIELD_RIGHT, Keys.DOWN);
-		actionToHWKey.put(Action.SHIELD_AIM_LEFT, Keys.LEFT);
+		actionToHWKey.put(Action.SHIELD_RIGHT, Keys.LEFT);
+		actionToHWKey.put(Action.SHIELD_AIM_LEFT, Keys.UP);
 		actionToHWKey.put(Action.SHIELD_AIM_RIGHT, Keys.RIGHT);
-		actionToHWKey.put(Action.SHIELD_SHOOT, Keys.NUM_0);
+		actionToHWKey.put(Action.SHIELD_SHOOT, Keys.ENTER);
 	}
-	
-	
-	
+
+	public void switcharoo() {
+		if(state == InputState.INVERTED) {
+			p1Controls();
+			p2Shields();
+			this.state = InputState.NORMAL;
+		} else {
+			p1Shields();
+			p2Controls();
+			this.state = InputState.INVERTED;
+		}
+	}
 	
 }
