@@ -28,7 +28,22 @@ public class BulletFactory {
 		simpleCollision.filters.add( e-> e.getComponent(HealthComponent.class) != null);
 		bullet.addComponent(simpleCollision);
 	}
+	
 
-		
+	public static void createRocket(Vector2 pos, GameState gs, Vector2 direction, float speed) {
+		GameObject bullet = new GameObject(pos.cpy(), gs);
+		Bullet comp = new Bullet();
+		// double damage ftw!
+		comp.damage *= 2;
+		bullet.addComponent(comp);
+		VelocityComponent vc = new VelocityComponent();
+		vc.v.set(direction.nor().scl(speed));
+		bullet.addComponent(vc);
+		ASCIIPicture asciiPic = new ASCIIPicture("SWOSH");
+		bullet.addComponent(asciiPic);
+		ExtraSimpleCollisionComponent simpleCollision = new ExtraSimpleCollisionComponent();
+		simpleCollision.filters.add( e-> e.getComponent(HealthComponent.class) != null);
+		bullet.addComponent(simpleCollision);
+	}	
 	
 }

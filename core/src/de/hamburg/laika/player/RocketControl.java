@@ -14,19 +14,28 @@ import de.kuro.lazyjam.ecmodel.concrete.GameState;
 
 public class RocketControl {
 
-	public final int buttonOffset = 100;
+	public final int buttonOffset = 200;
+	public final int chargeTime = 200;
+	
+	public long timeCounter = 0;
+	
+	public long lastShot = 0;
+	
 	@Update
-	public void update(Input i, OrthographicCamera cam, Vector2 pos) {
-		
-		
+	public void update(Input i, OrthographicCamera cam, Vector2 pos, GameState gs) {
+		timeCounter++;
 		Vector3 tmp = cam.unproject(new Vector3(i.getX(), i.getY(), 0));
-		float x = tmp.x;
-		float y = tmp.y;
+		Vector2 target = new Vector2(tmp.x, tmp.y);
 		
-		
-		if (y >= buttonOffset) {
-			
-			
-		}
+		if (isCharged()) {
+			if (target.y >= buttonOffset && i.isButtonPressed(Buttons.LEFT)) {
+				lastShot = timeCounter;
+				BulletFactory.createRocket(pos, gs, target.sub(pos), 1);
+			}
+		}	
+	}
+	
+	public boolean isCharged() {
+		return timeCounter - lastShot >= chargeTime;
 	}
 }
