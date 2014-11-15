@@ -95,6 +95,7 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent {
 		// precalc
 		int widthOfSprite = preFab.getWidth() / maxX;
 		int heightOfSprite = preFab.getHeight() / maxY;
+		sprite.s.setSize(widthOfSprite, heightOfSprite);
 		int currX = 0;
 		int currY = 0;
 		// init fields
