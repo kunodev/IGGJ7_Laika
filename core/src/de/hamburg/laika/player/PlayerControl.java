@@ -15,20 +15,23 @@ public class PlayerControl {
 	
 	public static final int SPEED = 3;
 	
+	public float speedModifier = 1.0f;
+	
 	@Update
 	public void update(Input i, Vector2 pos, InputMap map) {
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.DOWN))) {
-			pos.y -= SPEED;
+			pos.y -= SPEED * speedModifier;
 		}
 		if(i.isKeyPressed(Keys.UP)) {
-			pos.y += SPEED;
+			pos.y += SPEED * speedModifier;
 		}
 		if(i.isKeyPressed(Keys.LEFT)) {
-			pos.x -= SPEED;
+			pos.x -= SPEED * speedModifier;
 		}
 		if(i.isKeyPressed(Keys.RIGHT)) {
-			pos.x += SPEED;
+			pos.x += SPEED * speedModifier;
 		}
+		
 	}
 	
 	@Render
