@@ -7,6 +7,7 @@ import de.hamburg.laika.EnemyType.Comet;
 import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.EnemyType.Jaeger;
 import de.hamburg.laika.EnemyType.Laser;
+import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.button.ButtonComponent;
 import de.hamburg.laika.player.*;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
@@ -38,6 +39,10 @@ public class Laika extends LazyJamApplicationAdapter {
 		laika.addComponent(new PlayerControl());
 		laika.addComponent(new HealthComponent(500));
 
+		BackGroundGen backGroundGen = new BackGroundGen(gs);
+		laika.addComponent(backGroundGen);
+		//ADD STARSTUFF backGroundGen.registerEnemyType(enemyType);
+		
 		AlienFactory alienFac = new AlienFactory(gs);
 		laika.addComponent(alienFac);
 		laika.addComponent(new CoinsComponent());
