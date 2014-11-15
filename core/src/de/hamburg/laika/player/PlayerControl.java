@@ -16,10 +16,12 @@ public class PlayerControl {
 	
 	public static final int SPEED = 3;
 	
+	public float speedModifier = 1.0f;
+	
 	@Update
 	public void update(Input i, Vector2 pos, InputMap map, GameState gs) {
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.DOWN))) {
-			pos.y -= SPEED;
+			pos.y -= SPEED * speedModifier;
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.UP))) {
 			pos.y += SPEED;
