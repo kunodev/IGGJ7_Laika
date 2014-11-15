@@ -15,6 +15,7 @@ import de.hamburg.laika.button.ButtonComponent;
 import de.hamburg.laika.player.*;
 import de.kuro.lazyjam.asciiassetextension.ASCIIPicture;
 import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
+import de.kuro.lazyjam.ecmodel.IGameState;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
 import de.kuro.lazyjam.ecmodel.concrete.components.ExtraSimpleCollisionComponent;
@@ -22,6 +23,8 @@ import de.kuro.lazyjam.main.LazyJamApplicationAdapter;
 
 public class Laika extends LazyJamApplicationAdapter {
 	public static final String TAG_PLAYER = "ship";
+	public static final String TAG_ENEMY = "enemy";
+	
 	public static float WIDTH = 1280;
 	public static float HEIGHT = 720;
 
@@ -73,7 +76,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		GameObject jaeger = new GameObject(new Vector2(WIDTH, HEIGHT), gs);
 		jaeger.addComponent(new Laser(assetManager.get("rain.png", Texture.class), 8.0f, 2.0f, 1.5f, 1.0f, 50));
 		Texture catTexture = assetManager.get("cat.png", Texture.class);
-//		jaeger.addComponent(new Jaeger(3.1f, laika));
+		jaeger.addComponent(new Jaeger(3.1f, laika.getPos()));
 		jaeger.addComponent(new SpriteWrapper(catTexture));
 		
 		GameObject comet = new GameObject(new Vector2(WIDTH * 0.33f, HEIGHT * 0.67f), gs);

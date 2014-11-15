@@ -84,6 +84,7 @@ public class GameState extends AGameState {
 			this.taggedGameObjects.put(tag, new QueueSet<GameObject>(this));
 		}
 		this.taggedGameObjects.get(tag).add(gameObject);
+		this.updateAbles.add((Runnable) this.taggedGameObjects.get(tag));
 	}
 
 //	public void setMap(TiledMap map) {

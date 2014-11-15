@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import de.hamburg.laika.player.Bullet;
 import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.cdiutils.annotations.Collide;
 import de.kuro.lazyjam.cdiutils.annotations.Render;
@@ -38,12 +39,15 @@ public class Jaeger implements IEnemyType {
 		pos.add(toTarget);
 	}
 	
-	@Collide
-	public void kill(Collision co, GameState gs) {
-		co.otherGo.selfDestruct(gs);
-		co.thisGo.selfDestruct(gs);
-	}
 
+	@Collide
+	public void kill(Collision co, GameState gs, HealthComponent hc) {
+		co.otherGo.selfDestruct(gs);
+		if(hc.damage(co.otherGo.getComponent(Bullet.class).damage)) {
+			co.thisGo.selfDestruct(gs);
+		}
+	}
+	
 //	@Render
 //	public void render(SpriteBatch batch, Vector2 pos) {
 ////		batch.draw(tex, pos.x - tex.getWidth() * 0.5f, pos.y - tex.getHeight() * 0.5f, tex.getWidth() * 0.5f, tex.getHeight() * 0.5f, tex.getWidth(), tex.getHeight(), 1, 1, toTarget.angle(), 0, 0, tex.getWidth(), tex.getHeight(), false, false);

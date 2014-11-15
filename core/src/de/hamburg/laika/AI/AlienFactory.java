@@ -33,7 +33,7 @@ public class AlienFactory {
 		
 		for (int j = 0; j < enemyTypeAmountPairs.size(); ++j) {
 			if ( MathUtils.randomBoolean()) {
-				GameObject enemy = new GameObject(new Vector2(Laika.WIDTH, MathUtils.random() * Laika.HEIGHT ), gs);
+				GameObject enemy = new GameObject(new Vector2(Laika.WIDTH, MathUtils.random() * Laika.HEIGHT ),Laika.TAG_ENEMY, gs);
 				AmountEnemyTypePair amountEnemyTypePair = enemyTypeAmountPairs.get(j);
 				for(Object obj : amountEnemyTypePair.factory.createComponents()) {
 					enemy.addComponent(obj);
