@@ -2,8 +2,11 @@ package de.hamburg.laika.player;
 
 import com.badlogic.gdx.math.Vector2;
 
+import de.hamburg.laika.EnemyType.HealthComponent;
+import de.kuro.lazyjam.asciiassetextension.ASCIIPicture;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
+import de.kuro.lazyjam.ecmodel.concrete.components.ExtraSimpleCollisionComponent;
 import de.kuro.lazyjam.ecmodel.concrete.components.VelocityComponent;
 
 public class BulletFactory {
@@ -19,6 +22,11 @@ public class BulletFactory {
 		VelocityComponent vc = new VelocityComponent();
 		vc.v.set(direction.nor().scl(speed));
 		bullet.addComponent(vc);
+		ASCIIPicture asciiPic = new ASCIIPicture("PEW");
+		bullet.addComponent(asciiPic);
+		ExtraSimpleCollisionComponent simpleCollision = new ExtraSimpleCollisionComponent();
+		simpleCollision.filters.add( e-> e.getComponent(HealthComponent.class) != null);
+		bullet.addComponent(simpleCollision);
 	}
 
 		

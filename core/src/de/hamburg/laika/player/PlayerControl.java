@@ -37,9 +37,4 @@ public class PlayerControl {
 			BulletFactory.createBullet(pos, gs);
 		}
 	}
-	
-	@Render
-	public void render(FontManager fm, Vector2 pos) {
-		fm.drawTextAbsolut(pos.x, pos.y, "PLAYER");
-	}
 }

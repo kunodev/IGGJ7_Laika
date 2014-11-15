@@ -5,13 +5,16 @@ import java.util.List;
 
 import com.badlogic.gdx.math.Vector2;
 
+import de.kuro.lazyjam.cdiutils.annotations.Collide;
 import de.kuro.lazyjam.cdiutils.annotations.Render;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 import de.kuro.lazyjam.cdiutils.cdihelper.CDICallHelper;
 import de.kuro.lazyjam.cdiutils.cdihelper.ServiceManager;
+import de.kuro.lazyjam.cdiutils.context.CollisionGameObjectContext;
 import de.kuro.lazyjam.cdiutils.context.GameObjectContext;
 import de.kuro.lazyjam.cdiutils.context.GameStateContext;
 import de.kuro.lazyjam.ecmodel.IGameState;
+import de.kuro.lazyjam.ecmodel.concrete.tools.Collision;
 
 public class GameObject {
 
@@ -63,6 +66,11 @@ public class GameObject {
 		} 
 		return null;
 	}
+	
+	public void callCollide(GameObjectContext otherGOContext) {
+		CollisionGameObjectContext cgoc = new CollisionGameObjectContext(otherGOContext, this);
+		this.components.stream().forEach(e -> CDICallHelper.callOnObject(cgoc, Collide.class, e));
+	}
 
 	public void selfDestruct(GameState gs) {
 		gs.removeGameObject(this, tag);
@@ -70,5 +78,14 @@ public class GameObject {
 	
 	public List<Object> getComponents() {
 		return components;
+	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("GAMEOBJECT \n");
+		this.components.stream().forEach(e -> sb.append(e.getClass().toString() + "\n"));
+		sb.append("\n");
+		return sb.toString();
+		
 	}
 }

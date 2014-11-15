@@ -1,5 +1,7 @@
 package de.kuro.lazyjam.asciiassetextension;
 
+import java.awt.Font;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import de.kuro.lazyjam.cdiutils.annotations.Component;
 import de.kuro.lazyjam.cdiutils.annotations.Render;
+import de.kuro.lazyjam.cdiutils.annotations.Update;
 import de.kuro.lazyjam.simpleservice.FontManager;
 
 @Component(name="ASCIIPic")
@@ -15,6 +18,9 @@ public class ASCIIPicture implements IRectangleProvider {
 
 	public String picture;
 	public Rectangle rect;
+	public BitmapFont f;
+	
+	public static final int DEFAULT_FONTSIZE = 20;
 	
 	public ASCIIPicture() {
 	}
@@ -32,9 +38,28 @@ public class ASCIIPicture implements IRectangleProvider {
 	public void setBoundaries(Rectangle rect) {
 		this.rect = rect;
 	}
+	
+	@Update
+	public void updateRect(Vector2 pos) {
+		this.getRectangle().x = pos.x;
+		this.getRectangle().y = pos.y;
+	}
  
 	@Override
 	public Rectangle getRectangle() {
+		if(rect == null) {
+			String[] lines = this.picture.split("\\n");
+			float g = f == null ? DEFAULT_FONTSIZE : f.getLineHeight();
+			int ySize = (int) (lines.length * g);
+			int xSize = 0;
+			for(String line : lines) {
+				float h = f == null ? DEFAULT_FONTSIZE : f.getSpaceWidth();
+				xSize = (int) Math.max(xSize, line.length() * h); 
+			}
+			rect = new Rectangle();
+			rect.setHeight(ySize);
+			rect.setWidth(xSize);
+		}
 		return rect;
 	}
 	

@@ -1,28 +1,40 @@
 package de.kuro.lazyjam.ecmodel.concrete.components;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
 import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.player.PlayerControl;
+import de.kuro.lazyjam.asciiassetextension.IRectangleProvider;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
+import de.kuro.lazyjam.cdiutils.context.GameObjectContext;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
 
-public abstract class ExtraSimpleCollisionComponent {
+public class ExtraSimpleCollisionComponent {
+	
+	public List<Predicate<GameObject>> filters;
 
-	public int range = 10;
-
-	@Update
-	public void collideWith(Vector2 pos, GameState gs, GameObject go) {
-		gs.gameObjects.stream()
-				.filter(e -> e.getComponent(HealthComponent.class) != null)
-				.filter(e -> e.getPos().dst(pos) <= range)
-				.filter(e -> e.getComponent(PlayerControl.class) == null)
-				.filter(e -> e != go)
-				.forEach(e -> go.getComponent(ExtraSimpleCollisionComponent.class).collide(go, e, gs));
+	public ExtraSimpleCollisionComponent() {
+		filters = new ArrayList<Predicate<GameObject>>();
 	}
-
-	public abstract void collide(GameObject thisGo, GameObject otherGo, GameState gs);
-
+	
+	@Update
+	public void collideWith(Vector2 pos, GameState gs, GameObjectContext goc, IRectangleProvider rect) {
+		Stream<GameObject> gameObjectsStream = gs.gameObjects.stream();
+		Predicate<GameObject> finalFilter = e -> e != goc.go;
+		
+		for(Predicate<GameObject> filter : this.filters) {
+			finalFilter = finalFilter.and(filter);
+		}
+		finalFilter = finalFilter.and(e -> (e.getComponent(IRectangleProvider.class) != null) && e.getComponent(IRectangleProvider.class).getRectangle().overlaps(rect.getRectangle()));
+		gameObjectsStream
+			.filter(finalFilter)
+			.forEach(e -> e.callCollide(goc));
+	}
 
 }
