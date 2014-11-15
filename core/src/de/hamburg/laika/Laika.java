@@ -9,6 +9,7 @@ import de.hamburg.laika.AI.AlienFactory;
 import de.hamburg.laika.EnemyType.Comet;
 import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.EnemyType.Laser;
+import de.hamburg.laika.EnemyType.factory.JaegerFactory;
 import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.background.BackGroundMover;
 import de.hamburg.laika.button.ButtonBuilder;
@@ -132,7 +133,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		comet.addComponent(new Comet(7.0f));
 		comet.addComponent(sw);
 		
-		//alienFac.registerEnemyType(50, new JaegerFactory(laika.getPos(), catTexture) );
+		alienFac.registerEnemyType(50, new JaegerFactory(laika.getPos(), catTexture) );
 		
 		ChangeControlsTask cct = new ChangeControlsTask(serviceMan.getService(InputMap.class));
 		controllerFuckUpThread = new LimitedTimeWorkerThread(5000, cct, Integer.MAX_VALUE);
