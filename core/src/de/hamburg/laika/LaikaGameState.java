@@ -26,6 +26,7 @@ import de.hamburg.laika.player.buffcomponents.ShieldModificationComponent;
 import de.hamburg.laika.player.buffcomponents.SideCannonModificationComponent;
 import de.hamburg.laika.player.buffcomponents.SpeedModificationComponent;
 import de.hamburg.laika.player.buffcomponents.UpgradeComponent;
+import de.hamburg.laika.player.coins.CoinsService;
 import de.hamburg.laika.player.coins.InfoTextComponent;
 import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.cdiutils.cdihelper.ServiceManager;
@@ -59,6 +60,8 @@ public class LaikaGameState extends GameState {
 	}
 
 	public void init(ServiceManager serviceman) {
+		CoinsService cs = serviceman.getService(CoinsService.class);
+		cs.coins = cs.startCoins;
 		AssetManager assetManager = serviceman.getService(AssetManager.class);
 		GameObject laika = new GameObject(new Vector2(510.f, 330.f), Laika.TAG_PLAYER, this);
 		laika.addComponent(new PlayerControl());
