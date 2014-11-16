@@ -58,13 +58,13 @@ public class GameStateContextManager {
 
 	public void render() {
 		if(activeState != null) {
-			activeState.onRender(new GlobalContext(this.serviceMan));
+			activeState.onRender(new GlobalContext(this.serviceMan, this));
 		}
 	}
 
 	public void update(int deltaInMilliseconds) {
 		if(activeState != null) {
-			activeState.onUpdate(new GlobalContext(this.serviceMan), deltaInMilliseconds);
+			activeState.onUpdate(new GlobalContext(this.serviceMan, this), deltaInMilliseconds);
 		}
 	}
 
