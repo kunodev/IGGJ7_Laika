@@ -15,7 +15,7 @@ public class ButtonBuilder {
 	}
 	
 	public GameObject createButton(ButtonListener bl, String text, Texture background) {
-		GameObject ub = new GameObject(new Vector2(100+numButtons++*200, 50), gs);
+		GameObject ub = new GameObject(new Vector2(100+numButtons++*200, 25), gs);
 		ub.addComponent(new ButtonComponent(background, bl, text, new Vector2(200, 50)));
 		return ub;
 	}

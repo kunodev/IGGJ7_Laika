@@ -4,6 +4,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 
 import de.hamburg.laika.player.BulletFactory;
+import de.kuro.lazyjam.ecmodel.concrete.GameState;
 import de.kuro.lazyjam.main.LazyJamApplicationAdapter;
 
 public class Laika extends LazyJamApplicationAdapter {
@@ -51,21 +52,25 @@ public class Laika extends LazyJamApplicationAdapter {
 	@Override
 	public void create() {
 		super.create();
-		LaikaGameState gs = new LaikaGameState();
-		this.gscm.initMainGameState(gs);
+		
+		LaikaPreGameState prelogueGameState = new LaikaPreGameState();
+		this.gscm.initMainGameState(prelogueGameState);
+		prelogueGameState.init(serviceMan);
+		
+//		LaikaGameState gs = new LaikaGameState();
+//		this.gscm.initMainGameState(gs);
 		
 		
-		gs.bgm = assetManager.get("Go Cart - Loop Mix.mp3");
-		gs.bgm.setLooping(true);
-		gs.bgm.play();
-		gs.bgm.setVolume(0.1f);
+		Music bgm = assetManager.get("Go Cart - Loop Mix.mp3");
+		bgm.setLooping(true);
+		bgm.play();
+		bgm.setVolume(0.1f);
 		
 		//initBackGround(gs);
 		
 		BulletFactory.HAMMER = assetManager.get("hammer_pew.png");
+//		gs.init(serviceMan);
 		BulletFactory.MATROSCHKA = assetManager.get("matroschka.png");
-
-		gs.init(serviceMan);
 	}
 
 //	private void initBackGround(GameState gs) {		

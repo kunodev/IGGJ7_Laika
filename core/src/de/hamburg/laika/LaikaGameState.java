@@ -41,6 +41,7 @@ import de.kuro.lazyjam.tools.WorkerThread;
 public class LaikaGameState extends GameState{
 
 	WorkerThread controllerFuckUpThread;
+	public static final float SAFE_ZONE_SIZE = 128.f;
 	
 	@Override
 	protected void update(GlobalContext globalContext) {
@@ -50,7 +51,7 @@ public class LaikaGameState extends GameState{
 			GameObject go = it.next();
 			final Vector2 pos = go.getPos();
 			//if(!this.taggedGameObjects.get(Laika.TAG_DECO).contains(go)) {
-				if(pos.x < 0 || pos.y < 0 || pos.x > cam.viewportWidth || pos.y > cam.viewportHeight){
+				if(pos.x < -SAFE_ZONE_SIZE || pos.y < -SAFE_ZONE_SIZE || pos.x > cam.viewportWidth + SAFE_ZONE_SIZE || pos.y > cam.viewportHeight + SAFE_ZONE_SIZE){
 					it.remove();
 				}
 			//}
