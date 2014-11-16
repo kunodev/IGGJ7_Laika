@@ -14,6 +14,7 @@ import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.button.ButtonBuilder;
 import de.hamburg.laika.inputmap.InputMap;
 import de.hamburg.laika.player.ChangeControlsTask;
+import de.hamburg.laika.player.GameOverComponent;
 import de.hamburg.laika.player.PlayerControl;
 import de.hamburg.laika.player.RocketControl;
 import de.hamburg.laika.player.RotateSpriteComponent;
@@ -37,7 +38,7 @@ import de.kuro.lazyjam.tools.WorkerThread;
 
 public class LaikaGameState extends GameState {
 
-	WorkerThread controllerFuckUpThread;
+	public WorkerThread controllerFuckUpThread;
 	public static final float SAFE_ZONE_SIZE = 128.f;
 	public static final float HALF_SAFE_ZONE_SIZE = SAFE_ZONE_SIZE * 0.5f;
 
@@ -107,6 +108,7 @@ public class LaikaGameState extends GameState {
 		canon.addComponent(upgradeComponent3);
 		laika.addComponent(new RocketControl());
 
+		laika.addComponent(new GameOverComponent());
 
 		GameObject shield = new GameObject(new Vector2(), Laika.TAG_PLAYER, this);
 		RelativityComponent relComp = new RelativityComponent();
@@ -136,7 +138,6 @@ public class LaikaGameState extends GameState {
 		laika.addComponent(stages);
 
 		ChangeControlsTask cct = new ChangeControlsTask(serviceman.getService(InputMap.class));
-		controllerFuckUpThread = new LimitedTimeWorkerThread(5000, cct, Integer.MAX_VALUE);
 		controllerFuckUpThread = new LimitedTimeWorkerThread(50000, cct, Integer.MAX_VALUE);
 		controllerFuckUpThread.start();
 

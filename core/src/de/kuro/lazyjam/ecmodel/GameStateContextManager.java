@@ -32,6 +32,14 @@ public class GameStateContextManager {
 		this.gameStates.put(key, state);
 	}
 	
+	public void removeGameState(Class<? extends IGameState> key) {
+		if (gameStates.containsKey(key)) {
+			if (gameStates.get(key) != activeState) {
+				gameStates.remove(key);
+			}
+		}
+	}
+	
 	public void initMainGameState(IGameState gs) {
 		this.mainState = gs;
 		this.activeState = gs;
