@@ -24,6 +24,8 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent i
 	public SpriteWrapper sprite;
 	public boolean play = true;
 	public boolean playOnce = false;
+	private int maxX;
+	private int maxY;
 	
 	public class MyTexRegion extends TextureRegion implements IRectangleProvider {
 
@@ -79,7 +81,7 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent i
 		if(currentTick >= loopTick) {
 			this.incrementXOffset();
 			currentTick = 0;
-			if (playOnce && this.xOffset == this.renderableObjects.get(getState()).size()-1) {
+			if (playOnce && this.xOffset == maxX - 1) {
 				play = false;
 			}
 		}
@@ -101,8 +103,8 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent i
 		String[] initVal = initString.split("\\+");
 		Texture preFab = assetMan.get(initVal[0] + ".png");
 		sprite = new SpriteWrapper(preFab);
-		int maxX = Integer.parseInt(initVal[1]);
-		int maxY = Integer.parseInt(initVal[2]);
+		maxX = Integer.parseInt(initVal[1]);
+		maxY = Integer.parseInt(initVal[2]);
 		// precalc
 		int widthOfSprite = preFab.getWidth() / maxX;
 		int heightOfSprite = preFab.getHeight() / maxY;
