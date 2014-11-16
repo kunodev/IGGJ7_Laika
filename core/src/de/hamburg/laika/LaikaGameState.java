@@ -131,7 +131,7 @@ public class LaikaGameState extends GameState {
 		bb.createButton(upgradeComponent2, "Moar big pew", buttonBG);
 		bb.createButton(upgradeComponent3, "Moar Small pew", buttonBG);
 		bb.createButton(upgradeComponent4, "Moar Shields", buttonBG);
-
+		
 		Texture cometTex = assetManager.get("poop.png", Texture.class);
 		final float offset = Math.max(cometTex.getWidth(), cometTex.getHeight()) * (float) Math.sqrt(2.0) * 0.5f;
 		GameObject comet = new GameObject(new Vector2(Laika.WIDTH - offset, Laika.HEIGHT - offset), this);

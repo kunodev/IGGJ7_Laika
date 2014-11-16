@@ -7,7 +7,7 @@ import de.kuro.lazyjam.simpleservice.FontManager;
 
 public class InfoTextComponent {
 	
-	public int offsetX = 850;
+	public int offsetX = 1050;
 	public static final int TICKS_TO_CHANGE = 60 * 5 * 10;
 	public int controlChangeTicks = TICKS_TO_CHANGE;
 	
