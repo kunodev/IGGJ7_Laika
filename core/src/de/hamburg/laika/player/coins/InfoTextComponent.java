@@ -1,7 +1,10 @@
 package de.hamburg.laika.player.coins;
 
 import de.hamburg.laika.player.RocketControl;
+import de.hamburg.laika.player.buffcomponents.SpaceTimeContinuumButton;
+
 import com.badlogic.gdx.graphics.Color;
+
 import de.kuro.lazyjam.cdiutils.annotations.Render;
 import de.kuro.lazyjam.simpleservice.FontManager;
 
@@ -18,13 +21,15 @@ public class InfoTextComponent {
 	
 	
 	@Render
-	public void render(FontManager fm, CoinsService coins, RocketControl rocket) {
+	public void render(FontManager fm, CoinsService coins, RocketControl rocket, SpaceTimeContinuumButton space) {
 		ticks++;
 		if ((flickerOn && ticks > flickerTimeSwitchOn) || (!flickerOn && ticks > flickerTimeSwitchOff)) {
 			flickerOn = !flickerOn;
 			ticks = 0;
 		}
-				
+		
+		if (space.charged()) fm.drawTextAbsolut(offsetX, 85, "Spacetime available", Color.GREEN);
+		
 		fm.drawTextAbsolut(offsetX, 65, "Rockets ");
 		if(flickerOn || rocket.isCharged()) fm.drawTextAbsolut(offsetX + 70, 65, rocket.isCharged() ? "ready" : "charging", rocket.isCharged() ? Color.GREEN : Color.RED);
 		fm.drawTextAbsolut(offsetX, 45, "" + coins.coins + " coins");
