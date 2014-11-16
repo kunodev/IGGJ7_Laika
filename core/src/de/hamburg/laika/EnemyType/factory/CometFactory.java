@@ -3,6 +3,7 @@ package de.hamburg.laika.EnemyType.factory;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import de.hamburg.laika.EnemyType.Comet;
 import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.Laika;
 import de.hamburg.laika.LaikaGameState;
@@ -41,22 +42,21 @@ public class CometFactory {
 					velocity = null;
 			}
 		}
-
 		final VelocityComponent vc = new VelocityComponent();
 		vc.v.set(velocity.nor().scl(speed));
 		comet.addComponent(vc);
-
-		final HealthComponent healthComponent = new HealthComponent(MAX_HEALTH);
-		comet.addComponent(healthComponent);
 
 		final SpriteWrapper sw = new SpriteWrapper(texture);
 		sw.s.setRotation(velocity.angle());
 		sw.s.setFlip(true, false);
 		comet.addComponent(sw);
 
-		/*ExtraSimpleCollisionComponent simpleCollision = new ExtraSimpleCollisionComponent();
-		simpleCollision.tagToSearch = Laika.TAG_PLAYER;
-		comet.addComponent(simpleCollision);*/
+		comet.addComponent(new HealthComponent(MAX_HEALTH));
+		comet.addComponent(new Comet());
+
+	/*	ExtraSimpleCollisionComponent collComp = new ExtraSimpleCollisionComponent();
+		collComp.tagToSearch = Laika.TAG_PLAYER;
+		comet.addComponent(collComp);*/
 	}
 
 	static enum DIRECTION {

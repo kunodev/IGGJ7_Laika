@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.AI.AlienFactory;
@@ -16,12 +17,7 @@ import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.button.ButtonBuilder;
 import de.hamburg.laika.inputmap.InputMap;
-import de.hamburg.laika.player.ChangeControlsTask;
-import de.hamburg.laika.player.InfoTextComponent;
-import de.hamburg.laika.player.PlayerControl;
-import de.hamburg.laika.player.RocketControl;
-import de.hamburg.laika.player.ShieldControl;
-import de.hamburg.laika.player.SmallCannonControl;
+import de.hamburg.laika.player.*;
 import de.hamburg.laika.player.buffcomponents.MainCannonModificationComponent;
 import de.hamburg.laika.player.buffcomponents.ShieldModificationComponent;
 import de.hamburg.laika.player.buffcomponents.SideCannonModificationComponent;
@@ -131,8 +127,8 @@ public class LaikaGameState extends GameState{
 		GameObject comet = new GameObject(new Vector2(Laika.WIDTH * 0.90f, Laika.HEIGHT * 0.90f), this);
 		Texture cometTex = assetManager.get("poop.png", Texture.class);
 		SpriteWrapper sw = new SpriteWrapper(cometTex);
-		comet.addComponent(new Comet(7.0f));
 		comet.addComponent(sw);
+		comet.addComponent(new RotateSpriteComponent(sw.s, 3.0f));
 
 		GameStages stages = new GameStages(alienFac, assetManager, laika);
 		laika.addComponent(stages);
