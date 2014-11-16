@@ -34,7 +34,7 @@ public class GameStages {
 
 		if (alienFac.stageComplete() && stageCounter == 0) {
 			
-			alienFac.setChance(0.5f);
+			alienFac.setChance(0.75f);
 			final Texture cometTexture = assetManager.get("komet.png", Texture.class);
 			CometFactory cometFac = new CometFactory(gs, 2.0f, false, cometTexture);
 			alienFac.registerEnemyType(5, cometFac);
@@ -60,14 +60,36 @@ public class GameStages {
 		}
 		if (alienFac.stageComplete() && stageCounter == 2) {
 
+			alienFac.setChance(1.f);
 			final Texture catTexture = assetManager.get("katzenblob.png", Texture.class);
-			alienFac.registerEnemyType(25, new JaegerFactory(ship.getPos(), catTexture));
+			alienFac.registerEnemyType(10, new JaegerFactory(ship.getPos(), catTexture));
+
+			stageCounter++;
+			System.out.println("Stage 2");
+		}
+		
+		if (alienFac.stageComplete() && stageCounter == 3) {
+
+			alienFac.setChance(0.75f);
+			final Texture catTexture = assetManager.get("katzenblob.png", Texture.class);
+			alienFac.registerEnemyType(10, new JaegerFactory(ship.getPos(), catTexture));
+			
+			final Texture cometTexture = assetManager.get("komet.png", Texture.class);
+			CometFactory cometFac = new CometFactory(gs, 2.0f, false, cometTexture);
+			alienFac.registerEnemyType(2, cometFac);
+			
+			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
+			final Texture bagCatLazerTexture = assetManager.get("lazorkitten_pew.png", Texture.class);
+			final Texture bagCatLazerAniTex = assetManager.get("lazorkitten_spawnlazor.png", Texture.class);
+			final Animation bagCatLazerAni = AnimationWrapper.loadAnimation(bagCatLazerAniTex, 3, 1, 1.0f/9.0f, Animation.PlayMode.NORMAL);
+
+			alienFac.registerEnemyType(1, new BagCatFactory(bagCatTexture, bagCatLazerTexture,  bagCatLazerAni, 100, new CurveMovement(4)));
 
 			stageCounter++;
 			System.out.println("Stage 3");
 		}
 		
-		if (alienFac.stageComplete() && stageCounter == 3 ) {
+		if (alienFac.stageComplete() && stageCounter == 4 ) {
 			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
 			final Texture bagCatLazerTexture = assetManager.get("lazorkitten_pew.png", Texture.class);
 			final Texture bagCatLazerAniTex = assetManager.get("lazorkitten_spawnlazor.png", Texture.class);
@@ -78,7 +100,7 @@ public class GameStages {
 			stageCounter++;
 			System.out.println("Stage 4");
 		}
-		if (alienFac.stageComplete() && stageCounter == 4) {
+		if (alienFac.stageComplete() && stageCounter == 5) {
 			
 			alienFac.setChance(3.0f);
 			final Texture cometTexture = assetManager.get("komet.png", Texture.class);
@@ -89,7 +111,7 @@ public class GameStages {
 			stageCounter++;
 			System.out.println("Stage 4");
 		}
-		if (alienFac.stageComplete() && stageCounter == 5) {
+		if (alienFac.stageComplete() && stageCounter == 6) {
 			
 			alienFac.setChance(0.5f);
 
@@ -101,7 +123,7 @@ public class GameStages {
 			
 			stageCounter++;
 		}
-		if (alienFac.stageComplete() && stageCounter == 6) {
+		if (alienFac.stageComplete() && stageCounter == 7) {
 			
 			alienFac.setChance(0.5f);
 
@@ -114,7 +136,7 @@ public class GameStages {
 			stageCounter++;
 		}
 		
-		if (alienFac.stageComplete() && stageCounter == 7) {
+		if (alienFac.stageComplete() && stageCounter == 8) {
 			
 			alienFac.setChance(1.0f);
 
@@ -125,7 +147,7 @@ public class GameStages {
 			stageCounter++;
 		}
 		
-		if (alienFac.stageComplete() && stageCounter == 8) {
+		if (alienFac.stageComplete() && stageCounter == 9) {
 			alienFac.setChance(90); 
 			
 			final Texture poopTex = assetManager.get("poop.png", Texture.class);
@@ -136,7 +158,7 @@ public class GameStages {
 			stageCounter++;
 		}
 		
-		if (alienFac.stageComplete() && stageCounter == 9) {
+		if (alienFac.stageComplete() && stageCounter == 10) {
 			alienFac.setChance(0.5f); 
 			
 			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
@@ -150,7 +172,7 @@ public class GameStages {
 			stageCounter++;
 		}
 		
-		if (alienFac.stageComplete() && stageCounter == 10) {
+		if (alienFac.stageComplete() && stageCounter == 11) {
 			alienFac.setChance(90); 
 			
 			final Texture poopTex = assetManager.get("poop.png", Texture.class);
