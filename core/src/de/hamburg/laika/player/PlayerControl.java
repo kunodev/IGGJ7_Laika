@@ -1,6 +1,8 @@
 package de.hamburg.laika.player;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.Laika;
@@ -47,15 +49,18 @@ public class PlayerControl {
 		currentCannonTicks++;
 	}
 	
-
 	@Collide
-	public void kill(Collision co, GameState gs, CoinsService cs) {
+	public void kill(Collision co, GameState gs, CoinsService cs, AssetManager assetMan) {
 		HealthComponent otherComp = co.otherGo.getComponent(HealthComponent.class);	
 		CoinsComponent coinComp = co.otherGo.getComponent(CoinsComponent.class);	
 		if(otherComp != null) {
 			co.thisGo.selfDestruct(gs);
+			Sound s = assetMan.get("death.wav");
+			s.play();
 		} else if(coinComp != null) {
 			cs.addCoins(coinComp.amount);
+			Sound s = assetMan.get("coin.wav");
+			s.play();
 		}
 		co.otherGo.selfDestruct(gs);
 		}

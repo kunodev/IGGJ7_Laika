@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.AI.AlienFactory;
 import de.hamburg.laika.AI.GameStages;
+import de.hamburg.laika.EnemyMovement.BossMovement;
 import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.button.ButtonBuilder;
@@ -140,6 +141,13 @@ public class LaikaGameState extends GameState {
 		ChangeControlsTask cct = new ChangeControlsTask(serviceman.getService(InputMap.class));
 		controllerFuckUpThread = new LimitedTimeWorkerThread(50000, cct, Integer.MAX_VALUE);
 		controllerFuckUpThread.start();
+		
+		GameObject theBoss = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT/2), this);
+		theBoss.addComponent(new BossMovement(5, 30));
+		theBoss.addComponent(new HealthComponent(20000));
+		Texture theBossTex = assetManager.get("endboss.png", Texture.class);
+		theBoss.addComponent(new SpriteWrapper(theBossTex));
+		laika.addComponent(theBoss);
 
 	}
 }
