@@ -3,7 +3,6 @@ package de.hamburg.laika.AI;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
@@ -25,14 +24,14 @@ public class AlienFactory {
 	}
 
 	@Update
-	public void update(Input i, Vector2 pos) {
+	public void update() {
 		
 		Array<AmountEnemyTypePair> trash = new Array<AmountEnemyTypePair>(enemyTypeAmountPairs.size());
 		
-		for (int j = 0; j < enemyTypeAmountPairs.size(); ++j) {
+		for (int i = 0; i < enemyTypeAmountPairs.size(); ++i) {
 			if ( rand.nextFloat() * 100.f <= 0.5) {
 				GameObject enemy = new GameObject(new Vector2(Laika.WIDTH, rand.nextFloat() * Laika.HEIGHT ),Laika.TAG_ENEMY, gs);
-				AmountEnemyTypePair amountEnemyTypePair = enemyTypeAmountPairs.get(j);
+				AmountEnemyTypePair amountEnemyTypePair = enemyTypeAmountPairs.get(i);
 				for(Object obj : amountEnemyTypePair.factory.createComponents()) {
 					enemy.addComponent(obj);
 				}
@@ -53,6 +52,10 @@ public class AlienFactory {
 		enemyTypeAmountPairs.add(new AmountEnemyTypePair(amount, componentFac));
 	}
 	
+	public boolean stageComplete() {
+		return enemyTypeAmountPairs.isEmpty(); 
+	}
+	
 	static class AmountEnemyTypePair {
 		public int amount;
 		public IComponentCollectionFactory factory;
@@ -62,5 +65,4 @@ public class AlienFactory {
 			this.factory = factory;
 		}
 	}
-	
 }

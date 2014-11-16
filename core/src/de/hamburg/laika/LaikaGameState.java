@@ -9,11 +9,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.AI.AlienFactory;
+import de.hamburg.laika.AI.GameStages;
 import de.hamburg.laika.EnemyMovement.LinearMovement;
 import de.hamburg.laika.EnemyType.Comet;
 import de.hamburg.laika.EnemyType.HealthComponent;
-import de.hamburg.laika.EnemyType.Laser;
-import de.hamburg.laika.EnemyType.factory.JaegerFactory;
 import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.button.ButtonBuilder;
 import de.hamburg.laika.inputmap.InputMap;
@@ -128,14 +127,14 @@ public class LaikaGameState extends GameState{
 		bb.createButton(upgradeComponent3, "Moar Small pew", buttonBG);
 		bb.createButton(upgradeComponent4, "Moar Shields", buttonBG);
 		
-		GameObject comet = new GameObject(new Vector2(Laika.WIDTH * 0.33f, Laika.HEIGHT * 0.67f), this);
+		GameObject comet = new GameObject(new Vector2(Laika.WIDTH * 0.90f, Laika.HEIGHT * 0.90f), this);
 		Texture cometTex = assetManager.get("poop.png", Texture.class);
 		SpriteWrapper sw = new SpriteWrapper(cometTex);
 		comet.addComponent(new Comet(7.0f));
 		comet.addComponent(sw);
 
-		final Texture catTexture = assetManager.get("cat.png", Texture.class);
-		alienFac.registerEnemyType(50, new JaegerFactory(laika.getPos(), catTexture) );
+		GameStages stages = new GameStages(alienFac, assetManager, laika);
+		laika.addComponent(stages);
 
 		GameObject lazorKitten = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT * 0.8f), Laika.TAG_ENEMY, this);
 		lazorKitten.addComponent(new LinearMovement(new Vector2(-2.0f, 0.0f)));
