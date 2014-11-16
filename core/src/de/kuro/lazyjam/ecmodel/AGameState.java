@@ -11,7 +11,7 @@ public abstract class AGameState implements IGameState {
 
 	protected final List<Runnable> updateAbles;
 	protected int tick = 0;
-	protected final int TICK_TIME;
+	public int TICK_TIME;
 //	public Audio bgm; TODO: Audio Support
 
 	protected AGameState() {

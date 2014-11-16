@@ -24,6 +24,7 @@ import de.hamburg.laika.player.SmallCannonControl;
 import de.hamburg.laika.player.buffcomponents.MainCannonModificationComponent;
 import de.hamburg.laika.player.buffcomponents.ShieldModificationComponent;
 import de.hamburg.laika.player.buffcomponents.SideCannonModificationComponent;
+import de.hamburg.laika.player.buffcomponents.SpaceTimeContinuumButton;
 import de.hamburg.laika.player.buffcomponents.SpeedModificationComponent;
 import de.hamburg.laika.player.buffcomponents.UpgradeComponent;
 import de.hamburg.laika.player.coins.InfoTextComponent;
@@ -122,12 +123,15 @@ public class LaikaGameState extends GameState {
 		shield.addComponent(new SpriteWrapper(assetManager.get("schutzschild.png", Texture.class)));
 		shield.addComponent(upgradeComponent4);
 
+		SpaceTimeContinuumButton spaceTimeButton = new SpaceTimeContinuumButton();
+		
 		ButtonBuilder bb = new ButtonBuilder(this);
 		Texture buttonBG = assetManager.get("button.png", Texture.class);
 		bb.createButton(upgradeComponent, "Moar Speed", buttonBG);
 		bb.createButton(upgradeComponent2, "Moar big pew", buttonBG);
 		bb.createButton(upgradeComponent3, "Moar Small pew", buttonBG);
 		bb.createButton(upgradeComponent4, "Moar Shields", buttonBG);
+		bb.createButton(spaceTimeButton, "Rip Space-Time", buttonBG);
 
 		Texture cometTex = assetManager.get("poop.png", Texture.class);
 		final float offset = Math.max(cometTex.getWidth(), cometTex.getHeight()) * (float) Math.sqrt(2.0) * 0.5f;
