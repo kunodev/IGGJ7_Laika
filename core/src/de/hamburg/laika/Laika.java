@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 import de.hamburg.laika.player.BulletFactory;
+import de.hamburg.laika.player.coins.CoinFactory;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
 import de.kuro.lazyjam.main.LazyJamApplicationAdapter;
 
@@ -53,6 +54,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("schriftzug.png", Texture.class);
 		assetManager.load("shield.wav", Sound.class);
 		assetManager.load("lazorkitten_pew.png", Texture.class);
+		assetManager.load("muenze.png", Texture.class);
 	}
 
 	@Override
@@ -78,6 +80,7 @@ public class Laika extends LazyJamApplicationAdapter {
 //		gs.init(serviceMan);
 		BulletFactory.MATROSCHKA = assetManager.get("matroschka.png");
 		BulletFactory.SICKLE = assetManager.get("sichel_pew.png");
+		CoinFactory.COIN = assetManager.get("muenze.png");
 		BulletFactory.assetMan = assetManager;
 	}
 

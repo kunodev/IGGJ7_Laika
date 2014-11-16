@@ -4,8 +4,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.Laika;
+import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.inputmap.InputMap;
 import de.hamburg.laika.inputmap.InputMap.Action;
+import de.hamburg.laika.player.coins.CoinsComponent;
+import de.hamburg.laika.player.coins.CoinsService;
 import de.kuro.lazyjam.cdiutils.annotations.Collide;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
@@ -46,9 +49,15 @@ public class PlayerControl {
 	
 
 	@Collide
-	public void kill(Collision co, GameState gs) {
+	public void kill(Collision co, GameState gs, CoinsService cs) {
+		HealthComponent otherComp = co.otherGo.getComponent(HealthComponent.class);	
+		CoinsComponent coinComp = co.otherGo.getComponent(CoinsComponent.class);	
+		if(otherComp != null) {
+			co.thisGo.selfDestruct(gs);
+		} else if(coinComp != null) {
+			cs.addCoins(coinComp.amount);
+		}
 		co.otherGo.selfDestruct(gs);
-		co.thisGo.selfDestruct(gs);
-	}
+		}
 
 }
