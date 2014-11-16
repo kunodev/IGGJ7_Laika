@@ -46,7 +46,9 @@ public class GameStages {
 			alienFac.registerEnemyType(5, cometFac);
 
 			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
-			alienFac.registerEnemyType(4, new BagCatFactory(bagCatTexture, 100, new AntiZMovement(5, 100, 150)));
+			final Texture bagCatLazerTexture = assetManager.get("lazorkitten_pew.png", Texture.class);
+
+			alienFac.registerEnemyType(4, new BagCatFactory(bagCatTexture, bagCatLazerTexture, 100, new AntiZMovement(5, 100, 150)));
 
 			stageCounter++;
 			System.out.println("Stage 2");
@@ -62,7 +64,8 @@ public class GameStages {
 		
 		if (alienFac.stageComplete() && stageCounter == 4 ) {
 			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
-			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, 100, new CurveMovement(4)));
+			final Texture bagCatLazerTexture = assetManager.get("lazorkitten_pew.png", Texture.class);
+			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, bagCatLazerTexture,  100, new CurveMovement(4)));
 
 			stageCounter++;
 			System.out.println("Stage 4");
