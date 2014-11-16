@@ -20,6 +20,8 @@ public class ExtraSimpleCollisionComponent {
 	
 	public List<Predicate<GameObject>> filters;
 	public String tagToSearch;
+	public int activeAfter = 0;
+	public long ticks = 0;
 
 	public ExtraSimpleCollisionComponent() {
 		filters = new ArrayList<Predicate<GameObject>>();
@@ -27,6 +29,10 @@ public class ExtraSimpleCollisionComponent {
 	
 	@Update
 	public void collideWith(Vector2 pos, GameState gs, GameObjectContext goc, IRectangleProvider rect) {
+		if (ticks++ < activeAfter) {
+			return;
+		}
+		
 		Stream<GameObject> gameObjectsStream;
 		if(tagToSearch == null) {
 			gameObjectsStream = gs.gameObjects.stream();			
