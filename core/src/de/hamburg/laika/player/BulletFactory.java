@@ -83,7 +83,7 @@ public class BulletFactory {
 	}
 	
 
-	public static void createRocket(Vector2 pos, GameState gs, Vector2 target, Vector2 direction, int delay, float speed1, float speed2) {
+	public static void createMatroschka(Vector2 pos, GameState gs, Vector2 target, Vector2 direction, int delay, float speed1, float speed2) {
 		GameObject bullet = new GameObject(pos.cpy(), gs);
 		Bullet comp = new Bullet();
 		// double damage ftw!
@@ -98,6 +98,8 @@ public class BulletFactory {
 		vcc.add(delay, target.cpy(), speed2);
 		bullet.addComponent(vcc);
 		
+		bullet.addComponent(new MatroschkaExplodeComponent());
+		
 		SpriteWrapper sw = new SpriteWrapper(MATROSCHKA);
 		sw.s.setOriginCenter();
 		bullet.addComponent(sw);
@@ -107,4 +109,24 @@ public class BulletFactory {
 		bullet.addComponent(simpleCollision);
 	}	
 	
+	public static void createSmallMatroschka(Vector2 pos, GameState gs, Vector2 direction, float speed) {
+		GameObject bullet = new GameObject(pos.cpy(), gs);
+		Bullet comp = new Bullet();
+		// double damage ftw!
+		comp.damage *= 2;
+		bullet.addComponent(comp);
+		VelocityComponent vc = new VelocityComponent();
+		bullet.addComponent(vc);
+		vc.v.set(direction.nor().scl(speed));	
+		SpriteWrapper sw = new SpriteWrapper(MATROSCHKA);
+		sw.s.setSize(sw.s.getWidth()/3, sw.s.getHeight()/3);
+		sw.s.setOriginCenter();
+		sw.s.setRotation(direction.angle());
+		bullet.addComponent(sw);
+		ExtraSimpleCollisionComponent simpleCollision = new ExtraSimpleCollisionComponent();
+		simpleCollision.activeAfter = 10;
+		simpleCollision.filters.add( e-> e.getComponent(HealthComponent.class) != null);
+		simpleCollision.tagToSearch = Laika.TAG_ENEMY;
+		bullet.addComponent(simpleCollision);
+	}
 }

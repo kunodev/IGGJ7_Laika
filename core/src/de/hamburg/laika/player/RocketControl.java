@@ -29,7 +29,7 @@ public class RocketControl {
 		if (isCharged()) {
 			if (target.y >= buttonOffset && i.isButtonPressed(Buttons.LEFT)) {
 				lastShot = timeCounter;
-				BulletFactory.createRocket(pos, gs, target, new Vector2(1,0), 50, 1, 20);
+				BulletFactory.createMatroschka(pos, gs, target, new Vector2(1,0), 50, 1, 20);
 			}
 		}	
 	}
