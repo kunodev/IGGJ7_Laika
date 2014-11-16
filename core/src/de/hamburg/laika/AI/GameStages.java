@@ -21,7 +21,7 @@ public class GameStages {
 	private AssetManager assetManager;
 	private final GameObject ship;
 
-	int stageCounter = 8;
+	int stageCounter = 0;
 
 	public GameStages(AlienFactory alienFac, AssetManager assetManager, GameObject ship) {
 		this.alienFac = alienFac;
