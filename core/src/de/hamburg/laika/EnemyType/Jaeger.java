@@ -1,6 +1,8 @@
 package de.hamburg.laika.EnemyType;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -41,7 +43,9 @@ public class Jaeger implements IEnemyType {
 	
 
 	@Collide
-	public void kill(Collision co, GameState gs, HealthComponent hc) {
+	public void kill(Collision co, GameState gs, HealthComponent hc, AssetManager assetMan) {
+		Sound s = assetMan.get("Hit_Hurt11.wav");
+		s.play();
 		co.otherGo.selfDestruct(gs);
 		if(hc.damage(co.otherGo.getComponent(Bullet.class).damage)) {
 			co.thisGo.selfDestruct(gs);
