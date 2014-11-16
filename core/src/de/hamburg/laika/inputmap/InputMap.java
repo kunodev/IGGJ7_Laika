@@ -62,6 +62,7 @@ public class InputMap {
 	}
 
 	public void switcharoo() {
+		actionToHWKey = new HashMap<Action,Integer>();
 		if(state == InputState.INVERTED) {
 			p1Controls();
 			p2Shields();
