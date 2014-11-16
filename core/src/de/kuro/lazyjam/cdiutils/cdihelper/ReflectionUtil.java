@@ -11,7 +11,7 @@ public class ReflectionUtil {
 	
 	public static void init() {
 		reflect = new Reflections("de.kuro.lazyjam",new SubTypesScanner(false), new TypeAnnotationsScanner());
-		addReflection("");
+		addReflection("de.hamburg.laika");
 		//Seriously... have to do something about this?
 	}
 	

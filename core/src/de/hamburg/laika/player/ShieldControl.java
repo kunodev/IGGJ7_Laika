@@ -78,6 +78,8 @@ public class ShieldControl {
 					this.shieldActive = false;
 				}
 			} else if(coinComp != null) {
+				Sound s = assetMan.get("coin.wav");
+				s.play();
 				cs.addCoins(coinComp.amount);
 			}
 			c.otherGo.selfDestruct(gs);

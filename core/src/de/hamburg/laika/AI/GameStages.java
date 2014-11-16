@@ -60,7 +60,7 @@ public class GameStages {
 		}
 		if (alienFac.stageComplete() && stageCounter == 2) {
 
-			final Texture catTexture = assetManager.get("cat.png", Texture.class);
+			final Texture catTexture = assetManager.get("katzenblob.png", Texture.class);
 			alienFac.registerEnemyType(25, new JaegerFactory(ship.getPos(), catTexture));
 
 			stageCounter++;
