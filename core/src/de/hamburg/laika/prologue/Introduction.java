@@ -9,7 +9,7 @@ public class Introduction {
 	
 	public final int ticksToMiddle = 80;
 	public final int ticksToEndStart	= 150;
-	public final int ticksToSelfDestruct = 200;
+	public final int ticksToSelfDestruct = 220;
 	public int ticks = 0;
 	public Object nextComponentToAdd;
 	

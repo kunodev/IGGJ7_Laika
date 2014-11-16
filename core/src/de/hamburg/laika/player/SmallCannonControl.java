@@ -12,7 +12,7 @@ import de.kuro.lazyjam.ecmodel.concrete.components.RelativityComponent;
 
 public class SmallCannonControl {
 	
-	public static final int SMALL_CANNON_TICKS = 1;
+	public static final int SMALL_CANNON_TICKS = 10;
 	public int currentSmallCannonTicks;
 	public int cannonTicksReduction;
 	

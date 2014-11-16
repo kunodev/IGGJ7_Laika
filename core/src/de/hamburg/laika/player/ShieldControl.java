@@ -1,6 +1,8 @@
 package de.hamburg.laika.player;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
@@ -62,8 +64,11 @@ public class ShieldControl {
 	}
 	
 	@Collide
-	public void repel(Collision c, GameState gs) {
+	public void repel(Collision c, GameState gs, AssetManager assetMan) {
 		if(shieldActive) {
+			Sound s = assetMan.get("shield.wav");
+			s.play();
+			
 			HealthComponent otherComp = c.otherGo.getComponent(HealthComponent.class);
 			this.shieldHP -= otherComp.getHealth();
 			if(shieldHP <= 0) {

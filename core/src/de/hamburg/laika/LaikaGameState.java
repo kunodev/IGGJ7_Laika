@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.AI.AlienFactory;
@@ -16,15 +17,11 @@ import de.hamburg.laika.EnemyMovement.LinearMovement;
 import de.hamburg.laika.EnemyMovement.ZMovement;
 import de.hamburg.laika.EnemyType.Comet;
 import de.hamburg.laika.EnemyType.HealthComponent;
+import de.hamburg.laika.EnemyType.Laser;
 import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.button.ButtonBuilder;
 import de.hamburg.laika.inputmap.InputMap;
-import de.hamburg.laika.player.ChangeControlsTask;
-import de.hamburg.laika.player.InfoTextComponent;
-import de.hamburg.laika.player.PlayerControl;
-import de.hamburg.laika.player.RocketControl;
-import de.hamburg.laika.player.ShieldControl;
-import de.hamburg.laika.player.SmallCannonControl;
+import de.hamburg.laika.player.*;
 import de.hamburg.laika.player.buffcomponents.MainCannonModificationComponent;
 import de.hamburg.laika.player.buffcomponents.ShieldModificationComponent;
 import de.hamburg.laika.player.buffcomponents.SideCannonModificationComponent;
@@ -103,7 +100,6 @@ public class LaikaGameState extends GameState{
 		laika.addComponent(alienFac);
 		laika.addComponent(new InfoTextComponent());
 
-
 		UpgradeComponent upgradeComponent = new SpeedModificationComponent();
 		UpgradeComponent upgradeComponent2 = new MainCannonModificationComponent();
 		UpgradeComponent upgradeComponent3 = new SideCannonModificationComponent();
@@ -134,14 +130,15 @@ public class LaikaGameState extends GameState{
 		GameObject comet = new GameObject(new Vector2(Laika.WIDTH * 0.90f, Laika.HEIGHT * 0.90f), this);
 		Texture cometTex = assetManager.get("poop.png", Texture.class);
 		SpriteWrapper sw = new SpriteWrapper(cometTex);
-		comet.addComponent(new Comet(7.0f));
 		comet.addComponent(sw);
+		comet.addComponent(new RotateSpriteComponent(sw.s, 3.0f));
 
 		GameStages stages = new GameStages(alienFac, assetManager, laika);
 		laika.addComponent(stages);
 
 		GameObject lazorKitten = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT * 0.8f), Laika.TAG_ENEMY, this);
 		lazorKitten.addComponent(new LinearMovement(new Vector2(-2.0f, 0.0f)));
+		lazorKitten.addComponent(new Laser(assetManager.get("lazorkitten_pew.png", Texture.class), 1.0f, 0.0f, 5.0f, 0.0f, 5, -16.0f, 33.0f));
 		lazorKitten.addComponent(new AnimationWrapper(assetManager.get("lazorkitten_map.png", Texture.class),3, 1, 1.f/6.f, Animation.PlayMode.LOOP_PINGPONG));
 		
 		GameObject lazorKitten2 = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT * 0.8f), Laika.TAG_ENEMY, this);

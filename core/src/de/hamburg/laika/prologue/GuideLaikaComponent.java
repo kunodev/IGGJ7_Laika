@@ -3,6 +3,7 @@ package de.hamburg.laika.prologue;
 import com.badlogic.gdx.math.Vector2;
 
 import de.kuro.lazyjam.cdiutils.annotations.Update;
+import de.kuro.lazyjam.simpleservice.FontManager;
 
 public class GuideLaikaComponent {
 	
@@ -13,9 +14,13 @@ public class GuideLaikaComponent {
 	@Update
 	public void guide(Vector2 pos) {
 		ticks++;
-		if(ticks <= MAX_TICKS) {
+		if(!done()) {
 			pos.x += 1f;
 		}
+	}
+	
+	public boolean done() {
+		return ticks > MAX_TICKS;
 	}
 	
 	

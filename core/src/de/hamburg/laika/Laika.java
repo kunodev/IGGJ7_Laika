@@ -44,11 +44,15 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("sparkle2.png", Texture.class);
 		assetManager.load("sparkle3.png", Texture.class);
 		assetManager.load("sparkle4.png", Texture.class);
-
 		assetManager.load("lazorkitten_map.png", Texture.class);
 		assetManager.load("matroschka.png", Texture.class);
 		assetManager.load("Laser_Shoot11.wav", Sound.class);
 
+		assetManager.load("komet.png", Texture.class);
+		assetManager.load("Hit_Hurt11.wav", Sound.class);
+		assetManager.load("schriftzug.png", Texture.class);
+		assetManager.load("shield.wav", Sound.class);
+		assetManager.load("lazorkitten_pew.png", Texture.class);
 	}
 
 	@Override
