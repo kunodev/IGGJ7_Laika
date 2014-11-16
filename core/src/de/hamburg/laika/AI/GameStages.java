@@ -27,13 +27,27 @@ public class GameStages {
 	public void update(GameState gs) {
 
 		if(alienFac.stageComplete() && stageCounter == 1) {
-			final Texture catTexture = assetManager.get("cat.png", Texture.class);
-			alienFac.registerEnemyType(25, new JaegerFactory(ship.getPos(), catTexture) );
-
-			final Texture cometTexture = assetManager.get("komet.png", Texture.class);
-			CometFactory.createComet(gs, 2.0f, false, cometTexture);
+			final Texture cometTexture = assetManager.get("komet.png", Texture.class);			
+			CometFactory cometFac = new CometFactory(gs, 2.0f, false, cometTexture);
+			alienFac.registerEnemyType(5, cometFac);
 
 			System.out.println("Stage 1");
-		}	
+		}
+		
+		if(alienFac.stageComplete() && stageCounter == 2) {
+			final Texture cometTexture = assetManager.get("komet.png", Texture.class);			
+			CometFactory cometFac = new CometFactory(gs, 2.0f, false, cometTexture);
+			alienFac.registerEnemyType(5, cometFac);
+
+			System.out.println("Stage 2");
+		}
+		if(alienFac.stageComplete() && stageCounter == 3) {
+			
+			final Texture catTexture = assetManager.get("cat.png", Texture.class);
+			alienFac.registerEnemyType(25, new JaegerFactory(ship.getPos(), catTexture) );
+			
+			System.out.println("Stage 3");
+		}
+			
 	}
 }

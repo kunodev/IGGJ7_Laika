@@ -1,62 +1,34 @@
 package de.hamburg.laika.EnemyType.factory;
 
+import java.util.List;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import de.hamburg.laika.EnemyType.Comet;
-import de.hamburg.laika.EnemyType.HealthComponent;
+
 import de.hamburg.laika.Laika;
 import de.hamburg.laika.LaikaGameState;
+import de.hamburg.laika.EnemyType.Comet;
+import de.hamburg.laika.EnemyType.HealthComponent;
 import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
 import de.kuro.lazyjam.ecmodel.concrete.components.ExtraSimpleCollisionComponent;
 import de.kuro.lazyjam.ecmodel.concrete.components.VelocityComponent;
 
-public class CometFactory {
+public class CometFactory implements IComponentCollectionFactory{
 	public static int MAX_HEALTH = 200;
-
-	public static void createComet(GameState gs, float speed, boolean aimAtPlayer, Texture texture) {
-		final Vector2 pos = new Vector2();
-		final DIRECTION dir = createPosInSafeZone(pos);
-		final GameObject comet = new GameObject(pos, Laika.TAG_ENEMY, gs);
-
-		Vector2 velocity;
-		if (aimAtPlayer && !gs.getTaggedGameObjects(Laika.TAG_PLAYER).isEmpty()) {
-			velocity = gs.getFirstTaggedGameObject(Laika.TAG_PLAYER).getPos().cpy().sub(pos);
-		} else {
-			switch (dir) {
-				case TOP:
-					velocity = createPosInSafeZone(DIRECTION.BOTTOM);
-					break;
-				case RIGHT:
-					velocity = createPosInSafeZone(DIRECTION.LEFT);
-					break;
-				case BOTTOM:
-					velocity = createPosInSafeZone(DIRECTION.TOP);
-					break;
-				case LEFT:
-					velocity = createPosInSafeZone(DIRECTION.RIGHT);
-					break;
-				default:
-					velocity = null;
-			}
-		}
-		final VelocityComponent vc = new VelocityComponent();
-		vc.v.set(velocity.nor().scl(speed));
-		comet.addComponent(vc);
-
-		final SpriteWrapper sw = new SpriteWrapper(texture);
-		sw.s.setRotation(velocity.angle());
-		sw.s.setFlip(true, false);
-		comet.addComponent(sw);
-
-		comet.addComponent(new HealthComponent(MAX_HEALTH));
-		comet.addComponent(new Comet());
-
-		ExtraSimpleCollisionComponent collComp = new ExtraSimpleCollisionComponent();
-		collComp.tagToSearch = Laika.TAG_PLAYER;
-		comet.addComponent(collComp);
+	
+	private GameState gs;
+	private float speed;
+	private boolean aimAtPlayer;
+	private Texture texture;
+	
+	public CometFactory(GameState gs, float speed, boolean aimAtPlayer, Texture texture) {
+		this.gs = gs;
+		this.speed = speed;
+		this.aimAtPlayer = aimAtPlayer;
+		this.texture = texture;
 	}
 
 	static enum DIRECTION {
@@ -97,6 +69,51 @@ public class CometFactory {
 				return new Vector2(Laika.WIDTH + offset, MathUtils.random(-offset, Laika.HEIGHT + offset));
 		}
 
+		return null;
+	}
+
+	@Override
+	public List<Object> createComponents() {
+		final Vector2 pos = new Vector2();
+		final DIRECTION dir = createPosInSafeZone(pos);
+		final GameObject comet = new GameObject(pos, Laika.TAG_ENEMY, gs);
+
+		Vector2 velocity;
+		if (aimAtPlayer && !gs.getTaggedGameObjects(Laika.TAG_PLAYER).isEmpty()) {
+			velocity = gs.getFirstTaggedGameObject(Laika.TAG_PLAYER).getPos().cpy().sub(pos);
+		} else {
+			switch (dir) {
+				case TOP:
+					velocity = createPosInSafeZone(DIRECTION.BOTTOM);
+					break;
+				case RIGHT:
+					velocity = createPosInSafeZone(DIRECTION.LEFT);
+					break;
+				case BOTTOM:
+					velocity = createPosInSafeZone(DIRECTION.TOP);
+					break;
+				case LEFT:
+					velocity = createPosInSafeZone(DIRECTION.RIGHT);
+					break;
+				default:
+					velocity = null;
+			}
+		}
+		final VelocityComponent vc = new VelocityComponent();
+		vc.v.set(velocity.nor().scl(speed));
+		comet.addComponent(vc);
+
+		final SpriteWrapper sw = new SpriteWrapper(texture);
+		sw.s.setRotation(velocity.angle());
+		sw.s.setFlip(true, false);
+		comet.addComponent(sw);
+
+		comet.addComponent(new HealthComponent(MAX_HEALTH));
+		comet.addComponent(new Comet());
+
+		ExtraSimpleCollisionComponent collComp = new ExtraSimpleCollisionComponent();
+		collComp.tagToSearch = Laika.TAG_PLAYER;
+		comet.addComponent(collComp);
 		return null;
 	}
 }
