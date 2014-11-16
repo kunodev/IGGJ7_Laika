@@ -37,7 +37,6 @@ public class ProjectileSpawner {
 			projectile.addComponent(new Projectile(damage));
 
 			ExtraSimpleCollisionComponent collComp = new ExtraSimpleCollisionComponent();
-			//collComp.filters.add( e-> e.getComponent(PlayerControl.class) != null);
 			collComp.tagToSearch = Laika.TAG_PLAYER;
 			projectile.addComponent(collComp);
 		}

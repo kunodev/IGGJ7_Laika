@@ -60,10 +60,10 @@ public class PlayerControl {
 				co.thisGo.selfDestruct(gs);
 				Sound s = assetMan.get("death.wav");
 				s.play();
-			} else if (otherComp != null) {
-				Sound s = assetMan.get("death.wav");
-				s.play();
 			}
+		}else	if (otherComp != null) {
+			Sound s = assetMan.get("death.wav");
+			s.play();
 			co.thisGo.selfDestruct(gs);
 		} else if (coinComp != null) {
 			cs.addCoins(coinComp.amount);
@@ -73,5 +73,4 @@ public class PlayerControl {
 
 		co.otherGo.selfDestruct(gs);
 	}
-
 }

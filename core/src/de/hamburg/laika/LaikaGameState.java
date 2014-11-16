@@ -143,15 +143,5 @@ public class LaikaGameState extends GameState {
 		ChangeControlsTask cct = new ChangeControlsTask(serviceman.getService(InputMap.class));
 		controllerFuckUpThread = new LimitedTimeWorkerThread(50000, cct, Integer.MAX_VALUE);
 		controllerFuckUpThread.start();
-		
-		GameObject theBoss = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT/2), this);
-		theBoss.addComponent(new BossMovement(5, 30));
-		theBoss.addComponent(new HealthComponent(20000));
-		Texture theBossTex = assetManager.get("endboss.png", Texture.class);
-		theBoss.addComponent(new SpriteWrapper(theBossTex));
-		Texture catTEx = assetManager.get("cat.png", Texture.class);
-
-		ProjectileSpawner ps = new ProjectileSpawner(0.04f, 4.0f, catTEx, 25);
-		theBoss.addComponent(ps);
 	}
 }

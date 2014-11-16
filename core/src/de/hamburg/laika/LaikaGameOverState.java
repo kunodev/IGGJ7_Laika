@@ -10,6 +10,8 @@ import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.cdiutils.cdihelper.ServiceManager;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 
+import javax.xml.soap.Text;
+
 public class LaikaGameOverState extends LaikaGameState {
 
 	@Override
@@ -30,7 +32,7 @@ public class LaikaGameOverState extends LaikaGameState {
 		
 		
 		GameObject gameOver = new GameObject(new Vector2(640f,330f), this);
-		gameOver.addComponent(new SpriteWrapper(assetManager.get("gameover_schriftzug.png")));
+		gameOver.addComponent(new SpriteWrapper(assetManager.get("gameover_schriftzug.png", Texture.class)));
 		
 		
 		

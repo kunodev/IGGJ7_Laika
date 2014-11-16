@@ -1,7 +1,6 @@
 package de.hamburg.laika.EnemyType;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Sound;
+import de.hamburg.laika.player.Bullet;
 import de.kuro.lazyjam.cdiutils.annotations.Collide;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
 import de.kuro.lazyjam.ecmodel.concrete.tools.Collision;
@@ -17,12 +16,15 @@ public class Projectile implements IEnemyType {
 		this.damage = 25;
 	}
 
-
 	@Collide
 	public void hit(Collision co, GameState gs) {
-		//co.thisGo.selfDestruct(gs);
-		if (co.otherGo.getComponent(HealthComponent.class).damage(damage)) {
+		HealthComponent health = co.otherGo.getComponent(HealthComponent.class);
+		if (health != null && co.otherGo.getComponent(HealthComponent.class).damage(damage)) {
 			co.otherGo.selfDestruct(gs);
+		}
+
+		if (co.thisGo.getComponent(HealthComponent.class).damage(co.otherGo.getComponent(Bullet.class).damage)) {
+			co.thisGo.selfDestruct(gs);
 		}
 	}
 }
