@@ -14,6 +14,7 @@ import de.hamburg.laika.EnemyMovement.AntiZMovement;
 import de.hamburg.laika.EnemyMovement.CurveMovement;
 import de.hamburg.laika.EnemyMovement.LinearMovement;
 import de.hamburg.laika.EnemyMovement.ZMovement;
+import de.hamburg.laika.EnemyType.BagCat;
 import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.EnemyType.Laser;
 import de.hamburg.laika.background.BackGroundGen;
@@ -141,21 +142,28 @@ public class LaikaGameState extends GameState{
 		laika.addComponent(stages);
 
 		GameObject lazorKitten = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT * 0.8f), Laika.TAG_ENEMY, this);
-		lazorKitten.addComponent(new HealthComponent(10));
+		lazorKitten.addComponent(new HealthComponent(100));
+		lazorKitten.addComponent(new BagCat());
 		lazorKitten.addComponent(new LinearMovement(new Vector2(-2.0f, 0.0f)));
 		lazorKitten.addComponent(new Laser(assetManager.get("lazorkitten_pew.png", Texture.class), 5.0f, 0.0f, 1.0f, 0.0f, 5, -16.0f, 33.0f));
 		lazorKitten.addComponent(new AnimationWrapper(assetManager.get("lazorkitten_map.png", Texture.class),3, 1, 1.f/6.f, Animation.PlayMode.LOOP_PINGPONG));
 		
 		GameObject lazorKitten2 = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT * 0.8f), Laika.TAG_ENEMY, this);
 		lazorKitten2.addComponent(new AntiZMovement(5, 100, 150));
+		lazorKitten2.addComponent(new HealthComponent(100));
+		lazorKitten2.addComponent(new BagCat());
 		lazorKitten2.addComponent(new AnimationWrapper(assetManager.get("lazorkitten_map.png", Texture.class),3, 1, 1.f/6.f, Animation.PlayMode.LOOP_PINGPONG));
 		
 		GameObject lazorKitten3 = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT * 0.2f), Laika.TAG_ENEMY, this);
 		lazorKitten3.addComponent(new ZMovement(5, 100, 150));
+		lazorKitten3.addComponent(new HealthComponent(100));
+		lazorKitten3.addComponent(new BagCat());
 		lazorKitten3.addComponent(new AnimationWrapper(assetManager.get("lazorkitten_map.png", Texture.class),3, 1, 1.f/6.f, Animation.PlayMode.LOOP_PINGPONG));
 		
 		GameObject lazorKitten4 = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT * 0.2f), Laika.TAG_ENEMY, this);
 		lazorKitten4.addComponent(new CurveMovement(5));
+		lazorKitten4.addComponent(new HealthComponent(100));
+		lazorKitten4.addComponent(new BagCat());
 		lazorKitten4.addComponent(new AnimationWrapper(assetManager.get("lazorkitten_map.png", Texture.class),3, 1, 1.f/6.f, Animation.PlayMode.LOOP_PINGPONG));
 
 		ChangeControlsTask cct = new ChangeControlsTask(serviceman.getService(InputMap.class));
