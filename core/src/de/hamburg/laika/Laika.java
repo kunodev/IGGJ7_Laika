@@ -53,6 +53,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("schriftzug.png", Texture.class);
 		assetManager.load("shield.wav", Sound.class);
 		assetManager.load("lazorkitten_pew.png", Texture.class);
+		assetManager.load("lazorkitten_spawnlazor.png", Texture.class);
 	}
 
 	@Override
@@ -70,7 +71,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		Music bgm = assetManager.get("Go Cart - Loop Mix.mp3");
 		bgm.setLooping(true);
 		bgm.play();
-		bgm.setVolume(0.1f);
+		bgm.setVolume(0.8f);
 		
 		//initBackGround(gs);
 		

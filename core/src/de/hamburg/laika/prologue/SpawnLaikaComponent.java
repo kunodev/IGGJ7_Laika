@@ -20,7 +20,7 @@ public class SpawnLaikaComponent {
 		laika.addComponent(shipAnimation);
 		laika.addComponent(new GuideLaikaComponent());
 		go.selfDestruct(gs);
-		GameObject epicText = new GameObject(new Vector2(520f, 500f), gs);
+		GameObject epicText = new GameObject(new Vector2(640, 500f), gs);
 		epicText.addComponent(new SpriteWrapper(assetManager.get("schriftzug.png", Texture.class)));
 		epicText.addComponent(new AlphaModificator());
 	}

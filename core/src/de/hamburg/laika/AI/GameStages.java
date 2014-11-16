@@ -2,6 +2,7 @@ package de.hamburg.laika.AI;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 
 import de.hamburg.laika.EnemyMovement.AntiZMovement;
 import de.hamburg.laika.EnemyMovement.CurveMovement;
@@ -9,6 +10,7 @@ import de.hamburg.laika.EnemyType.factory.BagCatFactory;
 import de.hamburg.laika.EnemyType.factory.CometFactory;
 import de.hamburg.laika.EnemyType.factory.JaegerFactory;
 import de.hamburg.laika.EnemyType.factory.PoopFactory;
+import de.kuro.lazyjam.asciiassetextension.AnimationWrapper;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 import de.kuro.lazyjam.ecmodel.concrete.GameState;
@@ -48,8 +50,10 @@ public class GameStages {
 
 			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
 			final Texture bagCatLazerTexture = assetManager.get("lazorkitten_pew.png", Texture.class);
+			final Texture bagCatLazerAniTex = assetManager.get("lazorkitten_spawnlazor.png", Texture.class);
+			final Animation bagCatLazerAni = AnimationWrapper.loadAnimation(bagCatLazerAniTex, 3, 1, 1.0f/9.0f, Animation.PlayMode.NORMAL);
 
-			alienFac.registerEnemyType(4, new BagCatFactory(bagCatTexture, bagCatLazerTexture, 100, new AntiZMovement(5, 100, 150)));
+			alienFac.registerEnemyType(4, new BagCatFactory(bagCatTexture, bagCatLazerTexture, bagCatLazerAni, 100, new AntiZMovement(5, 100, 150)));
 
 			stageCounter++;
 			System.out.println("Stage 2");
@@ -66,7 +70,10 @@ public class GameStages {
 		if (alienFac.stageComplete() && stageCounter == 3 ) {
 			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
 			final Texture bagCatLazerTexture = assetManager.get("lazorkitten_pew.png", Texture.class);
-			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, bagCatLazerTexture,  100, new CurveMovement(4)));
+			final Texture bagCatLazerAniTex = assetManager.get("lazorkitten_spawnlazor.png", Texture.class);
+			final Animation bagCatLazerAni = AnimationWrapper.loadAnimation(bagCatLazerAniTex, 3, 1, 1.0f/9.0f, Animation.PlayMode.NORMAL);
+
+			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, bagCatLazerTexture,  bagCatLazerAni, 100, new CurveMovement(4)));
 
 			stageCounter++;
 			System.out.println("Stage 4");
@@ -88,7 +95,9 @@ public class GameStages {
 
 			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
 			final Texture bagCatLazerTexture = assetManager.get("lazorkitten_pew.png", Texture.class);
-			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, bagCatLazerTexture,  100, new CurveMovement(4)));
+			final Texture bagCatLazerAniTex = assetManager.get("lazorkitten_spawnlazor.png", Texture.class);
+			final Animation bagCatLazerAni = AnimationWrapper.loadAnimation(bagCatLazerAniTex, 3, 1, 1.0f/9.0f, Animation.PlayMode.NORMAL);
+			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, bagCatLazerTexture, bagCatLazerAni, 100, new CurveMovement(4)));
 			
 			stageCounter++;
 		}
@@ -99,7 +108,9 @@ public class GameStages {
 			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
 			final Texture bagCatLazerTexture = assetManager.get("lazorkitten_pew.png", Texture.class);
 			
-			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, bagCatLazerTexture,  100, new CurveMovement(4)));
+			final Texture bagCatLazerAniTex = assetManager.get("lazorkitten_spawnlazor.png", Texture.class);
+			final Animation bagCatLazerAni = AnimationWrapper.loadAnimation(bagCatLazerAniTex, 3, 1, 1.0f/9.0f, Animation.PlayMode.NORMAL);
+			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, bagCatLazerTexture,bagCatLazerAni, 100, new CurveMovement(4)));
 			stageCounter++;
 		}
 		
@@ -131,7 +142,10 @@ public class GameStages {
 			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
 			final Texture bagCatLazerTexture = assetManager.get("lazorkitten_pew.png", Texture.class);
 			
-			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, bagCatLazerTexture,  100, new CurveMovement(4)));
+
+			final Texture bagCatLazerAniTex = assetManager.get("lazorkitten_spawnlazor.png", Texture.class);
+			final Animation bagCatLazerAni = AnimationWrapper.loadAnimation(bagCatLazerAniTex, 3, 1, 1.0f/9.0f, Animation.PlayMode.NORMAL);
+			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, bagCatLazerTexture, bagCatLazerAni, 100, new CurveMovement(4)));
 			
 			stageCounter++;
 		}
