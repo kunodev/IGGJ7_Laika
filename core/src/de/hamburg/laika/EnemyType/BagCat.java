@@ -13,7 +13,8 @@ public class BagCat implements IEnemyType {
 		Sound s = assetMan.get("Hit_Hurt11.wav");
 		s.play();
 		co.otherGo.selfDestruct(gs);
-		if(hc.damage(co.otherGo.getComponent(Bullet.class).damage)) {
+		Bullet bullet = co.otherGo.getComponent(Bullet.class);
+		if(bullet != null && hc.damage(bullet.damage)) {
 			co.thisGo.selfDestruct(gs);
 		}
 	}
