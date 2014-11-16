@@ -23,7 +23,7 @@ public abstract class LazyJamApplicationAdapter extends ApplicationAdapter {
 	public ServiceManager serviceMan;
 
 	//debug
-	private FPSLogger fps = new FPSLogger();
+	//private FPSLogger fps = new FPSLogger();
 
 	private final float width;
 	private final float height;
@@ -75,7 +75,7 @@ public abstract class LazyJamApplicationAdapter extends ApplicationAdapter {
 		gscm.render();
 
 		batch.end();
-		fps.log();
+		//fps.log();
 	}
 	
 	public void setMap(String map, GameStateContext gsc) {
