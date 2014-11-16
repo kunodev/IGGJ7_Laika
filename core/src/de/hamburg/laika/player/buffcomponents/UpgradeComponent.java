@@ -10,10 +10,11 @@ import de.kuro.lazyjam.simpleservice.FontManager;
 public class UpgradeComponent implements ButtonListener {
 	
 	protected int numUpdates = 0;
+	public Vector2 offset = new Vector2(100, 0);
 	
 	@Render
 	public void render(FontManager fm, Vector2 pos) {
-		fm.drawTextAbsolutCentered((int)pos.x + 100, (int)pos.y, "" + numUpdates, Color.WHITE);
+		fm.drawTextAbsolutCentered((int)pos.x + (int)offset.x, (int)pos.y + (int)offset.y, "" + numUpdates, Color.WHITE);
 	}
 
 	@Override
