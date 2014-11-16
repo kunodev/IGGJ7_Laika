@@ -52,7 +52,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("Hit_Hurt11.wav", Sound.class);
 		assetManager.load("schriftzug.png", Texture.class);
 		assetManager.load("shield.wav", Sound.class);
-
+		assetManager.load("lazorkitten_pew.png", Texture.class);
 	}
 
 	@Override
