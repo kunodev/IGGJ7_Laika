@@ -17,13 +17,11 @@ public class Projectile implements IEnemyType {
 		this.damage = 25;
 	}
 
+
 	@Collide
-	public void hit(Collision co, GameState gs, AssetManager assetMan) {
-		Sound s = assetMan.get("Hit_Hurt11.wav");
-		s.play();
-		co.thisGo.selfDestruct(gs);
-		final HealthComponent health = co.otherGo.getComponent(HealthComponent.class);
-		if (health != null && health.damage(damage)) {
+	public void hit(Collision co, GameState gs) {
+		//co.thisGo.selfDestruct(gs);
+		if (co.otherGo.getComponent(HealthComponent.class).damage(damage)) {
 			co.otherGo.selfDestruct(gs);
 		}
 	}

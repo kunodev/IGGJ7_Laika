@@ -11,6 +11,7 @@ import de.hamburg.laika.AI.AlienFactory;
 import de.hamburg.laika.AI.GameStages;
 import de.hamburg.laika.EnemyMovement.BossMovement;
 import de.hamburg.laika.EnemyType.HealthComponent;
+import de.hamburg.laika.EnemyType.ProjectileSpawner;
 import de.hamburg.laika.background.BackGroundGen;
 import de.hamburg.laika.button.ButtonBuilder;
 import de.hamburg.laika.inputmap.InputMap;
@@ -146,7 +147,9 @@ public class LaikaGameState extends GameState {
 		theBoss.addComponent(new HealthComponent(20000));
 		Texture theBossTex = assetManager.get("endboss.png", Texture.class);
 		theBoss.addComponent(new SpriteWrapper(theBossTex));
-		laika.addComponent(theBoss);
+		Texture catTEx = assetManager.get("cat.png", Texture.class);
 
+		ProjectileSpawner ps = new ProjectileSpawner(0.04f, 4.0f, catTEx, 25);
+		theBoss.addComponent(ps);
 	}
 }

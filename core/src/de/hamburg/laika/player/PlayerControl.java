@@ -3,6 +3,7 @@ package de.hamburg.laika.player;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 
+import de.hamburg.laika.EnemyType.Projectile;
 import de.hamburg.laika.Laika;
 import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.inputmap.InputMap;
@@ -15,7 +16,7 @@ import de.kuro.lazyjam.ecmodel.concrete.GameState;
 import de.kuro.lazyjam.ecmodel.concrete.tools.Collision;
 
 public class PlayerControl {
-	
+
 	public static final int SPEED = 3;
 	public static final Vector2 SICKLE_OFFSET = new Vector2(40f, -30f);
 	public float speedModifier = 1.0f;
@@ -23,41 +24,47 @@ public class PlayerControl {
 	public static final int BIG_CANNON_TICKS = 20;
 	public int cannonTicksReduction;
 	public int currentCannonTicks;
-	
+
 	@Update
 	public void update(Input i, Vector2 pos, InputMap map, GameState gs) {
-		if(i.isKeyPressed(map.actionToHWKey.get(Action.DOWN))) {
+		if (i.isKeyPressed(map.actionToHWKey.get(Action.DOWN))) {
 			pos.y = Math.max(0.0f, Math.min(Laika.HEIGHT, pos.y - SPEED * speedModifier));
 		}
-		if(i.isKeyPressed(map.actionToHWKey.get(Action.UP))) {
+		if (i.isKeyPressed(map.actionToHWKey.get(Action.UP))) {
 			pos.y = Math.max(0.0f, Math.min(Laika.HEIGHT, pos.y + SPEED * speedModifier));
 		}
-		if(i.isKeyPressed(map.actionToHWKey.get(Action.LEFT))) {
+		if (i.isKeyPressed(map.actionToHWKey.get(Action.LEFT))) {
 			pos.x = Math.max(0.0f, Math.min(Laika.WIDTH, pos.x - SPEED * speedModifier));
 		}
-		if(i.isKeyPressed(map.actionToHWKey.get(Action.RIGHT))) {
+		if (i.isKeyPressed(map.actionToHWKey.get(Action.RIGHT))) {
 			pos.x = Math.max(0.0f, Math.min(Laika.WIDTH, pos.x + SPEED * speedModifier));
 		}
-		if(i.isKeyPressed(map.actionToHWKey.get(Action.SHOOT))) {
-			if(currentCannonTicks >= BIG_CANNON_TICKS - cannonTicksReduction) {
+		if (i.isKeyPressed(map.actionToHWKey.get(Action.SHOOT))) {
+			if (currentCannonTicks >= BIG_CANNON_TICKS - cannonTicksReduction) {
 				BulletFactory.createBulletSickle(pos.cpy().add(SICKLE_OFFSET), gs);
 				currentCannonTicks = 0;
 			}
 		}
 		currentCannonTicks++;
 	}
-	
+
 
 	@Collide
 	public void kill(Collision co, GameState gs, CoinsService cs) {
-		HealthComponent otherComp = co.otherGo.getComponent(HealthComponent.class);	
-		CoinsComponent coinComp = co.otherGo.getComponent(CoinsComponent.class);	
-		if(otherComp != null) {
+		HealthComponent otherComp = co.otherGo.getComponent(HealthComponent.class);
+		CoinsComponent coinComp = co.otherGo.getComponent(CoinsComponent.class);
+		Projectile projComp = co.otherGo.getComponent(Projectile.class);
+		if (projComp != null) {
+			if(co.thisGo.getComponent(HealthComponent.class).damage(projComp.damage)){
+				co.thisGo.selfDestruct(gs);
+			}
+		} else if (otherComp != null) {
 			co.thisGo.selfDestruct(gs);
-		} else if(coinComp != null) {
+		} else if (coinComp != null) {
 			cs.addCoins(coinComp.amount);
 		}
+
 		co.otherGo.selfDestruct(gs);
-		}
+	}
 
 }
