@@ -8,7 +8,7 @@ import de.kuro.lazyjam.settings.*;
 
 public class SpaceTimeContinuumButton extends UpgradeComponent {
 	
-	public static final int COOLDOWN = 60 * 30;
+	public static final int COOLDOWN = 60 * 6;
 	public static final int DURATION = 60 * 5;
 	public int loadingTicks = 0;
 	
@@ -19,11 +19,11 @@ public class SpaceTimeContinuumButton extends UpgradeComponent {
 	public void update(LaikaGameState gs) {
 		loadingTicks++;
 		if(timeTravelAction) {
-			gs.TICK_TIME = Constants.DEFAULT_TICK_TIME/2;
+			gs.TICK_TIME = Constants.DEFAULT_TICK_TIME*2;
 			timeTravelActive = true;
 			timeTravelAction = false;
 		}
-		if(timeTravelActive && loadingTicks >= DURATION) {
+		if(timeTravelActive && loadingTicks >= DURATION/2) {
 			gs.TICK_TIME = Constants.DEFAULT_TICK_TIME;
 			loadingTicks = 0;			
 		}
