@@ -87,7 +87,7 @@ public class BulletFactory {
 		GameObject bullet = new GameObject(pos.cpy(), gs);
 		Bullet comp = new Bullet();
 		// double damage ftw!
-		comp.damage *= 2;
+		comp.damage *= 1.1;
 		bullet.addComponent(comp);
 		VelocityComponent vc = new VelocityComponent();
 		bullet.addComponent(vc);
