@@ -33,7 +33,6 @@ public class ShieldControl {
 	public int bonusShieldHP;
 	
 	public static final int SHIELD_RELOAD_TICKS = 60*5;
-	public int reloadReduction;
 	public int shieldTicks = 0;
 	
 	@Update
@@ -45,7 +44,7 @@ public class ShieldControl {
 		if(!shieldActive) {
 			sw.s.setAlpha((float)shieldTicks/(float)SHIELD_RELOAD_TICKS);
 			shieldTicks++;
-			if(shieldTicks >= SHIELD_RELOAD_TICKS - reloadReduction) {
+			if(shieldTicks >= SHIELD_RELOAD_TICKS) {
 				this.shieldActive = true;
 				this.shieldHP = SHIELD_HP_START + bonusShieldHP;
 				this.shieldTicks = 0;
