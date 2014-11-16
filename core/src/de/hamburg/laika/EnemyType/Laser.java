@@ -62,8 +62,8 @@ public class Laser {
 	public void render(SpriteBatch batch, Vector2 pos) {
 		if (isLaserOn) {
 			final TextureRegion texReg = animation.getKeyFrame(stateTime);
-			batch.draw(texReg, pos.x - texReg.getRegionWidth() * 0.5f, pos.y - texReg.getRegionHeight() * 0.5f);
 			batch.draw(tex, 0, pos.y + yRenderOffset, 0.0f, tex.getHeight(), pos.x + xRenderOffset, tex.getHeight(), 1.0f, 1.0f, 0.0f, 0, 0, (int) (pos.x + xRenderOffset), tex.getHeight(), false, false);
+			batch.draw(texReg, pos.x - texReg.getRegionWidth() * 0.5f, pos.y - texReg.getRegionHeight() * 0.5f);
 		}
 	}
 
