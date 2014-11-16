@@ -75,6 +75,7 @@ public class ShieldControl {
 				this.shieldHP -= otherComp.getHealth();
 				if(shieldHP <= 0) {
 					this.shieldActive = false;
+					this.shieldTicks = 0;
 				}
 			} else if(coinComp != null) {
 				Sound s = assetMan.get("coin.wav");

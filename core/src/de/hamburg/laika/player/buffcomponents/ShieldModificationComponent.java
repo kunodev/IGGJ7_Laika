@@ -10,7 +10,7 @@ public class ShieldModificationComponent extends UpgradeComponent {
 	boolean sell = false;
 	
 	public static final int PRICE = 10;
-	public static final int ATOMIC_BUFF = 100;
+	public static final int ATOMIC_BUFF = 3;
 	
 	@Update
 	public void update(ShieldControl sc, CoinsService cc) {
