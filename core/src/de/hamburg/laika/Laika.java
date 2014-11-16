@@ -71,7 +71,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		Music bgm = assetManager.get("Go Cart - Loop Mix.mp3");
 		bgm.setLooping(true);
 		bgm.play();
-		bgm.setVolume(0.1f);
+		bgm.setVolume(0.8f);
 		
 		//initBackGround(gs);
 		

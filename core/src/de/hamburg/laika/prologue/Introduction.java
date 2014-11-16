@@ -1,5 +1,7 @@
 package de.hamburg.laika.prologue;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import de.kuro.lazyjam.ecmodel.concrete.GameObject;
@@ -12,6 +14,7 @@ public class Introduction {
 	public final int ticksToSelfDestruct = 220;
 	public int ticks = 0;
 	public Object nextComponentToAdd;
+	private static BitmapFont fonts;
 	
 	public enum Stage {
 		TO_MIDDLE,HOVERING,TOEND, DEATH
@@ -47,6 +50,19 @@ public class Introduction {
 			newGo.addComponent(nextComponentToAdd);
 			break;
 		}		
+	}
+	
+	public static void draw(Vector2 pos, String text, SpriteBatch sb) {
+		if(fonts == null) {
+			initFonts();
+		}
+		fonts.draw(sb, text, pos.x, pos.y);
+	}
+
+	private static void initFonts() {
+		fonts = new BitmapFont();
+		fonts.scale(1.5f);
+		
 	}
 	
 }

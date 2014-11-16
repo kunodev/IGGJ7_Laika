@@ -1,5 +1,6 @@
 package de.hamburg.laika.prologue;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import de.kuro.lazyjam.cdiutils.annotations.Render;
@@ -20,7 +21,7 @@ public class Introduction4 extends Introduction {
 	}
 
 	@Render
-	public void rendering(Vector2 pos, FontManager fm) {
-		fm.drawTextAbsolut(pos.x, pos.y, "She died a few hours after launch from heat...");
+	public void rendering(Vector2 pos, SpriteBatch sb) {
+		draw(pos, "She died a few hours after launch from heat...", sb);
 	}
 }

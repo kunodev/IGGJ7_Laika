@@ -7,7 +7,7 @@ import de.kuro.lazyjam.simpleservice.FontManager;
 
 public class GuideLaikaComponent {
 	
-	public static final int MAX_TICKS = 500;
+	public static final int MAX_TICKS = 640;
 	
 	public int ticks;
 	
