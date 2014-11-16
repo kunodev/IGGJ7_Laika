@@ -39,7 +39,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("purplestar.png", Texture.class);
 		assetManager.load("greenstar.png", Texture.class);
 		assetManager.load("pinkstar.png", Texture.class);
-
+		assetManager.load("sichel_pew.png", Texture.class);
 		assetManager.load("sparkle1.png", Texture.class);
 		assetManager.load("sparkle2.png", Texture.class);
 		assetManager.load("sparkle3.png", Texture.class);
@@ -74,6 +74,8 @@ public class Laika extends LazyJamApplicationAdapter {
 		BulletFactory.HAMMER = assetManager.get("hammer_pew.png");
 //		gs.init(serviceMan);
 		BulletFactory.MATROSCHKA = assetManager.get("matroschka.png");
+		BulletFactory.SICKLE = assetManager.get("sichel_pew.png");
+		BulletFactory.assetMan = assetManager;
 	}
 
 //	private void initBackGround(GameState gs) {		

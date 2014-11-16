@@ -23,6 +23,7 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent i
 	private int currentTick;
 	public SpriteWrapper sprite;
 	public boolean play = true;
+	public boolean playOnce = false;
 	
 	public class MyTexRegion extends TextureRegion implements IRectangleProvider {
 
@@ -78,6 +79,9 @@ public class PNGSpriteRenderComponent extends SimpleAbstractAnimationComponent i
 		if(currentTick >= loopTick) {
 			this.incrementXOffset();
 			currentTick = 0;
+			if (playOnce && this.xOffset == this.renderableObjects.get(getState()).size()-1) {
+				play = false;
+			}
 		}
 	}
 	

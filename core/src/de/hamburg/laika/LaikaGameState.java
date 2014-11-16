@@ -60,7 +60,7 @@ public class LaikaGameState extends GameState{
 	
 	public void init(ServiceManager serviceman) {
 		AssetManager assetManager = serviceman.getService(AssetManager.class);
-		GameObject laika = new GameObject(new Vector2(50.f, 50.f), Laika.TAG_PLAYER, this);
+		GameObject laika = new GameObject(new Vector2(510.f, 330.f), Laika.TAG_PLAYER, this);
 		laika.addComponent(new PlayerControl());
 		laika.addComponent(new HealthComponent(500));
 		//laika.addComponent(new ASCIIPicture("PLAYER"));

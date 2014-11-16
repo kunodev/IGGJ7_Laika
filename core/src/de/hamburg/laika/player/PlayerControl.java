@@ -14,7 +14,7 @@ import de.kuro.lazyjam.ecmodel.concrete.tools.Collision;
 public class PlayerControl {
 	
 	public static final int SPEED = 3;
-	
+	public static final Vector2 SICKLE_OFFSET = new Vector2(40f, -30f);
 	public float speedModifier = 1.0f;
 
 	public static final int BIG_CANNON_TICKS = 20;
@@ -37,7 +37,7 @@ public class PlayerControl {
 		}
 		if(i.isKeyPressed(map.actionToHWKey.get(Action.SHOOT))) {
 			if(currentCannonTicks >= BIG_CANNON_TICKS - cannonTicksReduction) {
-				BulletFactory.createBullet(pos, gs);
+				BulletFactory.createBulletSickle(pos.cpy().add(SICKLE_OFFSET), gs);
 				currentCannonTicks = 0;
 			}
 		}
