@@ -1,5 +1,6 @@
 package de.hamburg.laika.prologue;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import de.kuro.lazyjam.cdiutils.annotations.Render;
@@ -20,8 +21,8 @@ public class Introduction1 extends Introduction{
 	}
 	
 	@Render
-	public void rendering(Vector2 pos, FontManager fm) {
-		fm.drawTextAbsolut(pos.x, pos.y, "On the 3. November 1957...");
+	public void rendering(Vector2 pos, SpriteBatch sb) {
+		Introduction.draw(pos, "On the 3. November 1957...", sb);
 	}
 
 }
