@@ -11,7 +11,10 @@ import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.AI.AlienFactory;
 import de.hamburg.laika.AI.GameStages;
+import de.hamburg.laika.EnemyMovement.AntiZMovement;
+import de.hamburg.laika.EnemyMovement.CurveMovement;
 import de.hamburg.laika.EnemyMovement.LinearMovement;
+import de.hamburg.laika.EnemyMovement.ZMovement;
 import de.hamburg.laika.EnemyType.Comet;
 import de.hamburg.laika.EnemyType.HealthComponent;
 import de.hamburg.laika.EnemyType.Laser;
@@ -138,6 +141,18 @@ public class LaikaGameState extends GameState{
 		lazorKitten.addComponent(new LinearMovement(new Vector2(-2.0f, 0.0f)));
 		lazorKitten.addComponent(new Laser(assetManager.get("lazorkitten_pew.png", Texture.class), 5.0f, 0.0f, 1.0f, 0.0f, 5, -16.0f, 33.0f));
 		lazorKitten.addComponent(new AnimationWrapper(assetManager.get("lazorkitten_map.png", Texture.class),3, 1, 1.f/6.f, Animation.PlayMode.LOOP_PINGPONG));
+		
+		GameObject lazorKitten2 = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT * 0.8f), Laika.TAG_ENEMY, this);
+		lazorKitten2.addComponent(new AntiZMovement(5, 100, 150));
+		lazorKitten2.addComponent(new AnimationWrapper(assetManager.get("lazorkitten_map.png", Texture.class),3, 1, 1.f/6.f, Animation.PlayMode.LOOP_PINGPONG));
+		
+		GameObject lazorKitten3 = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT * 0.2f), Laika.TAG_ENEMY, this);
+		lazorKitten3.addComponent(new ZMovement(5, 100, 150));
+		lazorKitten3.addComponent(new AnimationWrapper(assetManager.get("lazorkitten_map.png", Texture.class),3, 1, 1.f/6.f, Animation.PlayMode.LOOP_PINGPONG));
+		
+		GameObject lazorKitten4 = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT * 0.2f), Laika.TAG_ENEMY, this);
+		lazorKitten4.addComponent(new CurveMovement(5));
+		lazorKitten4.addComponent(new AnimationWrapper(assetManager.get("lazorkitten_map.png", Texture.class),3, 1, 1.f/6.f, Animation.PlayMode.LOOP_PINGPONG));
 
 		ChangeControlsTask cct = new ChangeControlsTask(serviceman.getService(InputMap.class));
 		controllerFuckUpThread = new LimitedTimeWorkerThread(5000, cct, Integer.MAX_VALUE);
