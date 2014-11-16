@@ -1,10 +1,10 @@
-package de.hamburg.laika.player;
+package de.hamburg.laika.player.coins;
 
 import de.kuro.lazyjam.cdiutils.annotations.Service;
 
 @Service
-public class CoinsComponent {
-	public int coins = 1000;
+public class CoinsService {
+	public int coins = 10;
 	
 	public void removeCoins(int amount) {
 		coins = Math.max(0, coins - amount);

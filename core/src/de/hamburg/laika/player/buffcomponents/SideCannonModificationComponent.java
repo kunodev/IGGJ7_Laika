@@ -1,7 +1,7 @@
 package de.hamburg.laika.player.buffcomponents;
 
-import de.hamburg.laika.player.CoinsComponent;
 import de.hamburg.laika.player.SmallCannonControl;
+import de.hamburg.laika.player.coins.CoinsService;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 
 public class SideCannonModificationComponent extends UpgradeComponent{
@@ -13,7 +13,7 @@ public class SideCannonModificationComponent extends UpgradeComponent{
 	public static final int ATOMIC_BUFF = 1;
 	
 	@Update
-	public void update(SmallCannonControl scc, CoinsComponent cc) {
+	public void update(SmallCannonControl scc, CoinsService cc) {
 		if (buy && cc.coins >= PRICE) {
 			cc.removeCoins(PRICE);
 			numUpdates += ATOMIC_BUFF;

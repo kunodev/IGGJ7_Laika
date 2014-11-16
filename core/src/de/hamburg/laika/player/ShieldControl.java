@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 
 import de.hamburg.laika.inputmap.InputMap;
 import de.hamburg.laika.inputmap.InputMap.Action;
+import de.hamburg.laika.player.coins.CoinsComponent;
+import de.hamburg.laika.player.coins.CoinsService;
 import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
 import de.kuro.lazyjam.cdiutils.annotations.Collide;
 import de.kuro.lazyjam.cdiutils.annotations.Render;
@@ -64,15 +66,19 @@ public class ShieldControl {
 	}
 	
 	@Collide
-	public void repel(Collision c, GameState gs, AssetManager assetMan) {
+	public void repel(Collision c, GameState gs, AssetManager assetMan, CoinsService cs) {
 		if(shieldActive) {
-			Sound s = assetMan.get("shield.wav");
-			s.play();
-			
-			HealthComponent otherComp = c.otherGo.getComponent(HealthComponent.class);
-			this.shieldHP -= otherComp.getHealth();
-			if(shieldHP <= 0) {
-				this.shieldActive = false;
+			HealthComponent otherComp = c.otherGo.getComponent(HealthComponent.class);	
+			CoinsComponent coinComp = c.otherGo.getComponent(CoinsComponent.class);			
+			if(otherComp != null) {
+				Sound s = assetMan.get("shield.wav");
+				s.play();
+				this.shieldHP -= otherComp.getHealth();
+				if(shieldHP <= 0) {
+					this.shieldActive = false;
+				}
+			} else if(coinComp != null) {
+				cs.addCoins(coinComp.amount);
 			}
 			c.otherGo.selfDestruct(gs);
 		}

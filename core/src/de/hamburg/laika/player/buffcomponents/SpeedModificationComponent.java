@@ -1,7 +1,7 @@
 package de.hamburg.laika.player.buffcomponents;
 
-import de.hamburg.laika.player.CoinsComponent;
 import de.hamburg.laika.player.PlayerControl;
+import de.hamburg.laika.player.coins.CoinsService;
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 
 public class SpeedModificationComponent extends UpgradeComponent {	
@@ -9,7 +9,7 @@ public class SpeedModificationComponent extends UpgradeComponent {
 	boolean sell = false;
 	
 	@Update
-	public void update(PlayerControl pc, CoinsComponent cc) {
+	public void update(PlayerControl pc, CoinsService cc) {
 		if (buy && cc.coins >= 10) {
 			cc.removeCoins(10);
 			numUpdates += 10;
