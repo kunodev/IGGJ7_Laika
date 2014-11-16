@@ -134,8 +134,9 @@ public class LaikaGameState extends GameState{
 		laika.addComponent(stages);
 
 		GameObject lazorKitten = new GameObject(new Vector2(Laika.WIDTH, Laika.HEIGHT * 0.8f), Laika.TAG_ENEMY, this);
+		lazorKitten.addComponent(new HealthComponent(10));
 		lazorKitten.addComponent(new LinearMovement(new Vector2(-2.0f, 0.0f)));
-		lazorKitten.addComponent(new Laser(assetManager.get("lazorkitten_pew.png", Texture.class), 1.0f, 0.0f, 5.0f, 0.0f, 5, -16.0f, 33.0f));
+		lazorKitten.addComponent(new Laser(assetManager.get("lazorkitten_pew.png", Texture.class), 5.0f, 0.0f, 1.0f, 0.0f, 5, -16.0f, 33.0f));
 		lazorKitten.addComponent(new AnimationWrapper(assetManager.get("lazorkitten_map.png", Texture.class),3, 1, 1.f/6.f, Animation.PlayMode.LOOP_PINGPONG));
 
 		ChangeControlsTask cct = new ChangeControlsTask(serviceman.getService(InputMap.class));

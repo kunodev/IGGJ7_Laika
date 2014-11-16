@@ -23,7 +23,7 @@ public class CometFactory {
 
 		Vector2 velocity;
 		if (aimAtPlayer && !gs.getTaggedGameObjects(Laika.TAG_PLAYER).isEmpty()) {
-			velocity = gs.getFirstTaggedGameObject(Laika.TAG_PLAYER).getPos().sub(pos);
+			velocity = gs.getFirstTaggedGameObject(Laika.TAG_PLAYER).getPos().cpy().sub(pos);
 		} else {
 			switch (dir) {
 				case TOP:
@@ -54,9 +54,9 @@ public class CometFactory {
 		comet.addComponent(new HealthComponent(MAX_HEALTH));
 		comet.addComponent(new Comet());
 
-	/*	ExtraSimpleCollisionComponent collComp = new ExtraSimpleCollisionComponent();
+		ExtraSimpleCollisionComponent collComp = new ExtraSimpleCollisionComponent();
 		collComp.tagToSearch = Laika.TAG_PLAYER;
-		comet.addComponent(collComp);*/
+		comet.addComponent(collComp);
 	}
 
 	static enum DIRECTION {

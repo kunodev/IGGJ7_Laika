@@ -32,7 +32,6 @@ public class GameStages {
 
 			final Texture cometTexture = assetManager.get("komet.png", Texture.class);
 			CometFactory.createComet(gs, 2.0f, false, cometTexture);
-			CometFactory.createComet(gs, 2.0f, true, cometTexture);
 
 			System.out.println("Stage 1");
 		}	
