@@ -1,12 +1,13 @@
 package de.hamburg.laika.EnemyMovement;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 import de.kuro.lazyjam.cdiutils.annotations.Update;
 
 public class CurveMovement implements IEnemyMovement{
 	private final int velocity; // per second
-	private double state;
+	private float state;
 	
 	public CurveMovement(int velocity) {
 		this.velocity = velocity;
@@ -15,11 +16,12 @@ public class CurveMovement implements IEnemyMovement{
 
 	@Update
 	public void update(Vector2 pos){
-		
-			if ( state > 0 ) {
+			if ( state > -1 ) {
 				state -= 0.0025;
+			}else{
+				state = 1;
 			}
-			pos.x -= Math.cos(state) * velocity/2.0f;
-			pos.y += Math.sin(state) * velocity/2.0f; 
+			pos.x -= MathUtils.cos(state) * velocity;
+			pos.y += MathUtils.sin(state) * velocity;
 	}
 }

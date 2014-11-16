@@ -34,6 +34,8 @@ public class GameStages {
 			CometFactory cometFac = new CometFactory(gs, 2.0f, false, cometTexture);
 			alienFac.registerEnemyType(5, cometFac);
 
+			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
+
 			System.out.println("Stage 1");
 		}
 
@@ -53,7 +55,7 @@ public class GameStages {
 			alienFac.registerEnemyType(25, new JaegerFactory(ship.getPos(), catTexture));
 
 			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
-			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, 100, new CurveMovement(8)));
+			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, 100, new CurveMovement(4)));
 
 			System.out.println("Stage 3");
 		}
