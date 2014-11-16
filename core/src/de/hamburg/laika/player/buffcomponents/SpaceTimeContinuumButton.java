@@ -25,16 +25,21 @@ public class SpaceTimeContinuumButton extends UpgradeComponent {
 		}
 		if(timeTravelActive && loadingTicks >= DURATION/2) {
 			gs.TICK_TIME = Constants.DEFAULT_TICK_TIME;
-			loadingTicks = 0;			
+			loadingTicks = 0;	
+			timeTravelActive = false;
 		}
 	}
 	
 	@Override
 	public void onClick() {
-		if(loadingTicks >= COOLDOWN) {
+		if(charged()) {
 			loadingTicks = 0;
 			timeTravelAction = true;
 		}
+	}
+	
+	public boolean charged() {
+		return loadingTicks >= COOLDOWN;
 	}
 	
 	@Override
