@@ -67,7 +67,7 @@ public abstract class LazyJamApplicationAdapter extends ApplicationAdapter {
 		int deltaInMs = (int) (Gdx.graphics.getDeltaTime() * 1000);
 		gscm.update(deltaInMs);
 		
-		Gdx.gl.glClearColor(3/255.f, 12/255.f, 44/255.f, 1);
+		Gdx.gl.glClearColor(3/255.f, 10/255.f, 20/255.f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		serviceMan.getService(TiledMapProvider.class).render();
 		batch.begin();
