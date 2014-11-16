@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = (int) Laika.WIDTH;
 		config.height = (int) Laika.HEIGHT;
-		config.title = "Laika";
+		config.title = "Laika Space Adventure";
 		new LwjglApplication(new Laika(), config);
 	}
 }
