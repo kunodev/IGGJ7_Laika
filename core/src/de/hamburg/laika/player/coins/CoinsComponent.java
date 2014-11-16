@@ -8,7 +8,7 @@ public class CoinsComponent {
 	
 	@Collide
 	public void collision(CoinsService cs) {
-		cs.addCoins(amount);
+//		cs.addCoins(amount);
 	}
 
 }
