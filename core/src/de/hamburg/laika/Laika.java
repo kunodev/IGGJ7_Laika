@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 
 import de.hamburg.laika.player.BulletFactory;
 import de.hamburg.laika.player.coins.CoinFactory;
-import de.kuro.lazyjam.ecmodel.concrete.GameState;
 import de.kuro.lazyjam.main.LazyJamApplicationAdapter;
 
 public class Laika extends LazyJamApplicationAdapter {
@@ -58,6 +57,7 @@ public class Laika extends LazyJamApplicationAdapter {
 		assetManager.load("lazorkitten_spawnlazor.png", Texture.class);
 		assetManager.load("coin.wav", Sound.class);
 		assetManager.load("death.wav", Sound.class);
+		assetManager.load("endboss.png", Texture.class);
 	}
 
 	@Override

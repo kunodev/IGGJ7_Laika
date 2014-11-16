@@ -22,16 +22,16 @@ public class BossMovement {
 			pos.x -= velocity;
 			forward--;
 		} else {
-			if (pos.y > Laika.HEIGHT - 100) {
+			if (pos.y > Laika.HEIGHT - 150) {
 				state = false;
-			} else if ( pos.y < 0 ) {
+			} else if ( pos.y < 150 ) {
 				state = true;
 			}
 			
 			if (state == true) {
 				pos.y += velocity;
 			} else {
-				pos.x -= velocity;
+				pos.y -= velocity;
 			}
 		}
 	}
