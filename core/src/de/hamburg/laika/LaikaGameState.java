@@ -101,6 +101,7 @@ public class LaikaGameState extends GameState {
 		laika.addComponent(new InfoTextComponent());
 
 		UpgradeComponent upgradeComponent = new SpeedModificationComponent();
+		upgradeComponent.offset = new Vector2(-100, 0);
 		UpgradeComponent upgradeComponent2 = new MainCannonModificationComponent();
 		UpgradeComponent upgradeComponent3 = new SideCannonModificationComponent();
 
