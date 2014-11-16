@@ -1,6 +1,7 @@
 package de.hamburg.laika.prologue;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 import de.kuro.lazyjam.asciiassetextension.SpriteWrapper;
@@ -20,7 +21,7 @@ public class SpawnLaikaComponent {
 		laika.addComponent(new GuideLaikaComponent());
 		go.selfDestruct(gs);
 		GameObject epicText = new GameObject(new Vector2(520f, 500f), gs);
-		epicText.addComponent(new SpriteWrapper(assetManager.get("schriftzug.png")));
+		epicText.addComponent(new SpriteWrapper(assetManager.get("schriftzug.png", Texture.class)));
 		epicText.addComponent(new AlphaModificator());
 	}
 	
