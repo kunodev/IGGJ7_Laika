@@ -1,5 +1,6 @@
 package de.hamburg.laika.EnemyType.factory;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -114,6 +115,7 @@ public class CometFactory implements IComponentCollectionFactory{
 		ExtraSimpleCollisionComponent collComp = new ExtraSimpleCollisionComponent();
 		collComp.tagToSearch = Laika.TAG_PLAYER;
 		comet.addComponent(collComp);
-		return null;
+
+		return Collections.emptyList();
 	}
 }
