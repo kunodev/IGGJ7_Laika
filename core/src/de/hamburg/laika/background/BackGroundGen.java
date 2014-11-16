@@ -21,6 +21,8 @@ import de.kuro.lazyjam.ecmodel.concrete.GameState;
 		
 		Random rand = new Random(1);
 		
+		public boolean withCoins = true;
+		
 		private final GameState gs;
 		ArrayList<SpriteWrapper> stardust = new ArrayList<SpriteWrapper>();
 			
@@ -38,7 +40,7 @@ import de.kuro.lazyjam.ecmodel.concrete.GameState;
 					star.addComponent(dust);
 				}
 			}
-			if(rand.nextFloat() * 100f < 1f) {
+			if(withCoins && rand.nextFloat() * 100f < 1f) {
 				GameObject coin = CoinFactory.createCoinAt(new Vector2(Laika.WIDTH, rand.nextFloat() * Laika.HEIGHT ), gs, (int) (rand.nextFloat() * 20));
 				coin.addComponent(new LinearMovement(new Vector2(-rand.nextFloat() * (rand.nextInt(15) + 10.f), 0.f)));
 				coin.addComponent(coin);

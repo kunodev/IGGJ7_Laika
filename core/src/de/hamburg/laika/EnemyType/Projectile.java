@@ -23,7 +23,9 @@ public class Projectile implements IEnemyType {
 			co.otherGo.selfDestruct(gs);
 		}
 
-		if (co.thisGo.getComponent(HealthComponent.class).damage(co.otherGo.getComponent(Bullet.class).damage)) {
+		Bullet bullet = co.otherGo.getComponent(Bullet.class);
+
+		if (bullet != null &&co.thisGo.getComponent(HealthComponent.class).damage(bullet.damage)) {
 			co.thisGo.selfDestruct(gs);
 		}
 	}

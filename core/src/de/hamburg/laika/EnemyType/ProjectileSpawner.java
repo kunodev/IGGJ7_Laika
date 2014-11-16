@@ -31,7 +31,7 @@ public class ProjectileSpawner {
 	public void spawnProjectile(Vector2 pos, GameState gs, GameObject go){
 		if(MathUtils.random() < spawnChancePerTick){
 			GameObject projectile = new GameObject(pos.cpy(), Laika.TAG_ENEMY, gs);
-			projectile.addComponent(new HealthComponent(100));
+			projectile.addComponent(new HealthComponent(200));
 			projectile.addComponent(new SpriteWrapper(tex));
 			projectile.addComponent(new LinearMovement(new Vector2(-speed, 0.0f)));
 			projectile.addComponent(new Projectile(damage));
