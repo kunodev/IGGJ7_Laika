@@ -60,6 +60,6 @@ public class ButtonComponent {
 	public void render(SpriteBatch sb, FontManager fm, Vector2 pos) {
 		TextBounds tb = fm.getBounds(text);
 		sb.draw(background, pos.x - size.x/2, pos.y - size.y/2, size.x, size.y);
-		fm.drawTextAbsolut(pos.x - tb.width/2, pos.y + tb.height/2, text, Color.GREEN);
+		fm.drawTextAbsolut(pos.x - tb.width/2, pos.y + tb.height/2, text, Color.WHITE);
 	}
 }
