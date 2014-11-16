@@ -1,13 +1,14 @@
 package de.hamburg.laika.EnemyType.factory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+
 import de.hamburg.laika.EnemyType.BagCat;
 import de.hamburg.laika.EnemyType.HealthComponent;
 import de.kuro.lazyjam.asciiassetextension.AnimationWrapper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BagCatFactory implements IComponentCollectionFactory {
 	final Texture catTex;

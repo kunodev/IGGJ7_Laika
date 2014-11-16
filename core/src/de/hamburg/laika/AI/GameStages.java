@@ -30,12 +30,13 @@ public class GameStages {
 	public void update(GameState gs) {
 
 		if (alienFac.stageComplete() && stageCounter == 1) {
+			
+			alienFac.setChance(0.5f);
 			final Texture cometTexture = assetManager.get("komet.png", Texture.class);
 			CometFactory cometFac = new CometFactory(gs, 2.0f, false, cometTexture);
 			alienFac.registerEnemyType(5, cometFac);
 
-			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
-
+			stageCounter++;
 			System.out.println("Stage 1");
 		}
 
@@ -47,6 +48,7 @@ public class GameStages {
 			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
 			alienFac.registerEnemyType(4, new BagCatFactory(bagCatTexture, 100, new AntiZMovement(5, 100, 150)));
 
+			stageCounter++;
 			System.out.println("Stage 2");
 		}
 		if (alienFac.stageComplete() && stageCounter == 3) {
@@ -54,10 +56,26 @@ public class GameStages {
 			final Texture catTexture = assetManager.get("cat.png", Texture.class);
 			alienFac.registerEnemyType(25, new JaegerFactory(ship.getPos(), catTexture));
 
+			stageCounter++;
+			System.out.println("Stage 3");
+		}
+		
+		if (alienFac.stageComplete() && stageCounter == 4 ) {
 			final Texture bagCatTexture = assetManager.get("lazorkitten_map.png", Texture.class);
 			alienFac.registerEnemyType(12, new BagCatFactory(bagCatTexture, 100, new CurveMovement(4)));
 
-			System.out.println("Stage 3");
+			stageCounter++;
+			System.out.println("Stage 4");
+		}
+		if (alienFac.stageComplete() && stageCounter == 5) {
+			
+			alienFac.setChance(3);
+			final Texture cometTexture = assetManager.get("komet.png", Texture.class);
+			CometFactory cometFac = new CometFactory(gs, 3.0f, false, cometTexture);
+			alienFac.registerEnemyType(5, cometFac);
+			CometFactory cometFac2 = new CometFactory(gs, 3.0f, true, cometTexture);
+			alienFac.registerEnemyType(5, cometFac2);
+			stageCounter++;
 		}
 
 	}
