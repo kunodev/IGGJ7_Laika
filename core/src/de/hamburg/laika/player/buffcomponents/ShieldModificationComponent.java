@@ -26,7 +26,6 @@ public class ShieldModificationComponent extends UpgradeComponent {
 		}
 		
 		sc.bonusShieldHP = numUpdates * ATOMIC_BUFF;
-		sc.reloadReduction = numUpdates * ATOMIC_BUFF;
 	}
 	
 	@Override
