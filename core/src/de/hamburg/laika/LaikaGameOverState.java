@@ -18,6 +18,7 @@ public class LaikaGameOverState extends LaikaGameState {
 		AssetManager assetManager = serviceMan.getService(AssetManager.class);
 
 		BackGroundGen backGroundGen = new BackGroundGen(this);
+		backGroundGen.withCoins = false;
 		backGroundGen.registerStardust(assetManager.get("shootingstar1.png", Texture.class));
 		backGroundGen.registerStardust(assetManager.get("shootingstar2.png", Texture.class));
 		backGroundGen.registerStardust(assetManager.get("shootingstar3.png", Texture.class));
