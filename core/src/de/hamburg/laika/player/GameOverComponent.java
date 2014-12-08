@@ -7,12 +7,11 @@ import de.kuro.lazyjam.cdiutils.cdihelper.ServiceManager;
 import de.kuro.lazyjam.ecmodel.GameStateContextManager;
 
 public class GameOverComponent {
+	
 	@Destroy
 	public void loadGameOver(GameStateContextManager gscm, ServiceManager serviceMan) {
-		LaikaGameState lgs = gscm.getGameStateAs(LaikaGameState.class);
-		lgs.controllerFuckUpThread.kill = true;
 		gscm.removeGameState(LaikaGameOverState.class);
-		LaikaGameOverState gameGameState = new LaikaGameOverState();
+		LaikaGameOverState gameGameState = new LaikaGameOverState(serviceMan);
 		gscm.addGameState(LaikaGameOverState.class, gameGameState);
 		gscm.setGameState(LaikaGameOverState.class);
 		gameGameState.init(serviceMan);

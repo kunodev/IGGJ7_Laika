@@ -25,7 +25,7 @@ public class SideCannonModificationComponent extends UpgradeComponent{
 			sell = false;
 		}
 		
-		scc.cannonTicksReduction = numUpdates/5 * ATOMIC_BUFF;
+		scc.reduction = numUpdates/5 * ATOMIC_BUFF;
 		scc.bonusDamage = numUpdates * ATOMIC_BUFF * 5;
 	}
 	

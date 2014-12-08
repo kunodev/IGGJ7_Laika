@@ -14,7 +14,7 @@ public class BagCat implements IEnemyType {
 		s.play();
 		co.otherGo.selfDestruct(gs);
 		Bullet bullet = co.otherGo.getComponent(Bullet.class);
-		if(bullet != null && hc.damage(bullet.damage)) {
+		if(bullet != null && hc != null && hc.damage(bullet.damage)) {
 			co.thisGo.selfDestruct(gs);
 		}
 	}

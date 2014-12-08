@@ -14,6 +14,11 @@ import javax.xml.soap.Text;
 
 public class LaikaGameOverState extends LaikaGameState {
 
+	public LaikaGameOverState(ServiceManager sm) {
+		super(sm);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void init(ServiceManager serviceMan) {
 		GameObject dummyMain = new GameObject(new Vector2(), this);

@@ -71,7 +71,7 @@ public class Laika extends LazyJamApplicationAdapter {
 	public void create() {
 		super.create();
 		
-		LaikaPreGameState prelogueGameState = new LaikaPreGameState();
+		LaikaPreGameState prelogueGameState = new LaikaPreGameState(serviceMan);
 		this.gscm.initMainGameState(prelogueGameState);
 		prelogueGameState.init(serviceMan);
 		

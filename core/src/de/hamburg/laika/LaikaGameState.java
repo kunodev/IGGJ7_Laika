@@ -42,6 +42,10 @@ import de.kuro.lazyjam.tools.WorkerThread;
 
 public class LaikaGameState extends GameState {
 
+	public LaikaGameState(ServiceManager sm) {
+		super(sm);
+	}
+
 	public WorkerThread controllerFuckUpThread;
 	public static final float SAFE_ZONE_SIZE = 128.f;
 	public static final float HALF_SAFE_ZONE_SIZE = SAFE_ZONE_SIZE * 0.5f;
@@ -62,7 +66,8 @@ public class LaikaGameState extends GameState {
 	}
 
 	public void init(ServiceManager serviceman) {
-		CoinsService cs = serviceman.getService(CoinsService.class);
+		CoinsService cs = new CoinsService();
+		this.gameStateServiceMan.registerAsService(cs);
 		cs.coins = cs.startCoins;
 		AssetManager assetManager = serviceman.getService(AssetManager.class);
 		GameObject laika = new GameObject(new Vector2(510.f, 330.f), Laika.TAG_PLAYER, this);
@@ -73,16 +78,13 @@ public class LaikaGameState extends GameState {
 		shipAnimation.init("raumschiff_map+2+1", assetManager);
 		laika.addComponent(shipAnimation);
 
-		GameObject canon = new GameObject(new Vector2(50.f, 50.f), Laika.TAG_DECO, this);
+		GameObject canon = laika.createChild(this);
 		PNGSpriteRenderComponent cannonAnimation = new PNGSpriteRenderComponent();
 		cannonAnimation.init("grosse_kanone_map+3+1", assetManager);
 		cannonAnimation.loopTick = 2;
 		cannonAnimation.sprite.s.setOriginCenter();
 		cannonAnimation.sprite.s.setOrigin(cannonAnimation.sprite.s.getOriginX(), cannonAnimation.sprite.s.getOriginY() - 10);
 		canon.addComponent(cannonAnimation);
-		RelativityComponent relCanonComp = new RelativityComponent();
-		relCanonComp.parent = laika;
-		canon.addComponent(relCanonComp);
 		canon.addComponent(new SmallCannonControl());
 
 		BackGroundGen backGroundGen = new BackGroundGen(this);
@@ -117,15 +119,6 @@ public class LaikaGameState extends GameState {
 
 		laika.addComponent(new GameOverComponent());
 
-		GameObject shield = new GameObject(new Vector2(), Laika.TAG_PLAYER, this);
-		RelativityComponent relComp = new RelativityComponent();
-		UpgradeComponent upgradeComponent4 = new ShieldModificationComponent();
-
-		relComp.parent = laika;
-		shield.addComponent(new ShieldControl());
-		shield.addComponent(relComp);
-		shield.addComponent(new SpriteWrapper(assetManager.get("schutzschild.png", Texture.class)));
-		shield.addComponent(upgradeComponent4);
 
 		SpaceTimeContinuumButton spaceTimeButton = new SpaceTimeContinuumButton();
 		laika.addComponent(spaceTimeButton);
@@ -135,9 +128,16 @@ public class LaikaGameState extends GameState {
 		bb.createButton(upgradeComponent, "Moar Speed", buttonBG);
 		bb.createButton(upgradeComponent2, "Moar big pew", buttonBG);
 		bb.createButton(upgradeComponent3, "Moar Small pew", buttonBG);
-		bb.createButton(upgradeComponent4, "Moar Shields", buttonBG);
 		bb.createButton(spaceTimeButton, "Rip Space-Time", buttonBG);
 
+		GameObject shield = laika.createChild(this);
+		UpgradeComponent upgradeComponent4 = new ShieldModificationComponent();
+
+		shield.addComponent(new ShieldControl());
+		shield.addComponent(new SpriteWrapper(assetManager.get("schutzschild.png", Texture.class)));
+		shield.addComponent(upgradeComponent4);
+		bb.createButton(upgradeComponent4, "Moar Shields", buttonBG);
+		
 		Texture cometTex = assetManager.get("poop.png", Texture.class);
 		final float offset = Math.max(cometTex.getWidth(), cometTex.getHeight()) * (float) Math.sqrt(2.0) * 0.5f;
 		GameObject comet = new GameObject(new Vector2(Laika.WIDTH - offset, Laika.HEIGHT - offset), this);

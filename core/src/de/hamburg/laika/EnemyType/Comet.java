@@ -15,10 +15,11 @@ import de.kuro.lazyjam.ecmodel.concrete.tools.Collision;
 public class Comet implements IEnemyType {
 
 	@Collide
-	public void kill(Collision co, GameState gs, HealthComponent hc, AssetManager assetMan) {
+	public void kill(Collision co, GameState gs, AssetManager assetMan) {
 		Sound s = assetMan.get("Hit_Hurt11.wav");
 		s.play();
 		co.otherGo.selfDestruct(gs);
+		HealthComponent hc = co.thisGo.getComponent(HealthComponent.class);
 		if(hc.damage(co.otherGo.getComponent(Bullet.class).damage)) {
 			co.thisGo.selfDestruct(gs);
 		}

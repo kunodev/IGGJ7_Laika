@@ -13,6 +13,10 @@ import de.kuro.lazyjam.ecmodel.concrete.GameObject;
 public class LaikaPreGameState extends LaikaGameState{
 	
 	
+	public LaikaPreGameState(ServiceManager sm) {
+		super(sm);
+	}
+
 	@Override
 	public void init(ServiceManager serviceMan) {
 		GameObject dummyMain = new GameObject(new Vector2(), this);

@@ -18,7 +18,7 @@ public class StartGameComponent {
 	public void pollForMouseClick(GameStateContextManager gscm, Input i, ServiceManager serviceMan) {
 		if(i.isButtonPressed(Buttons.LEFT)) {
 			gscm.removeGameState(LaikaGameState.class);
-			LaikaGameState gameGameState = new LaikaGameState();
+			LaikaGameState gameGameState = new LaikaGameState(serviceMan);
 			gscm.addGameState(LaikaGameState.class, gameGameState);
 			gscm.setGameState(LaikaGameState.class);
 			gameGameState.init(serviceMan);
